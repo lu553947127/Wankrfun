@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">玩客</string>
+
+    <!--公共-->
+    <string name="home">玩客</string>
+    <string name="meet">遇见</string>
+    <string name="message">消息</string>
+    <string name="mine">我的</string>
+
+    <string name="loading">正在努力加载哦～</string>
+    <string name="start_title">让数字世界更真实</string>
+    <string name="net_error">没有网络，点击重试</string>
+    <string name="net_not">请检查是否联网</string>
+
+    <string name="reminder">温馨提示！</string>
+    <string name="permission_photo_storage">为了更好的为您服务，请您打开您的相机和存储权限!</string>
+    <string name="permission_location">为了更好的为您服务，请您打开您的定位权限!</string>
+    <string name="permission_notice">为了更好的为您服务，请您打开您的通知权限!</string>
+    <string name="empty">暂无</string>
+
+    <string name="login">登录 / 注册</string>
+    <string name="login_tips">输入手机号，进入玩客，未注册手机，将自动进入注册界面！</string>
+    <string name="login_password_title">欢迎回来，嘿嘿</string>
+    <string name="login_password_title2">嘿嘿</string>
+    <string name="login_password_tip">输入密码后，开始玩客！</string>
+    <string name="login_password_hint">输入密码</string>
+    <string name="login_password_forget">忘记密码？</string>
+    <string name="get_wanke">进入玩客 >>></string>
+    <string name="login_success">登录成功</string>
+
+    <string name="register">注册</string>
+    <string name="register_tips">已发送验证码</string>
+    <string name="resend">重新发送</string>
+    <string name="second">(%1$s)</string>
+    <string name="verification">验证</string>
+
+    <string name="set_password_tip">设置密码</string>
+    <string name="rebuild_password">重设密码</string>
+    <string name="set_password">请设置您的密码</string>
+    <string name="hint_password">输入密码（至少8个字符）</string>
+    <string name="confirm_password">确认密码</string>
+
+    <string name="first_sex">Hi,你的性别是？</string>
+    <string name="first_sex_tips">我们会根据你的性别推荐附近的异性</string>
+    <string name="first_sex_male">男生</string>
+    <string name="first_sex_female">女生</string>
+    <string name="first_birthday">你什么时候出生的呢？</string>
+    <string name="first_birthday_tips">听说出生日期也决定了组局喜好喔</string>
+    <string name="first_birthday_year">YYYY</string>
+    <string name="first_birthday_month">MM</string>
+    <string name="first_birthday_day">DD</string>
+    <string name="first_birthday_not">日期格式输入不正确</string>
+    <string name="first_job">你现在的状态是？</string>
+    <string name="first_job_tps">你的状态是？</string>
+    <string name="first_job_student">学生</string>
+    <string name="first_job_work">工作</string>
+    <string name="first_job_free">自由职业者</string>
+    <string name="first_expect">遇见玩趣相投的Ta</string>
+    <string name="first_expect_tips">你的期待是？</string>
+    <string name="first_activity_tips">最希望参加什么活动？</string>
+    <string name="first_user">想知道你的名字和照片？</string>
+    <string name="first_user_tips">有些人,一旦遇见,便一眼万年</string>
+    <string name="first_user_hint">填写名字（15个字符以内）</string>
+    <string name="first_permission">最后帮忙开个权限吧</string>
+    <string name="first_play">我今天想玩</string>
+    <string name="first_play_tips">*选择后将可以闪约附近和你有相同意向的朋友</string>
+    <string name="first_play_restaurant">我想吃的餐厅是</string>
+    <string name="first_play_hint">请输入</string>
+
+    <string name="home_title">最新发布</string>
+    <string name="home_empty">附近暂时找不到活动了</string>
+    <string name="home_release">最快发布</string>
+    <string name="home_start">最快开始</string>
+    <string name="home_distance">最快距离</string>
+
+    <string name="meet_my_matching">我的匹配：</string>
+
+</resources>

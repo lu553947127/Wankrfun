@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:contentInsetStart="0dp"
+    app:contentInsetEnd="0dp"
+    android:background="@color/black"
+    android:id="@+id/toolbar"
+    android:layout_below="@+id/fake_status_bar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@drawable/icon_home_location"
+            android:drawablePadding="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="@string/empty"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/iv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/icon_bubbling_back"
+            app:drawableTint="@color/white"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:scaleType="centerInside"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="@string/meet_my_matching"/>
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

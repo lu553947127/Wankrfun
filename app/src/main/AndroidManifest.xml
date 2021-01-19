@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wankrfun.crania">
+
+    <!--允许程序打开网络-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--允许程序获取网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--允许程序访问WiFi网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--允许程序写入内置sd卡的写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--允许程序读取内置sd卡的写权限-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--允许程序获取手机状态（包括手机号码、IMEI、IMSI权限等）-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--允许程序打开相机权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--用于提高GPS定位速度-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <application
+        android:name="com.wankrfun.crania.app.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/app_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Wankrfun"
+        android:networkSecurityConfig="@xml/network_config"
+        android:requestLegacyExternalStorage="true"
+        android:hardwareAccelerated="true"
+        android:usesCleartextTraffic="true"
+        tools:ignore="UnusedAttribute">
+
+        <!-- 启动页 -->
+        <activity android:name="com.wankrfun.crania.view.start.StartUpActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 首页(属性设置：软键盘默认自动不弹起) -->
+        <activity android:name="com.wankrfun.crania.view.MainActivity" android:windowSoftInputMode = "stateAlwaysHidden|adjustPan"/>
+
+        <!-- 登录页（属性设置：页面打开唯一性/设置底部控件view随着软键盘的弹出而上移） -->
+        <activity android:name="com.wankrfun.crania.view.login.LoginActivity" android:launchMode="singleTask"  android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <!-- 密码登录页 -->
+        <activity android:name="com.wankrfun.crania.view.login.LoginPasswordActivity"  android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <!-- 获取验证码页 -->
+        <activity android:name="com.wankrfun.crania.view.login.VerificationCodeActivity"/>
+
+        <!-- 设置密码页 -->
+        <activity android:name="com.wankrfun.crania.view.login.SetPasswordActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
+
+        <!-- 设置性别页面 -->
+        <activity android:name="com.wankrfun.crania.view.login.first.FirstSetGenderActivity"/>
+
+        <!-- 设置出生日期页面 -->
+        <activity android:name="com.wankrfun.crania.view.login.first.FirstSetBirthdayActivity"/>
+
+        <!-- 设置工作状态页面 -->
+        <activity android:name="com.wankrfun.crania.view.login.first.FirstSetJobActivity"/>
+
+        <!-- 设置玩趣相投 期待页面 -->
+        <activity android:name="com.wankrfun.crania.view.login.first.FirstSetExpectActivity"/>
+
+        <!-- 设置玩趣相投 活动页面 -->
+        <activity android:name="com.wankrfun.crania.view.login.first.FirstSetTypeActivity"/>
+
+        <!-- 设置用户信息 头像/名称页面 -->
+        <activity android:name="com.wankrfun.crania.view.login.first.FirstSetUserInfoActivity"/>
+
+        <!-- 第一次开启权限页面 -->
+        <activity android:name="com.wankrfun.crania.view.login.first.FirstPermissionActivity"/>
+
+        <!--Android7.0后临时访问权限-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.wankrfun.crania.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path">
+
+            </meta-data>
+        </provider>
+
+        <!--高德地图appKey-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="44005ef8d4b4afe3ad1c1cf2f61a846e" />
+
+    </application>
+
+</manifest>

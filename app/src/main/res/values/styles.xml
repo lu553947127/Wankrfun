@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--dialog通用动画-->
+    <style name="DialogAnimCustom" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <!--自定义渐变色TextView-->
+    <declare-styleable name="GradientTextView">
+        <attr name="textDrawable" format="reference" />
+    </declare-styleable>
+
+    <!--输入框选中状态-->
+    <style name="EditText" parent="Theme.AppCompat.Light">
+        <!--输入框未选中颜色-->
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <!--输入框选择颜色-->
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
+
+    <!--相册属性-->
+    <style name="Matisse.Dracula" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/color_161616</item>
+        <item name="colorPrimaryDark">@color/color_161616</item>
+        <item name="toolbar">@style/Toolbar.Dracula</item>
+        <item name="album.dropdown.title.color">@color/dracula_album_dropdown_title_text</item>
+        <item name="album.dropdown.count.color">@color/dracula_album_dropdown_count_text</item>
+        <item name="album.element.color">@android:color/white</item>
+        <item name="album.thumbnail.placeholder">@color/dracula_album_dropdown_thumbnail_placeholder</item>
+        <item name="album.emptyView">@drawable/ic_empty_dracula</item>
+        <item name="album.emptyView.textColor">@color/dracula_album_empty_view</item>
+        <item name="item.placeholder">@color/dracula_item_placeholder</item>
+        <item name="item.checkCircle.backgroundColor">@color/color_161616</item>
+        <item name="item.checkCircle.borderColor">@color/dracula_item_checkCircle_borderColor</item>
+        <item name="page.bg">@color/color_161616</item>
+        <item name="bottomToolbar.bg">@color/color_161616</item>
+        <item name="bottomToolbar.preview.textColor">@color/white</item>
+        <item name="bottomToolbar.apply.textColor">@color/dracula_preview_bottom_toolbar_apply</item>
+        <item name="preview.bottomToolbar.back.textColor">@color/dracula_preview_bottom_toolbar_back_text</item>
+        <item name="preview.bottomToolbar.apply.textColor">@color/dracula_preview_bottom_toolbar_apply</item>
+        <item name="android:listPopupWindowStyle">@style/Popup.Dracula</item>
+        <item name="listPopupWindowStyle">@style/Popup.Dracula</item>
+        <item name="capture.textColor">@color/dracula_capture</item>
+    </style>
+
+</resources>
