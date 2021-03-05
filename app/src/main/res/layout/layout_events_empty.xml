@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:id="@+id/rl_empty"
+    android:visibility="gone"
+    android:layout_margin="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_events">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_type2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_type2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_gray_bottom_20">
+
+        <RelativeLayout
+            android:id="@+id/rl_avatar2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true">
+
+            <com.wankrfun.crania.widget.CircleImageView
+                android:id="@+id/iv_avatar2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_sex2"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_a2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/rl_avatar2">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_location2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_activity_location"
+                android:drawablePadding="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:text="onlinne"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_clock2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/icon_activity_clock"
+                android:drawablePadding="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:text="2020/10/12"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_b2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/rl_avatar2"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_address2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_num2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sign2"
+                android:layout_width="66dp"
+                android:layout_height="25dp"
+                android:background="@drawable/shape_yellow_15"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:text="报名"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sing_num2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="10sp"
+                android:textColor="@color/color_979797"
+                android:text="0/5"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

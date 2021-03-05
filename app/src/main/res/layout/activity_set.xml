@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_user"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:drawableRight="@drawable/icon_right_gray"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="账号与安全"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/color_111111"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:drawableRight="@drawable/icon_right_gray"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="用户协议"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/color_111111"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_out"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:drawableRight="@drawable/icon_mine_out"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_DA615C"
+            android:textSize="15sp"
+            android:text="退出账号"/>
+
+    </LinearLayout>
+
+</LinearLayout>

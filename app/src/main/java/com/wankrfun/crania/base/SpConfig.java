@@ -22,6 +22,33 @@ public class SpConfig {
     /*用户id*/
     public static final String USER_ID = "user_id";
 
+    /*融云token*/
+    public static final String IM_TOKEN = "im_token";
+
+    /*邀请码*/
+    public static final String INVITE = "invite";
+
+    /*账号*/
+    public static final String PHONE = "phone";
+
+    /*密码*/
+    public static final String PASSWORD = "password";
+
+    /*性别*/
+    public static final String SEX = "sex";
+
+    /*出生日期*/
+    public static final String BIRTHDAY = "birthday";
+
+    /*工作*/
+    public static final String JOB = "job";
+
+    /*期待tag*/
+    public static final String FIRST_TAG = "tag";
+
+    /*活动tag*/
+    public static final String EVENT_TAG = "event_tag";
+
     /*经度*/
     public static final String LONGITUDE = "longitude";
 
@@ -30,4 +57,7 @@ public class SpConfig {
 
     /*城市*/
     public static final String CITY = "city";
+
+    /*省*/
+    public static final String PROVINCE = "province";
 }

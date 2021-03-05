@@ -16,12 +16,14 @@
     <string name="permission_photo_storage">为了更好的为您服务，请您打开您的相机和存储权限!</string>
     <string name="permission_location">为了更好的为您服务，请您打开您的定位权限!</string>
     <string name="permission_notice">为了更好的为您服务，请您打开您的通知权限!</string>
+    <string name="photo_size_not">图片数量超过限制，最多上传6张图片哦～</string>
     <string name="empty">暂无</string>
+    <string name="login_out_is">确定要退出登录吗？</string>
+    <string name="sign_out">退出登录成功</string>
 
     <string name="login">登录 / 注册</string>
     <string name="login_tips">输入手机号，进入玩客，未注册手机，将自动进入注册界面！</string>
-    <string name="login_password_title">欢迎回来，嘿嘿</string>
-    <string name="login_password_title2">嘿嘿</string>
+    <string name="login_password_title">欢迎回来，%1$s</string>
     <string name="login_password_tip">输入密码后，开始玩客！</string>
     <string name="login_password_hint">输入密码</string>
     <string name="login_password_forget">忘记密码？</string>
@@ -69,10 +71,16 @@
 
     <string name="home_title">最新发布</string>
     <string name="home_empty">附近暂时找不到活动了</string>
-    <string name="home_release">最快发布</string>
+    <string name="home_release">最新发布</string>
     <string name="home_start">最快开始</string>
     <string name="home_distance">最快距离</string>
 
     <string name="meet_my_matching">我的匹配：</string>
+
+
+    <string-array name="messages_list">
+        <item>消息</item>
+        <item>通知</item>
+    </string-array>
 
 </resources>

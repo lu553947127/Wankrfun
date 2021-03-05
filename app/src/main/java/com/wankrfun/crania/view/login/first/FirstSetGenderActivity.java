@@ -5,8 +5,10 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
+import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.widget.DrawableCenterTextView;
 
 import butterknife.BindView;
@@ -54,11 +56,13 @@ public class FirstSetGenderActivity extends BaseActivity {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_female://女生
+                SPUtils.getInstance().put(SpConfig.SEX, "female", true);
                 tvFemale.setBackgroundResource(R.drawable.shape_yellow_5);
                 tvMale.setBackgroundResource(R.drawable.shape_gray_5);
                 ActivityUtils.startActivity(FirstSetBirthdayActivity.class);
                 break;
             case R.id.tv_male://男生
+                SPUtils.getInstance().put(SpConfig.SEX, "male", true);
                 tvMale.setBackgroundResource(R.drawable.shape_yellow_5);
                 tvFemale.setBackgroundResource(R.drawable.shape_gray_5);
                 ActivityUtils.startActivity(FirstSetBirthdayActivity.class);

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:roundiv="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <include layout="@layout/toolbar"/>
+
+    <com.wankrfun.crania.widget.AdaptationScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:orientation="horizontal">
+
+                    <com.wankrfun.crania.widget.CornerImageView
+                        android:id="@+id/iv_image1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        roundiv:radius="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/shape_gray2_10"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp">
+
+                        <com.wankrfun.crania.widget.CornerImageView
+                            android:id="@+id/iv_image2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            roundiv:radius="5dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/shape_gray2_10"/>
+
+                        <com.wankrfun.crania.widget.CornerImageView
+                            android:id="@+id/iv_image3"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="5dp"
+                            roundiv:radius="5dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/shape_gray2_10"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+
+                    <com.wankrfun.crania.widget.CornerImageView
+                        android:id="@+id/iv_image4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        roundiv:radius="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/shape_gray2_10"/>
+
+                    <com.wankrfun.crania.widget.CornerImageView
+                        android:id="@+id/iv_image5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        roundiv:radius="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/shape_gray2_10"/>
+
+                    <com.wankrfun.crania.widget.CornerImageView
+                        android:id="@+id/iv_image6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        roundiv:radius="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/shape_gray2_10"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:text="基本资料"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/shape_gray_5"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="昵称"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:drawableRight="@drawable/icon_right_gray"
+                        android:drawablePadding="10dp"
+                        android:textColor="@color/color_979797"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/color_979797"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="位置"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:drawableRight="@drawable/icon_right_gray"
+                        android:drawablePadding="10dp"
+                        android:textColor="@color/color_979797"
+                        android:textSize="15sp"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/color_979797"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="生日"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_birthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/color_979797"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/color_979797"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="性别"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/color_979797"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/color_979797"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="状态"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_work"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:drawableRight="@drawable/icon_right_gray"
+                        android:drawablePadding="10dp"
+                        android:textColor="@color/color_979797"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/color_979797"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="个性标签"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:drawableRight="@drawable/icon_right_gray"
+                        android:drawablePadding="10dp" />
+
+                </RelativeLayout>
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/fl_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    app:flexWrap="wrap"
+                    app:showDivider="middle"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.wankrfun.crania.widget.AdaptationScrollView>
+
+</LinearLayout>

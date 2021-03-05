@@ -3,9 +3,9 @@ package com.wankrfun.crania.view.start;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
+import com.wankrfun.crania.dialog.AgreementDialog;
 import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.PermissionUtils;
 import com.wankrfun.crania.view.MainActivity;
@@ -25,7 +25,6 @@ import com.wankrfun.crania.view.login.first.FirstPermissionActivity;
  * @Version: 1.0
  */
 public class StartUpActivity extends BaseActivity {
-
     @Override
     public boolean isSupportSwipeBack() {
         return false;
@@ -43,7 +42,14 @@ public class StartUpActivity extends BaseActivity {
 
     @Override
     protected void initDataAndEvent(Bundle savedInstanceState) {
-        getIntoActivity();
+        if (LoginUtils.isFirstApp(activity)){
+            getIntoActivity();
+        }else {
+            //协议弹窗
+            AgreementDialog agreementDialog = new AgreementDialog(activity);
+            agreementDialog.showDialog();
+            agreementDialog.setOnCustomClickListener(this::getIntoActivity);
+        }
     }
 
     //判断跳转

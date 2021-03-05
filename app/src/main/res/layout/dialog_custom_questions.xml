@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_black_top_15">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="30dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:text="取消"/>
+
+            <com.wankrfun.crania.widget.GradientTextView
+                android:id="@+id/tv_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:enabled="true"
+                app:textDrawable="@drawable/selector_login_password"
+                android:textSize="14sp"
+                android:text="确定" />
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/color_979797"
+            android:textSize="11sp"
+            android:text="给你申请人准备一些小问题吧～（最多3个喔）"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_questions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:theme="@style/EditText2"
+            android:inputType="text"
+            android:textColorHint="@color/color_979797"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:hint="输入你的问题一"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_questions2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:theme="@style/EditText2"
+            android:inputType="text"
+            android:textColorHint="@color/color_979797"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:hint="输入你的问题二"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_questions3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:theme="@style/EditText2"
+            android:inputType="text"
+            android:textColorHint="@color/color_979797"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:hint="输入你的问题三"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/color_979797"
+            android:textSize="12sp"
+            android:text="eg.平时一个人的时候喜欢干什么"/>
+
+        <com.wankrfun.crania.widget.GradientTextView
+            android:id="@+id/tv_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:enabled="true"
+            app:textDrawable="@drawable/selector_login_password"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:text="+ 添加下一个问题" />
+
+    </LinearLayout>
+
+</LinearLayout>

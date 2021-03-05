@@ -23,6 +23,7 @@ import com.blankj.utilcode.util.Utils;
 import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.app.MyApplication;
+import com.wankrfun.crania.receiver.SealNotificationReceiver;
 import com.wankrfun.crania.utils.AutoUtils;
 import com.wankrfun.crania.utils.NotificationsUtils;
 import com.wankrfun.crania.utils.PermissionUtils;
@@ -34,6 +35,7 @@ import java.lang.reflect.InvocationTargetException;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
+import io.rong.push.RongPushClient;
 
 /**
  * @ProjectName: Wankrfun
@@ -80,8 +82,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, B
             BarUtils.setStatusBarLightMode(this,false);
         } else {
             //true为主题色状态栏
-            BarUtils.setStatusBarColor(this, ContextCompat.getColor(Utils.getApp(), R.color.colorPrimary), false);
+            BarUtils.setStatusBarColor(this, ContextCompat.getColor(Utils.getApp(), R.color.color_111111), false);
             BarUtils.setStatusBarLightMode(this,true);
+        }
+
+        //当需要更新 HMS Core ，主动调用 RongPushClient.resolveHMSCoreUpdate() 方法，注意要传递 activity
+        if (SealNotificationReceiver.needUpdate) {
+            //重置标记位，防止多次弹窗提醒
+            SealNotificationReceiver.needUpdate = false;
+            RongPushClient.resolveHMSCoreUpdate(this);
         }
 
         initDataAndEvent(savedInstanceState);

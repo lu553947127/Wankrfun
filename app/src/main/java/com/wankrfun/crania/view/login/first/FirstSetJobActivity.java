@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
+import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.widget.DrawableCenterTextView;
 
 import butterknife.BindView;
@@ -52,18 +54,21 @@ public class FirstSetJobActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_student://学生
+                SPUtils.getInstance().put(SpConfig.JOB, "s:", true);
                 tvStudent.setBackgroundResource(R.drawable.shape_yellow_5);
                 tvWork.setBackgroundResource(R.drawable.shape_gray_5);
                 tvFree.setBackgroundResource(R.drawable.shape_gray_5);
                 ActivityUtils.startActivity(FirstSetExpectActivity.class);
                 break;
             case R.id.tv_work://工作
+                SPUtils.getInstance().put(SpConfig.JOB, "j:", true);
                 tvStudent.setBackgroundResource(R.drawable.shape_gray_5);
                 tvWork.setBackgroundResource(R.drawable.shape_yellow_5);
                 tvFree.setBackgroundResource(R.drawable.shape_gray_5);
                 ActivityUtils.startActivity(FirstSetExpectActivity.class);
                 break;
             case R.id.tv_free://自由职业者
+                SPUtils.getInstance().put(SpConfig.JOB, "c:", true);
                 tvStudent.setBackgroundResource(R.drawable.shape_gray_5);
                 tvWork.setBackgroundResource(R.drawable.shape_gray_5);
                 tvFree.setBackgroundResource(R.drawable.shape_yellow_5);

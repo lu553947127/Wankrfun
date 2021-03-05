@@ -25,17 +25,30 @@ import com.blankj.utilcode.util.Utils;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BuildConfig;
 import com.wankrfun.crania.http.api.ApiService;
 import com.wankrfun.crania.http.retrofit.BaseRequest;
+import com.wankrfun.crania.receiver.CrashHandler;
+import com.wankrfun.crania.utils.LoginUtils;
+import com.wankrfun.crania.utils.RongIMUtils;
+import com.wankrfun.crania.view.start.StartUpActivity;
 
 import java.io.File;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.push.RongPushClient;
+import io.rong.push.pushconfig.PushConfig;
+import me.goldze.mvvmhabit.base.BaseApplication;
+import me.goldze.mvvmhabit.crash.CaocConfig;
+
+import static com.wankrfun.crania.BuildConfig.DEBUG;
 
 /**
  * @ProjectName: Wankrfun
@@ -60,19 +73,14 @@ public class MyApplication extends Application {
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
-            layout.setPrimaryColorsId(android.R.color.transparent, R.color.colorPrimary);//全局设置主题颜色
-            return new MaterialHeader(context).setColorSchemeResources(R.color.colorPrimary);//指定为经典Header，默认是贝塞尔雷达Header
+            layout.setPrimaryColorsId(android.R.color.transparent, R.color.white);//全局设置主题颜色
+            return new ClassicsHeader(context);//指定为经典Header，默认是贝塞尔雷达Header
         });
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
             //指定为经典Footer，默认是 BallPulseFooter
-            ClassicsFooter footer = new ClassicsFooter(context).setDrawableSize(20).setAccentColorId(R.color.colorPrimary);
-            //去掉加载完成字样
-            footer.setFinishDuration(0);
-            return footer;
+            return new ClassicsFooter(context).setDrawableSize(20).setAccentColorId(R.color.white);
         });
-        // 设置加载完成文字为空
-        ClassicsFooter.REFRESH_FOOTER_FINISH = "";
     }
 
     @Override
@@ -93,6 +101,26 @@ public class MyApplication extends Application {
         BGASwipeBackHelper.init(this, null);
 
         initCrash(getApplicationContext());
+
+        initRongYun(getApplicationContext());
+        //闪退处理初始化
+//        CrashHandler.getInstance().init(this, DEBUG, true, 0, StartUpActivity.class);
+
+        //MVVMHabit初始化
+        BaseApplication.setApplication(this);
+        //配置全局异常崩溃操作
+        CaocConfig.Builder.create()
+                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //背景模式,开启沉浸式
+                .enabled(true) //是否启动全局异常捕获
+                .showErrorDetails(true) //是否显示错误详细信息
+                .showRestartButton(true) //是否显示重启按钮
+                .trackActivities(true) //是否跟踪Activity
+                .minTimeBetweenCrashesMs(2000) //崩溃的间隔时间(毫秒)
+                .errorDrawable(R.mipmap.app_logo) //错误图标
+//                .restartActivity(LoginActivity.class) //重新启动后的activity
+                //.errorActivity(YourCustomErrorActivity.class) //崩溃后的错误activity
+                //.eventListener(new YourCustomEventListener()) //崩溃后的错误监听
+                .apply();
     }
 
     /**
@@ -153,8 +181,52 @@ public class MyApplication extends Application {
     private static void initCrash(final Context context) {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             File externalStorageDirectory = Environment.getExternalStorageDirectory();
-            CrashUtils.init(externalStorageDirectory.getPath() + "/weibi/crash/");
+            CrashUtils.init(externalStorageDirectory.getPath() + "/wankrfun/crash/");
         }
+    }
+
+    /**
+     * 初始化融云
+     * @param context
+     */
+    private static void initRongYun(Context context) {
+        //融云初始化
+        RongIM.init(context, BuildConfig.RONG_YUN_APP_KEY);
+        //融云推送初始化
+        PushConfig config = new PushConfig
+                .Builder()
+                .enableHWPush(true)
+                .enableMiPush("2882303761519202034", "5801920268034")
+                .enableMeiZuPush("112988", "2fa951a802ac4bd5843d694517307896")
+                .enableVivoPush(true)
+                .enableOppoPush("6bbb2e614c374489b2aca7016c4cbceb", "7e187275fb0645aea6fd3a3e85aedcb5")
+                .enableFCM(true)
+                .build();
+        RongPushClient.setPushConfig(config);
+
+        //设置融云全局链接状态监听
+        RongIMClient.setConnectionStatusListener(connectionStatus -> {
+            switch (connectionStatus) {
+                //融云账号在其他设备上进行登录
+                case KICKED_OFFLINE_BY_OTHER_CLIENT:
+                    LoginUtils.getExitLogin();
+                    break;
+            }
+        });
+
+        //设置消息回执的会话类型
+        Conversation.ConversationType[] types = new Conversation.ConversationType[] {
+                Conversation.ConversationType.PRIVATE,
+                Conversation.ConversationType.GROUP,
+                Conversation.ConversationType.DISCUSSION
+        };
+        RongIM.getInstance().setReadReceiptConversationTypeList(types);
+        //注册复写的会话列表布局
+//        RongIM.getInstance().registerConversationTemplate(new CustomPrivateConversationProvider());
+        //开启高清语音
+        RongIM.getInstance().setVoiceMessageType(RongIM.VoiceMessageType.HighQuality);
+        //获取发出去的消息监听
+        RongIMUtils.getSendMessageListener();
     }
 
     //获取到主线程的handler

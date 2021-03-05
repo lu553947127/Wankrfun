@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+    android:paddingBottom="60dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <com.kcrason.dynamicpagerindicatorlibrary.DynamicPagerIndicator
+        android:id="@+id/dynamic_pager_indicator"
+        style="@style/DynamicPagerIndicatorStyle"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"/>
+
+</LinearLayout>

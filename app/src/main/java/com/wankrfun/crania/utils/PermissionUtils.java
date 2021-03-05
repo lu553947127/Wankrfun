@@ -83,6 +83,24 @@ public class PermissionUtils {
     }
 
     /**
+     * 开启相机/本地存储权限(多张图片上传 多属性设置)
+     *
+     * @param activity 上下文
+     */
+    public static void openCameraOfStoragePermission(BaseActivity activity, int maxSelectable){
+        AndPermission.with(activity)
+                .runtime()
+                .permission(Permission.READ_EXTERNAL_STORAGE, Permission.CAMERA)
+                .onGranted(permissions -> {
+                    openAlbum(activity, MimeType.ofImage(), false, maxSelectable);
+                })
+                .onDenied(permissions ->{
+                    activity.showPermissionDialog(activity.getResources().getString(R.string.permission_photo_storage));
+                })
+                .start();
+    }
+
+    /**
      * 打开相册
      *
      * @param activity 上下文

@@ -17,9 +17,20 @@ public class BaseBean {
     private String name;
     private int images;
     private boolean checkState;
+    private int imagesNot;
 
     public BaseBean(String name, int images) {
         this.name = name;
+        this.images = images;
+    }
+
+    public BaseBean(String name, int images, int imagesNot) {
+        this.name = name;
+        this.images = images;
+        this.imagesNot = imagesNot;
+    }
+
+    public BaseBean(int images) {
         this.images = images;
     }
 
@@ -45,5 +56,13 @@ public class BaseBean {
 
     public void setCheckState(boolean checkState) {
         this.checkState = checkState;
+    }
+
+    public int getImagesNot() {
+        return imagesNot;
+    }
+
+    public void setImagesNot(int imagesNot) {
+        this.imagesNot = imagesNot;
     }
 }

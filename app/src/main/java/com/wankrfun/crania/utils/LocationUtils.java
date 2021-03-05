@@ -1,6 +1,7 @@
 package com.wankrfun.crania.utils;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -12,6 +13,7 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.parse.ParseUser;
 import com.wankrfun.crania.app.MyApplication;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.event.LocationEvent;
@@ -56,8 +58,8 @@ public class LocationUtils {
         mLocationClient.setLocationListener(location -> {
             if (null != location) {
                 if (location.getErrorCode() == 0) {
-//                    SPUtils.getInstance().put(SpConfig.LONGITUDE, String.valueOf(location.getLongitude()), true);
-//                    SPUtils.getInstance().put(SpConfig.LATITUDE, String.valueOf(location.getLatitude()), true);
+                    SPUtils.getInstance().put(SpConfig.LONGITUDE, String.valueOf(location.getLongitude()), true);
+                    SPUtils.getInstance().put(SpConfig.LATITUDE, String.valueOf(location.getLatitude()), true);
                     LogUtils.e( "longitude："+location.getLongitude()+"latitude："+location.getLatitude());
                     getAddressChange(location.getLatitude(), location.getLongitude());
                 }
@@ -86,8 +88,13 @@ public class LocationUtils {
             @Override
             public void onRegeocodeSearched(RegeocodeResult result, int rCode) {
                 if (rCode == 1000) {
+                    if (TextUtils.isEmpty(SPUtils.getInstance().getString(SpConfig.CITY))){
+                        ParseUser.getCurrentUser().put("address", result.getRegeocodeAddress().getCity());
+                        ParseUser.getCurrentUser().saveInBackground();
+                    }
                     SPUtils.getInstance().put(SpConfig.CITY, result.getRegeocodeAddress().getCity(), true);
-                    EventBus.getDefault().post(new LocationEvent(longitude,latitude,result.getRegeocodeAddress().getCity()));
+                    SPUtils.getInstance().put(SpConfig.PROVINCE, result.getRegeocodeAddress().getProvince(), true);
+                    EventBus.getDefault().post(new LocationEvent(longitude, latitude, result.getRegeocodeAddress().getCity()));
                 } else {
                     LogUtils.e("地理编码", "地址名出错");
                 }

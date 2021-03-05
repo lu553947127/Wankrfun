@@ -6,9 +6,11 @@ import android.text.Editable;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
+import com.wankrfun.crania.base.SpConfig;
 
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
@@ -78,6 +80,7 @@ public class FirstSetBirthdayActivity extends BaseActivity {
         if (isYear && isMonth && isDay){
             LogUtils.e(RegexUtils.isDate(year + "-" + month + "-" + day));
             if (RegexUtils.isDate(year + "-" + month + "-" + day)){
+                SPUtils.getInstance().put(SpConfig.BIRTHDAY, year + "-" + month + "-" + day, true);
                 ActivityUtils.startActivity(FirstSetJobActivity.class);
             }else {
                 ToastUtils.showShort(getString(R.string.first_birthday_not));

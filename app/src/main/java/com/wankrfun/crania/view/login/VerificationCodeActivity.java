@@ -71,6 +71,7 @@ public class VerificationCodeActivity extends BaseActivity {
         loginViewModel.verificationCodeLiveData.observe(this, object -> {
             Bundle bundle = new Bundle();
             bundle.putString("type", getIntent().getStringExtra("type"));
+            bundle.putString("phone", getIntent().getStringExtra("phone"));
             ActivityUtils.startActivity(bundle, SetPasswordActivity.class);
         });
 

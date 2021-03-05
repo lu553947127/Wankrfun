@@ -1,6 +1,5 @@
 package com.wankrfun.crania.adapter;
 
-import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -36,10 +35,10 @@ public class EventsTypeAdapter extends BaseQuickAdapter<BaseBean, BaseViewHolder
         helper.setText(R.id.tv_title,item.getName());
 
         if (item.isCheckState()){
-            helper.setVisible(R.id.rl_select, true);
+            helper.setVisible(R.id.iv_images, true);
             helper.setVisible(R.id.ll_type, false);
         }else {
-            helper.setVisible(R.id.rl_select, false);
+            helper.setVisible(R.id.iv_images, false);
             helper.setVisible(R.id.ll_type, true);
         }
 
@@ -53,8 +52,8 @@ public class EventsTypeAdapter extends BaseQuickAdapter<BaseBean, BaseViewHolder
                 .build());
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url("")
-                .placeholder(item.getImages())
-                .errorPic(item.getImages())
+                .placeholder(item.getImagesNot())
+                .errorPic(item.getImagesNot())
                 .imageView(imageViews)
                 .build());
     }

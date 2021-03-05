@@ -10,7 +10,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -140,14 +139,13 @@ public class VerificationCodeInputView extends ViewGroup {
             addView(editText,i);
 
             //设置光标颜色
-            editText.setTextCursorDrawable(R.drawable.cursor_color);
+//            editText.setTextCursorDrawable(R.drawable.cursor_color);
             //设置下划线颜色
             editText.setBackgroundResource(R.drawable.et_underline_unselected);
             /**EditText的焦点监听事件**/
             editText.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
                     editText.setBackgroundResource(R.drawable.et_underline_selected);
-
                 } else {
                     editText.setBackgroundResource(R.drawable.et_underline_unselected);
                 }

@@ -1,21 +1,27 @@
 package com.wankrfun.crania.view;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.wankrfun.crania.R;
-import com.wankrfun.crania.adapter.EventsTypeAdapter;
-import com.wankrfun.crania.adapter.SwipeFlingAdapter;
+import com.wankrfun.crania.adapter.MeetListAdapter;
 import com.wankrfun.crania.base.BaseFragment;
 import com.wankrfun.crania.base.SpConfig;
-import com.wankrfun.crania.utils.RefreshUtils;
-import com.wankrfun.crania.widget.swipe.SwipeFlingAdapterView;
+import com.wankrfun.crania.utils.SlideViewUtils;
+import com.wankrfun.crania.view.meet.MineMatchingActivity;
+import com.wankrfun.crania.viewmodel.MeetViewModel;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @ProjectName: Wankrfun
@@ -34,8 +40,13 @@ public class MeetFragment extends BaseFragment {
     View fakeStatusBar;
     @BindView(R.id.tv_location)
     AppCompatTextView tvLocation;
-    @BindView(R.id.swipe_view)
-    SwipeFlingAdapterView swipeFlingAdapterView;
+    @BindView(R.id.tv_bar_title)
+    AppCompatTextView tvBarTitle;
+    @BindView(R.id.rv)
+    RecyclerView recyclerView;
+    @BindView(R.id.rl_empty)
+    RelativeLayout rlEmpty;
+    private MeetViewModel meetViewModel;
 
     @Override
     protected int initLayout() {
@@ -53,44 +64,47 @@ public class MeetFragment extends BaseFragment {
 
         tvLocation.setText(SPUtils.getInstance().getString(SpConfig.CITY));
 
-        SwipeFlingAdapter swipeFlingAdapter = new SwipeFlingAdapter();
-        swipeFlingAdapterView.setAdapter(swipeFlingAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        MeetListAdapter meetListAdapter = new MeetListAdapter();
+        recyclerView.setAdapter(meetListAdapter);
 
-        swipeFlingAdapterView.setIsNeedSwipe(true);
-        swipeFlingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
-            @Override
-            public void removeFirstObjectInAdapter() {
+        meetViewModel = mActivity.getViewModel(MeetViewModel.class);
 
+        //获取遇见卡片列表返回结果
+        meetViewModel.meetListLiveData.observe(this, meetListBean -> {
+            tvBarTitle.setText("今日剩余喜欢: " + meetListBean.getData().getAllowedToday());
+            meetListAdapter.setNewData(meetListBean.getData().getList());
+            if (meetListBean.getData().getList().size() != 0){
+                rlEmpty.setVisibility(View.GONE);
+            }else {
+                rlEmpty.setVisibility(View.VISIBLE);
             }
-
-            @Override
-            public void onLeftCardExit(Object dataObject) {
-
-            }
-
-            @Override
-            public void onRightCardExit(Object dataObject) {
-
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int itemsInAdapter) {
-
-            }
-
-            @Override
-            public void onScroll(float progress, float scrollXProgress) {
-
-            }
+            SlideViewUtils.getSlideResult(recyclerView, meetListBean.getData().getList(), rlEmpty, meetListAdapter, meetViewModel);
         });
 
-        swipeFlingAdapterView.setOnItemClickListener((event, v, dataObject) -> {
-
+        //手势操作: 喜欢或不喜欢成功返回结果
+        meetViewModel.meetUserCardLiveData.observe(this, eventsCreateBean -> {
+            meetViewModel.getMeetList();
+            if (!TextUtils.isEmpty(SPUtils.getInstance().getString(SpConfig.CITY))){
+                meetViewModel.getMeetUploadCard();
+            }
         });
     }
 
     @Override
     protected void initDataFromService() {
+        meetViewModel.getMeetList();
+        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(SpConfig.CITY))){
+            meetViewModel.getMeetUploadCard();
+        }
+    }
 
+    @OnClick({R.id.iv_tab_right})
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_tab_right://我的匹配列表
+                ActivityUtils.startActivity(MineMatchingActivity.class);
+                break;
+        }
     }
 }

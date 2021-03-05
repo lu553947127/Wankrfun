@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.FirstSetExpectAdapter;
 import com.wankrfun.crania.base.BaseActivity;
+import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.utils.RefreshUtils;
 
 import butterknife.BindView;
@@ -48,6 +50,7 @@ public class FirstSetTypeActivity extends BaseActivity {
         recyclerView.setAdapter(firstSetExpectAdapter);
 
         firstSetExpectAdapter.setOnItemClickListener((adapter, view, position) -> {
+            SPUtils.getInstance().put(SpConfig.EVENT_TAG, firstSetExpectAdapter.getData().get(position).getName(), true);
             firstSetExpectAdapter.setIsSelect(firstSetExpectAdapter.getData().get(position).getName());
             ActivityUtils.startActivity(FirstSetUserInfoActivity.class);
         });

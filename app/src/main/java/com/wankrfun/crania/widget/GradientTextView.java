@@ -174,7 +174,7 @@ public class GradientTextView extends AppCompatTextView {
      */
     private void setGradientColor(GradientDrawable drawable) {
         int[] colors = getColors(drawable);
-        LogUtils.i(TAG, "colors:" + Arrays.toString(colors) + ",width:" + getMeasuredWidth());
+//        LogUtils.i(TAG, "colors:" + Arrays.toString(colors) + ",width:" + getMeasuredWidth());
         if (getMeasuredWidth() == 0) {
             int a = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
             measure(a, a);
@@ -204,6 +204,14 @@ public class GradientTextView extends AppCompatTextView {
         boolean isSelected = isSelected();
         super.setSelected(selected);
         if (isSelected != selected)
+            resetColorState();
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        boolean isEnabled = isEnabled();
+        super.setEnabled(enabled);
+        if (isEnabled != enabled)
             resetColorState();
     }
 

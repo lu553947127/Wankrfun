@@ -3,11 +3,14 @@ buildscript {
     repositories {
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        //华为推送maven仓库
+        maven {url 'http://developer.huawei.com/repo/'}
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
-
+        //华为推送maven仓库
+        classpath 'com.huawei.agconnect:agcp:1.4.1.300'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -18,7 +21,15 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        //融云即时通讯maven仓库
+        maven {url  "https://dl.bintray.com/rongcloud/maven"}
+        //华为推送maven仓库
+        maven { url 'https://developer.huawei.com/repo/' }
+        //导入本地aar包
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 

@@ -15,5 +15,14 @@ package com.wankrfun.crania.base;
 public class BuildConfig {
 
     //服务器地址
-    public static final String BASE_URL="http://www.weibichain.com/";
+    public static final String BASE_URL = "http://www.weibichain.com/";
+
+//    //融云appKey测试
+//    public static final String RONG_YUN_APP_KEY = "sfci50a7sxgwi";
+
+    //融云appKey测试 正式
+    public static final String RONG_YUN_APP_KEY = "y745wfm8yhg3v";
+
+    //隐私协议网址
+    public static final String AGREEMENT_URL = "http://www.wankrfun.com/policy.html";
 }

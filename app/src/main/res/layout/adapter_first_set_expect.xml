@@ -15,11 +15,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@drawable/icon_expect_love"/>
+            android:src="@drawable/icon_activity_food"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"

@@ -15,7 +15,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.wankrfun.crania.event.BaseEvent;
+import com.wankrfun.crania.base.VersionUploadBean;
+import com.wankrfun.crania.bean.LoginBean;
 import com.wankrfun.crania.event.ParseEvent;
 import com.wankrfun.crania.http.retrofit.BaseRepository;
 
@@ -48,6 +49,7 @@ public class LoginViewModel extends BaseRepository {
     public MutableLiveData<ParseEvent> verificationCodeLiveData;
     public MutableLiveData<ParseEvent> resetPasswordLiveData;
     public MutableLiveData<ParseUser> loginLiveData;
+    public MutableLiveData<VersionUploadBean> versionUploadLiveData;
 
     public LoginViewModel() {
         pageStateLiveData = new MutableLiveData<>();
@@ -58,6 +60,7 @@ public class LoginViewModel extends BaseRepository {
         verificationCodeLiveData = new MutableLiveData<>();
         resetPasswordLiveData = new MutableLiveData<>();
         loginLiveData = new MutableLiveData<>();
+        versionUploadLiveData = new MutableLiveData<>();
     }
 
     /**
@@ -67,7 +70,7 @@ public class LoginViewModel extends BaseRepository {
      */
     public void getVerificationPhone(String phone){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
-        query.whereEqualTo("username", phone);
+        query.whereEqualTo("phonenumber", phone);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             public void done(ParseObject parseObject, ParseException e) {
                 if (e == null) {
@@ -94,7 +97,7 @@ public class LoginViewModel extends BaseRepository {
             public void done(Object object, ParseException e) {
                 if (e == null) {
                     LogUtils.e("getSendCode: "+ new Gson().toJson(object));
-                    BaseEvent baseEvent = new Gson().fromJson(new Gson().toJson(object),BaseEvent.class);
+                    LoginBean baseEvent = new Gson().fromJson(new Gson().toJson(object), LoginBean.class);
                     if (baseEvent.getCode() == 0){
                         sendCodeLiveData.postValue(new ParseEvent(object));
                     }else {
@@ -123,7 +126,7 @@ public class LoginViewModel extends BaseRepository {
             public void done(Object object, ParseException e) {
                 if (e == null) {
                     LogUtils.e("getVerificationCode: "+ new Gson().toJson(object));
-                    BaseEvent baseEvent = new Gson().fromJson(new Gson().toJson(object),BaseEvent.class);
+                    LoginBean baseEvent = new Gson().fromJson(new Gson().toJson(object), LoginBean.class);
                     if (baseEvent.getCode() == 0){
                         verificationCodeLiveData.postValue(new ParseEvent(object));
                     }else {
@@ -171,7 +174,7 @@ public class LoginViewModel extends BaseRepository {
             public void done(Object object, ParseException e) {
                 if (e == null) {
                     LogUtils.e("getResetPassword: "+ new Gson().toJson(object));
-                    BaseEvent baseEvent = new Gson().fromJson(new Gson().toJson(object),BaseEvent.class);
+                    LoginBean baseEvent = new Gson().fromJson(new Gson().toJson(object), LoginBean.class);
                     if (baseEvent.getCode() == 0){
                         resetPasswordLiveData.postValue(new ParseEvent(object));
                     }else {
@@ -199,6 +202,70 @@ public class LoginViewModel extends BaseRepository {
                     loginLiveData.postValue(user);
                 } else {
                     ToastUtils.showShort(e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 注册时填写邀请码时的回传
+     *
+     * @param rewardUserId 新注册用户的objectId, 可选
+     * @param inviteCode 邀请码,必选
+     */
+    public void getInvited(String rewardUserId, String inviteCode){
+        HashMap<String, String> params = new HashMap();
+        params.put("rewardUserId", rewardUserId);
+        params.put("inviteCode", inviteCode);
+        ParseCloud.callFunctionInBackground("invited-sign-up-hanlder", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getInvited: "+ new Gson().toJson(object));
+                }else {
+                    LogUtils.e( "getInvited: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 注册回传,用户注册成功后调用
+     *
+     */
+    public void getSignUp(){
+        HashMap<String, String> params = new HashMap();
+        ParseCloud.callFunctionInBackground("android-signup-notice", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getSignUp: "+ new Gson().toJson(object));
+                }else {
+                    LogUtils.e( "getSignUp: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取版本升级信息
+     */
+    public void getVersionUpload(){
+        HashMap<String, String> params = new HashMap();
+        ParseCloud.callFunctionInBackground("upgrade-info", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getVersionUpload: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    VersionUploadBean versionUploadBean = new Gson().fromJson(new Gson().toJson(object), VersionUploadBean.class);
+                    if (versionUploadBean.getCode() == 0){
+                        versionUploadLiveData.postValue(versionUploadBean);
+                    }else {
+                        ToastUtils.showShort(versionUploadBean.getError());
+                    }
+                }else {
+                    LogUtils.e("getVersionUpload: " + e.getMessage());
                 }
             }
         });

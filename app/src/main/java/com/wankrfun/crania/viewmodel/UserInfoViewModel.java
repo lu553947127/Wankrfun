@@ -3,9 +3,9 @@ package com.wankrfun.crania.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
@@ -13,6 +13,7 @@ import com.wankrfun.crania.event.ParseEvent;
 import com.wankrfun.crania.http.retrofit.BaseRepository;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @ProjectName: Wankrfun
@@ -41,28 +42,44 @@ public class UserInfoViewModel extends BaseRepository {
     /**
      * 保存用户信息
      *
-     * @param phone 账号
+     * @param name 用户名
      * @param password 密码
+     * @param name 用户昵称
      * @param sex 性别
      * @param birthday 出生日期
      * @param job 工作状态
      * @param tag 期待tag
      * @param event_tag 参加活动tag
      */
-    public void getSaveUserInfo(String phone, String password, String sex, String birthday, String job, String tag, String event_tag){
+    public void getSaveUserInfo(String phone, String password, String name, String sex, String birthday, String job, List<String> tag, List<String> event_tag, ParseFile file){
+        LogUtils.e(file);
         ParseUser user = new ParseUser();
         user.setUsername(phone);
         user.setPassword(password);
+        user.put("phonenumber", phone);//手机号
+        user.put("name", name);//用户昵称
         user.put("sex", sex);//male/female
         user.put("birthday", birthday);//YYYY-MM-dd
         user.put("job", job);//"s": 学生, "j":工作了, "c":自由职业
         user.put("tag", tag);//期待
         user.put("event_tag", event_tag);//活动
+        user.put("photo", file);//用户头像
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    saveUserInfoLiveData.postValue(new ParseEvent(e.getMessage()));
+                    user.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                saveUserInfoLiveData.postValue(new ParseEvent("success"));
+                            }else {
+                                LogUtils.e("ParseException:" + e);
+                                saveUserInfoLiveData.postValue(new ParseEvent(e.getMessage()));
+                            }
+                        }
+                    });
                 } else {
+                    LogUtils.e("ParseException:" + e);
                     saveUserInfoLiveData.postValue(new ParseEvent(e.getMessage()));
                 }
             }
@@ -74,23 +91,19 @@ public class UserInfoViewModel extends BaseRepository {
      *
      * @param image 文件流
      */
-    public void getUploadFile(File image){
+    public static ParseFile getUploadFile(File image){
         LogUtils.e(image);
         ParseFile file = new ParseFile(image, "picturePath");
-        // Upload the image into Parse Cloud
-        file.saveInBackground();
-        // Create a New Class called "ImageUpload" in Parse
-        ParseObject imgupload = new ParseObject("Image");
-        // Create a column named "ImageName" and set the string
-        imgupload.put("Image", "picturePath");
-        // Create a column named "ImageFile" and insert the image
-        imgupload.put("ImageFile", file);
-        // Create the class and the columns
-        imgupload.saveInBackground(new SaveCallback() {
+        file.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                LogUtils.e(e);
+                if (e == null){
+                    ToastUtils.showShort("图片上传成功");
+                }else {
+                    ToastUtils.showShort("图片上传失败");
+                }
             }
         });
+        return file;
     }
 }

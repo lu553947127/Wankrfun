@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:text="我要评论"
+        android:textColor="@color/color_333333" />
+
+    <fj.edittextcount.lib.FJEditTextCount
+        android:id="@+id/et_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@null"
+        app:etHintColor="@color/color_979797"
+        app:etLineColor="@android:color/transparent"
+        app:etMaxLength="300"
+        app:etMinHeight="88dp"
+        app:etPromptTextColor="@color/color_979797"
+        app:etPromptTextSize="15sp"
+        app:etTextColor="@color/color_333333"
+        app:etTextSize="15sp"
+        app:etType="percentage"
+        app:etHint="请输入你的评论"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_finish"
+        android:layout_width="74dp"
+        android:layout_height="35dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="40dp"
+        android:layout_gravity="right"
+        android:background="@drawable/shape_yellow_5"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="发送"/>
+
+</LinearLayout>

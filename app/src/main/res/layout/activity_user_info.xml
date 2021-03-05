@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.wankrfun.crania.widget.AdaptationScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="centerCrop" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_bg2"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/icon_mine_bg"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="100dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_like"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:background="@drawable/icon_mine_like"
+                            android:paddingLeft="30dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:orientation="horizontal">
+
+                            <com.wankrfun.crania.widget.CircleImageView
+                                android:id="@+id/iv_avatar"
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:layout_gravity="center_vertical" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="15dp"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tv_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:textSize="18sp" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tv_address"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:drawableLeft="@drawable/icon_events_location"
+                                        android:drawablePadding="2dp"
+                                        android:textColor="@color/color_BDBDBD"
+                                        android:textSize="10sp" />
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/iv_sex"
+                                        android:layout_width="10dp"
+                                        android:layout_height="10dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_gravity="center_vertical" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tv_constellation"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:textColor="@color/color_BDBDBD"
+                                        android:textSize="10sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_696969"
+                        android:textSize="13sp"
+                        android:text="个性标签"/>
+
+                    <com.google.android.flexbox.FlexboxLayout
+                        android:id="@+id/fl_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:flexWrap="wrap"
+                        app:showDivider="middle"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:src="@drawable/icon_mine_down"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_696969"
+                        android:textSize="13sp"
+                        android:text="我的相册"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_album"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_initiate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableBottom="@drawable/icon_tab_line"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:text="我的发起"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:layout_marginLeft="25dp"
+                        android:textColor="@color/color_494949"
+                        android:textSize="16sp"
+                        android:text="我的申请"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <com.wankrfun.crania.widget.AutoHeightViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+
+            </LinearLayout>
+
+        </com.wankrfun.crania.widget.AdaptationScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <!--头部-->
+    <RelativeLayout
+        android:id="@+id/rl_toolbar_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingTop="40dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/svg_icon_back"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_more"/>
+
+    </RelativeLayout>
+
+    <!--隐藏头部-->
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp"
+        android:paddingBottom="10dp"
+        android:alpha="0"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_set2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/svg_icon_back"/>
+
+        <com.wankrfun.crania.widget.CircleImageView
+            android:id="@+id/iv_avatar2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_more2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_more"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -2,13 +2,20 @@ package com.wankrfun.crania.utils;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.text.TextUtils;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
+import com.wankrfun.crania.view.login.LoginActivity;
 
 import java.util.List;
+
+import io.rong.imkit.RongIM;
 
 /**
  * @ProjectName: Wankrfun
@@ -25,6 +32,20 @@ import java.util.List;
 public class LoginUtils {
 
     /**
+     * 检测是否第一次打开app
+     *
+     * @return
+     */
+    public static boolean isFirstApp(BaseActivity activity) {
+        SharedUtils sharedUtils = new SharedUtils(activity);
+        String first = sharedUtils.getShared(SpConfig.FIRST_APP,"first");
+        if (TextUtils.isEmpty(first)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 检测是否登录
      *
      * @return
@@ -35,6 +56,54 @@ public class LoginUtils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 检测是否登记用户信息
+     *
+     * @return
+     */
+    public static boolean isFirstUser(){
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            ParseFile parseFile = (ParseFile) currentUser.get("photo");
+            if (StringUtils.isTrimEmpty(String.valueOf(currentUser.get("sex")))){
+                return false;
+            }
+            if (StringUtils.isTrimEmpty(String.valueOf(currentUser.get("birthday")))){
+                return false;
+            }
+            if (StringUtils.isTrimEmpty(String.valueOf(currentUser.get("job")))){
+                return false;
+            }
+            if (StringUtils.isTrimEmpty(String.valueOf(currentUser.get("tag")))){
+                return false;
+            }
+            if (StringUtils.isTrimEmpty(String.valueOf(currentUser.get("event_tag")))){
+                return false;
+            }
+            if (StringUtils.isTrimEmpty(currentUser.getUsername())){
+                return false;
+            }
+            if (StringUtils.isTrimEmpty(String.valueOf(parseFile.getUrl()))){
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 退出账号到登录页面
+     *
+     * @return
+     */
+    public static void getExitLogin() {
+        SPUtils.getInstance().clear(true);
+        ActivityUtils.startActivity(LoginActivity.class);
+        ActivityUtils.finishOtherActivities(LoginActivity.class);
+        RongIM.getInstance().logout();
     }
 
     /**

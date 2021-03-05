@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="115dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerInParent="true">
 
         <ImageView
             android:id="@+id/iv_empty"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:layout_gravity="center"
-            android:src="@drawable/icon_job_free"/>
+            android:src="@drawable/icon_empty_events"/>
 
         <TextView
             android:id="@+id/tv_empty"

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_events_add"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/svg_icon_back"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/icon_matching_like"
+            android:drawablePadding="10dp"
+            android:background="@drawable/shape_yellow_half_5"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="智能推荐" />
+
+    </RelativeLayout>
+
+    <com.wankrfun.crania.widget.AdaptationScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@null"
+                android:textColor="@color/white"
+                android:textColorHint="@color/color_6C6974"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:hint="介绍一下你的活动"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/icon_activity_location"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="地点"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/icon_events_select"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="请选择"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/white"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/icon_activity_clock"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="时间"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/icon_events_select"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="请选择"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/white"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/icon_events_user_add"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="参与人"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:drawableRight="@drawable/icon_events_select"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:text="请选择"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <com.wankrfun.crania.widget.CircleImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/aaa2"
+                    android:layout_gravity="center_vertical"/>
+
+                <RelativeLayout
+                    android:id="@+id/ll_questions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/icon_events_questions"
+                    android:layout_marginLeft="10dp"
+                    android:alpha="0.5">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_979797"
+                            android:textSize="11sp"
+                            android:text="合拍问答"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_questions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:text="选择合适的问题更了解你的申请人"/>
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/icon_right_gray"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_release"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/shape_gray_5"
+                android:alpha="0.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="发布"/>
+
+        </LinearLayout>
+
+    </com.wankrfun.crania.widget.AdaptationScrollView>
+
+</RelativeLayout>

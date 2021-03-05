@@ -9,14 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_image"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"/>
 
@@ -27,27 +27,17 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_images"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/circle_gray"
-        android:visibility="gone">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_images"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:layout_centerInParent="true" />
-
-    </RelativeLayout>
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

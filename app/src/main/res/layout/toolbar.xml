@@ -2,59 +2,65 @@
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="47dp"
+    android:layout_height="44dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:contentInsetStart="0dp"
     app:contentInsetEnd="0dp"
-    android:background="@color/black"
-    android:id="@+id/toolbar"
-    android:layout_below="@+id/fake_status_bar">
+    android:background="@color/color_111111"
+    app:layout_constraintTop_toBottomOf="@+id/fake_status_bar"
+    android:id="@+id/toolbar">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_location"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bar_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:drawableLeft="@drawable/icon_home_location"
-            android:drawablePadding="5dp"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:text="@string/empty"/>
+            android:background="@drawable/selector_toolbar"
+            android:scaleType="centerInside"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:src="@drawable/svg_icon_back"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_bar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/icon_home_down"
             android:layout_centerInParent="true"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:lines="1"
             android:maxEms="13"
             android:singleLine="true"
-            android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:text="@string/home_title"/>
+            android:textSize="18sp"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_date"
+            android:id="@+id/iv_bar_right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/selector_toolbar"
+            android:scaleType="centerInside"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_bar_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_toolbar"
             android:gravity="center_vertical"
             android:layout_alignParentRight="true"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/icon_home_date"/>
+            android:textColor="@color/white"
+            android:textSize="13sp"/>
 
     </RelativeLayout>
 
