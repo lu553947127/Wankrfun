@@ -25,6 +25,12 @@ public class SpConfig {
     /*融云token*/
     public static final String IM_TOKEN = "im_token";
 
+    /*极光设备id*/
+    public static final String REGISTRATION_ID = "registrationId";
+
+    /*极光推送别名是否设置*/
+    public static final String ALIAS_STATUS = "alias_status";
+
     /*邀请码*/
     public static final String INVITE = "invite";
 

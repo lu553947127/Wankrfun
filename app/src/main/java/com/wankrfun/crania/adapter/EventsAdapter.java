@@ -69,8 +69,8 @@ public class EventsAdapter extends BaseQuickAdapter<EventsBean.DataBean.ListBean
         CornerImageView cornerImageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getEventImage())
-                .placeholder(R.drawable.icon_empty_meet)
-                .errorPic(R.drawable.icon_empty_meet)
+                .placeholder(R.drawable.ic_empty_zhihu)
+                .errorPic(R.drawable.ic_empty_zhihu)
                 .imageView(cornerImageView)
                 .build());
 
@@ -89,14 +89,14 @@ public class EventsAdapter extends BaseQuickAdapter<EventsBean.DataBean.ListBean
         CircleImageView circleImageView2 = helper.getView(R.id.iv_avatar2);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getCreator_image())
-                .placeholder(R.drawable.icon_empty_meet)
-                .errorPic(R.drawable.icon_empty_meet)
+                .placeholder(R.drawable.rc_default_portrait)
+                .errorPic(R.drawable.rc_default_portrait)
                 .imageView(circleImageView)
                 .build());
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getCreator_image())
-                .placeholder(R.drawable.icon_empty_meet)
-                .errorPic(R.drawable.icon_empty_meet)
+                .placeholder(R.drawable.rc_default_portrait)
+                .errorPic(R.drawable.rc_default_portrait)
                 .imageView(circleImageView2)
                 .build());
 

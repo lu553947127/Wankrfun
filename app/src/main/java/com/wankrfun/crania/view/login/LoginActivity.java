@@ -76,17 +76,17 @@ public class LoginActivity extends BaseActivity {
 
         //验证手机号返回结果
         loginViewModel.verificationPhoneLiveData.observe(this, object -> {
-            if (object.getMessage().equals("Invalid session token")){
-                ToastUtils.showShort(object.getMessage());
-                return;
-            }
             Bundle bundle = new Bundle();
             if (object.getParseObject() != null){
                 bundle.putString("abbreviation", abbreviation);
                 bundle.putString("phone", object.getParseObject().getString("phonenumber"));
                 ActivityUtils.startActivity(bundle,LoginPasswordActivity.class);
             }else {
-                if (etPhone.getTrimmedString().equals("8584058565")){
+                if (object.getMessage().equals("Invalid session token")){
+                    ToastUtils.showShort(object.getMessage());
+                    return;
+                }
+                if (etPhone.getTrimmedString().equals("8584058566")){
                     bundle.putString("type", getIntent().getStringExtra("type"));
                     bundle.putString("phone", code + etPhone.getTrimmedString());
                     ActivityUtils.startActivity(bundle, SetPasswordActivity.class);

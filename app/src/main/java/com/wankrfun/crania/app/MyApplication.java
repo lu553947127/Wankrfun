@@ -32,14 +32,13 @@ import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BuildConfig;
 import com.wankrfun.crania.http.api.ApiService;
 import com.wankrfun.crania.http.retrofit.BaseRequest;
-import com.wankrfun.crania.receiver.CrashHandler;
 import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.RongIMUtils;
-import com.wankrfun.crania.view.start.StartUpActivity;
 
 import java.io.File;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
+import cn.jpush.android.api.JPushInterface;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -47,8 +46,6 @@ import io.rong.push.RongPushClient;
 import io.rong.push.pushconfig.PushConfig;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.crash.CaocConfig;
-
-import static com.wankrfun.crania.BuildConfig.DEBUG;
 
 /**
  * @ProjectName: Wankrfun
@@ -103,8 +100,8 @@ public class MyApplication extends Application {
         initCrash(getApplicationContext());
 
         initRongYun(getApplicationContext());
-        //闪退处理初始化
-//        CrashHandler.getInstance().init(this, DEBUG, true, 0, StartUpActivity.class);
+
+        initJPush(getApplicationContext());
 
         //MVVMHabit初始化
         BaseApplication.setApplication(this);
@@ -227,6 +224,14 @@ public class MyApplication extends Application {
         RongIM.getInstance().setVoiceMessageType(RongIM.VoiceMessageType.HighQuality);
         //获取发出去的消息监听
         RongIMUtils.getSendMessageListener();
+    }
+
+    /**
+     * 极光推送初始化配置
+     */
+    private static void initJPush(Context context) {
+//        JPushInterface.setDebugMode(BuildConfig.DEBUG);
+        JPushInterface.init(context);
     }
 
     //获取到主线程的handler

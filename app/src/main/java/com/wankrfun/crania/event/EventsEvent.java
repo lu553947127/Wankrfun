@@ -2,6 +2,7 @@ package com.wankrfun.crania.event;
 
 import com.wankrfun.crania.bean.UserEventsListBean;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ public class EventsEvent {
     private UserEventsListBean userEventsListBean;
 
     public EventsEvent() {
+
     }
 
     public EventsEvent(String type, String title) {

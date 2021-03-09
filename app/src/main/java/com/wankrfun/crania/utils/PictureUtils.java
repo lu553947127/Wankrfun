@@ -1,5 +1,8 @@
 package com.wankrfun.crania.utils;
 
+import com.wankrfun.crania.app.MyApplication;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +33,19 @@ public class PictureUtils {
             list.add(picture_list.get(i));
         }
         return list;
+    }
+
+    /**
+     * 鲁班压缩时，设置压缩后存放的路径
+     *
+     * @return
+     */
+    public static String getLuBanPath() {
+        String path = MyApplication.getInstance().getFilesDir() + "/Luban/image/";
+        File file = new File(path);
+        if (file.mkdirs()) {
+            return path;
+        }
+        return path;
     }
 }

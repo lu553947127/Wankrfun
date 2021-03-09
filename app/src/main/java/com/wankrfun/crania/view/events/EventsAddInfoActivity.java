@@ -28,9 +28,11 @@ import com.wankrfun.crania.dialog.CustomBottomAddress;
 import com.wankrfun.crania.dialog.CustomBottomPeople;
 import com.wankrfun.crania.dialog.CustomBottomQuestions;
 import com.wankrfun.crania.dialog.CustomBottomTime;
+import com.wankrfun.crania.event.CompressEvent;
 import com.wankrfun.crania.event.EventsEvent;
 import com.wankrfun.crania.image.ImageConfig;
 import com.wankrfun.crania.image.ImageLoader;
+import com.wankrfun.crania.utils.CompressUtils;
 import com.wankrfun.crania.utils.EventsUtils;
 import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.utils.ParseUtils;
@@ -84,6 +86,7 @@ public class EventsAddInfoActivity extends BaseActivity {
     AppCompatTextView tvQuestions;
     private GridImageAdapter gridImageAdapter;
     private List<String> picture_list = new ArrayList<>();
+    private List<Object> eventEditImage = new ArrayList<>();
     private EventsViewModel eventsViewModel;
 
     private ParseFile eventImage;
@@ -92,7 +95,6 @@ public class EventsAddInfoActivity extends BaseActivity {
     private String eventType, eventTypeIcon, event_address, activity_time, eventSex;
     private int max_num;
     private EventsDetailBean eventsDetailBean;
-    private List<Object> eventEditImage = new ArrayList<>();
 
     @Override
     protected int initLayoutRes() {
@@ -155,9 +157,10 @@ public class EventsAddInfoActivity extends BaseActivity {
         eventsViewModel.eventsEditLiveData.observe(this, eventsCreateBean -> {
             hideLoading();
             ToastUtils.showShort(eventsCreateBean.getData().getMsg());
-            EventBus.getDefault().post(new EventsEvent());
-            ActivityUtils.finishActivity(EventsAddActivity.class);
-            finish();
+            if (eventsCreateBean.getCode() == 0){
+                EventBus.getDefault().post(new EventsEvent());
+                finish();
+            }
         });
     }
 
@@ -175,7 +178,7 @@ public class EventsAddInfoActivity extends BaseActivity {
 
             picture_list.addAll(eventsDetailBean.getData().getEvent().getImages());
             eventEditImage.addAll(eventsDetailBean.getData().getEvent().getImages());
-            gridImageAdapter.setNewEditData(picture_list, "edit");
+            gridImageAdapter.setNewData(picture_list);
 
             longitude = eventsDetailBean.getData().getEvent().getEventLocation().getLongitude();
             latitude = eventsDetailBean.getData().getEvent().getEventLocation().getLatitude();
@@ -191,7 +194,7 @@ public class EventsAddInfoActivity extends BaseActivity {
 
             isTimeUnlimited = NumberUtils.dealDateFormat(eventsDetailBean.getData().getEvent().getActivity_time()).equals("2200-01-01 08:30:00");
             activity_time = NumberUtils.dealDateFormat(eventsDetailBean.getData().getEvent().getActivity_time()).equals("2200-01-01 08:30:00") ?
-                    "可以商讨" : NumberUtils.dealDateFormat(eventsDetailBean.getData().getEvent().getActivity_time());
+                    "2200-01-01 08:30:00" : NumberUtils.dealDateFormat(eventsDetailBean.getData().getEvent().getActivity_time());
             tvTime.setText(activity_time);
 
             max_num = eventsDetailBean.getData().getEvent().getMax_num();
@@ -199,19 +202,21 @@ public class EventsAddInfoActivity extends BaseActivity {
 
             switch (eventsDetailBean.getData().getEvent().getEventSex()){
                 case "x":
+                case "x:":
                     eventSex = "x:";
                     tvPeople.setText(peopleNum + ",不限性别");
                     break;
                 case "m":
+                case "m:":
                     eventSex = "m:";
                     tvPeople.setText(peopleNum + ",限男生");
                     break;
                 case "f":
+                case "f:":
                     eventSex = "f:";
                     tvPeople.setText(peopleNum + ",限女生");
                     break;
             }
-
         }else {
             eventType = getIntent().getStringExtra("type");
             eventTypeIcon = getIntent().getStringExtra("typeChildren");
@@ -230,21 +235,17 @@ public class EventsAddInfoActivity extends BaseActivity {
                     return;
                 }
                 for (int i = 0; i < Matisse.obtainResult(data).size(); i++) {
-                    picture_list.add(ImageLoader.getUriRealFilePath(activity, Matisse.obtainResult(data).get(i)));
-                    eventEditImage.add(ParseUtils.setImageFile(new File(ImageLoader.getUriRealFilePath(activity, Matisse.obtainResult(data).get(i)))));
+                    CompressUtils.uploadFileCompress(new File(ImageLoader.getUriRealFilePath(activity, Matisse.obtainResult(data).get(i))));
                 }
             }else {
                 if (Matisse.obtainPathResult(data).size()+ picture_list.size() > 6){
                     ToastUtils.showShort(getString(R.string.photo_size_not));
                     return;
                 }
-                picture_list.addAll(Matisse.obtainPathResult(data));
                 for (int i = 0; i < Matisse.obtainPathResult(data).size(); i++) {
-                    eventEditImage.add(ParseUtils.setImageFile(new File(Matisse.obtainPathResult(data).get(i))));
+                    CompressUtils.uploadFileCompress(new File(Matisse.obtainPathResult(data).get(i)));
                 }
             }
-            LogUtils.e(picture_list);
-            gridImageAdapter.setNewData(picture_list);
         }
     }
 
@@ -287,6 +288,8 @@ public class EventsAddInfoActivity extends BaseActivity {
                 break;
             case R.id.tv_release://发布
 
+                showLoading();
+
                 if (TextUtils.isEmpty(eventType)){
                     ToastUtils.showShort("活动类型不能为空");
                     return;
@@ -300,6 +303,13 @@ public class EventsAddInfoActivity extends BaseActivity {
                 if (TextUtils.isEmpty(etEvents.getText().toString())){
                     ToastUtils.showShort("活动内容不能为空");
                     return;
+                }
+
+                String eventTitle;
+                if (etEvents.getText().toString().length() > 20){
+                    eventTitle = etEvents.getText().toString().substring(0, 20);
+                }else {
+                    eventTitle = etEvents.getText().toString();
                 }
 
                 if (picture_list.size() != 0){
@@ -321,17 +331,15 @@ public class EventsAddInfoActivity extends BaseActivity {
                     return;
                 }
 
-                showLoading();
-
                 if (eventsDetailBean != null){
                     eventsViewModel.getEventsEdit(
                             eventsDetailBean.getData().getEvent().getObjectId()
                             , eventsDetailBean.getData().getEvent().getEventCreator()
                             , eventType
                             , eventTypeIcon
+                            , eventTitle
                             , etEvents.getText().toString()
-                            , etEvents.getText().toString()
-                            , eventImage
+                            , eventEditImage.get(0)
                             , eventEditImage
                             , isLocUnlimited
                             , longitude
@@ -344,7 +352,7 @@ public class EventsAddInfoActivity extends BaseActivity {
                 }else {
                     eventsViewModel.getEventsCreate(eventType
                             , eventTypeIcon
-                            , etEvents.getText().toString()
+                            , eventTitle
                             , etEvents.getText().toString()
                             , eventImage
                             , ParseUtils.setImageFile(picture_list)
@@ -411,5 +419,13 @@ public class EventsAddInfoActivity extends BaseActivity {
                 tvQuestions.setText(event.getTitle());
                 break;
         }
+    }
+
+    @Subscribe
+    public void onEventCompress(CompressEvent event) {
+        picture_list.add(String.valueOf(event.getCompressFile()));
+        eventEditImage.add(ParseUtils.setImageFile(event.getCompressFile()));
+        gridImageAdapter.setNewData(picture_list);
+        LogUtils.e(picture_list);
     }
 }

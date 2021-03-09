@@ -433,7 +433,7 @@ public class EventsViewModel extends BaseRepository {
      */
     public void getEventsEdit(String eventId, String creatorId, String eventType, String eventTypeIcon
             , String event_contents, String eventDesc
-            , ParseFile eventImage, List<Object> images
+            , Object eventImage, List<Object> images
             , boolean isLocUnlimited, double longitude, double latitude, String event_address
             , boolean isTimeUnlimited, String activity_time
             , int max_num, String eventSex){
@@ -465,11 +465,7 @@ public class EventsViewModel extends BaseRepository {
                     LogUtils.e("getEventsEdit: "+ new Gson().toJson(object));
                     LogUtils.json(LogUtils.I,new Gson().toJson(object));
                     EventsCreateBean eventsCreateBean = new Gson().fromJson(new Gson().toJson(object), EventsCreateBean.class);
-                    if (eventsCreateBean.getCode() == 0){
-                        eventsEditLiveData.postValue(eventsCreateBean);
-                    }else {
-                        ToastUtils.showShort(eventsCreateBean.getData().getMsg());
-                    }
+                    eventsEditLiveData.postValue(eventsCreateBean);
                 }else {
                     LogUtils.e("getEventsEdit: " + e.getMessage());
                 }

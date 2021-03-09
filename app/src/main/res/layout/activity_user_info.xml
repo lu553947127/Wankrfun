@@ -247,7 +247,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_more"/>
+            android:src="@drawable/icon_more"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
@@ -282,7 +283,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_more"/>
+            android:src="@drawable/icon_more"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

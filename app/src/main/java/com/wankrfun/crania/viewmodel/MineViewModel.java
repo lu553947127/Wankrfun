@@ -19,6 +19,7 @@ import com.wankrfun.crania.http.retrofit.BaseRepository;
 import com.wankrfun.crania.utils.JsonUtils;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @ProjectName: Wankrfun
@@ -44,6 +45,7 @@ public class MineViewModel extends BaseRepository {
     public MutableLiveData<EventsCreateBean> userUploadPhotoLiveData;
     public MutableLiveData<EventsCreateBean> userUploadAddressLiveData;
     public MutableLiveData<EventsCreateBean> userUploadJobLiveData;
+    public MutableLiveData<EventsCreateBean> userUploadImagesLiveData;
     private final String userId;
 
     public MineViewModel() {
@@ -58,6 +60,7 @@ public class MineViewModel extends BaseRepository {
         userUploadPhotoLiveData = new MutableLiveData<>();
         userUploadAddressLiveData = new MutableLiveData<>();
         userUploadJobLiveData = new MutableLiveData<>();
+        userUploadImagesLiveData = new MutableLiveData<>();
     }
 
     /**
@@ -266,6 +269,32 @@ public class MineViewModel extends BaseRepository {
                     }
                 }else {
                     LogUtils.e("getUploadJob: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 修改个人相册图片
+     */
+    public void getUploadImages(List<Object> images){
+        HashMap<String, Object> params = new HashMap();
+        params.put("userId", userId);
+        params.put("content", images); //新相册图片array，必选
+        ParseCloud.callFunctionInBackground("edit-user-profile-images", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getUploadImages: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    EventsCreateBean bean = new Gson().fromJson(new Gson().toJson(object), EventsCreateBean.class);
+                    if (bean.getCode() == 0){
+                        userUploadImagesLiveData.postValue(bean);
+                    }else {
+                        ToastUtils.showShort(bean.getError());
+                    }
+                }else {
+                    LogUtils.e("getUploadImages: " + e.getMessage());
                 }
             }
         });

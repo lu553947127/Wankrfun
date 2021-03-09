@@ -10,9 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.flexbox.FlexboxLayout;
-import com.lxj.xpopup.XPopup;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineAlbumAdapter;
@@ -24,7 +22,6 @@ import com.wankrfun.crania.utils.EventsUtils;
 import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.utils.PictureEnlargeUtils;
 import com.wankrfun.crania.utils.ScrollUtils;
-import com.wankrfun.crania.viewmodel.MeetViewModel;
 import com.wankrfun.crania.viewmodel.MineViewModel;
 import com.wankrfun.crania.widget.AdaptationScrollView;
 import com.wankrfun.crania.widget.AutoHeightViewPager;
@@ -83,7 +80,6 @@ public class UserInfoActivity extends BaseActivity {
     @BindView(R.id.view_pager)
     AutoHeightViewPager viewPager;
     private MineViewModel mineViewModel;
-    private MeetViewModel meetViewModel;
     private UserInfoBean userInfoBean;
     //切换个性标签布尔值
     private boolean isShow;
@@ -124,7 +120,6 @@ public class UserInfoActivity extends BaseActivity {
         });
 
         mineViewModel = getViewModel(MineViewModel.class);
-        meetViewModel = getViewModel(MeetViewModel.class);
 
         //获取用户详情返回结果
         mineViewModel.userInfoLiveData.observe(this, userInfoBean -> {
@@ -164,12 +159,6 @@ public class UserInfoActivity extends BaseActivity {
             }
         });
 
-        //解除匹配成功返回结果
-        meetViewModel.unMatchingLiveData.observe(this, eventsCreateBean -> {
-            ToastUtils.showShort(eventsCreateBean.getData().getMsg());
-            finish();
-        });
-
         mineViewModel.getUserInfo(getIntent().getStringExtra("id"));
     }
 
@@ -182,23 +171,14 @@ public class UserInfoActivity extends BaseActivity {
                 break;
             case R.id.iv_more://更多
             case R.id.iv_more2:
-                new XPopup.Builder(activity)
-                        .hasShadowBg(false)
-                        .atView(view)
-                        .asAttachList(new String[]{"解除匹配","取消"}, null,
-                                (position, text) -> {
-                                    switch (text){
-                                        case "解除匹配":
-                                            meetViewModel.getUnMatching(userInfoBean.getData().getProfile().getObjectId());
-                                            break;
-                                    }
-                                }).show();
                 break;
             case R.id.iv_label://个性标签切换数量
                 if (!isShow){
                     EventsUtils.getShowTag(activity, flLabel, EventsUtils.getMineTag(userInfoBean));
+                    ivLabel.setImageResource(R.drawable.icon_mine_up);
                 }else {
                     EventsUtils.getShowTag(activity, flLabel, EventsUtils.getMineTagSmall(userInfoBean));
+                    ivLabel.setImageResource(R.drawable.icon_mine_down);
                 }
                 isShow = !isShow;
                 break;

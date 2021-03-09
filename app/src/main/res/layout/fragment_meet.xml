@@ -13,7 +13,7 @@
 
     <include layout="@layout/toolbar_meet"/>
 
-    <include layout="@layout/layout_empty"/>
+    <include layout="@layout/layout_empty_meet"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"

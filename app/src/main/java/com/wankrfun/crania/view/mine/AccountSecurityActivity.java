@@ -7,11 +7,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
-import com.wankrfun.crania.base.SpConfig;
-import com.wankrfun.crania.view.login.SetPasswordActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -57,10 +54,7 @@ public class AccountSecurityActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_password://修改密码
-//                ActivityUtils.startActivity(ChangePasswordActivity.class);
-                bundle.putString("type","change");
-                bundle.putString("phone", SPUtils.getInstance().getString(SpConfig.PHONE));
-                ActivityUtils.startActivity(bundle, SetPasswordActivity.class);
+                ActivityUtils.startActivity(ChangePasswordActivity.class);
                 break;
         }
     }

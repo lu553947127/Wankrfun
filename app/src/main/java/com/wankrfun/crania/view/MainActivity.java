@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,7 +20,10 @@ import com.king.app.updater.AppUpdater;
 import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
+import com.wankrfun.crania.base.SpConfig;
+import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.NotificationsUtils;
+import com.wankrfun.crania.utils.SharedUtils;
 import com.wankrfun.crania.utils.VersionUtils;
 import com.wankrfun.crania.viewmodel.IMConnectViewModel;
 import com.wankrfun.crania.viewmodel.LoginViewModel;
@@ -92,6 +96,13 @@ public class MainActivity extends BaseActivity {
         });
         IMConnectViewModel imConnectViewModel = getViewModel(IMConnectViewModel.class);
         imConnectViewModel.getImToken();
+
+//        //极光别名设置
+//        if (LoginUtils.setJPushAlias(activity)){
+//            //保存设备ID返回结果
+//            SharedUtils sharedUtils = new SharedUtils(activity);
+//            LogUtils.e("设备ID" + sharedUtils.getShared(SpConfig.REGISTRATION_ID,"message"));
+//        }
     }
 
     /**

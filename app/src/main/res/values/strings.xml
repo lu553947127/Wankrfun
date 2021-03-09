@@ -70,7 +70,7 @@
     <string name="first_play_hint">请输入</string>
 
     <string name="home_title">最新发布</string>
-    <string name="home_empty">附近暂时找不到活动了</string>
+    <string name="home_empty">暂时找不到数据哦</string>
     <string name="home_release">最新发布</string>
     <string name="home_start">最快开始</string>
     <string name="home_distance">最快距离</string>

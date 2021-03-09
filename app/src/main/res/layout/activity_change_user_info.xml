@@ -23,94 +23,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:orientation="horizontal">
-
-                    <com.wankrfun.crania.widget.CornerImageView
-                        android:id="@+id/iv_image1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        roundiv:radius="5dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/shape_gray2_10"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="5dp">
-
-                        <com.wankrfun.crania.widget.CornerImageView
-                            android:id="@+id/iv_image2"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            roundiv:radius="5dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/shape_gray2_10"/>
-
-                        <com.wankrfun.crania.widget.CornerImageView
-                            android:id="@+id/iv_image3"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:layout_marginTop="5dp"
-                            roundiv:radius="5dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/shape_gray2_10"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
-
-                    <com.wankrfun.crania.widget.CornerImageView
-                        android:id="@+id/iv_image4"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        roundiv:radius="5dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/shape_gray2_10"/>
-
-                    <com.wankrfun.crania.widget.CornerImageView
-                        android:id="@+id/iv_image5"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="5dp"
-                        roundiv:radius="5dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/shape_gray2_10"/>
-
-                    <com.wankrfun.crania.widget.CornerImageView
-                        android:id="@+id/iv_image6"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="5dp"
-                        roundiv:radius="5dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/shape_gray2_10"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"

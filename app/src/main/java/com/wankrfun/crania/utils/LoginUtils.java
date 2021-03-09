@@ -15,6 +15,7 @@ import com.wankrfun.crania.view.login.LoginActivity;
 
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
 import io.rong.imkit.RongIM;
 
 /**
@@ -92,6 +93,19 @@ public class LoginUtils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 极光推送别名设置
+     */
+    public static boolean setJPushAlias(BaseActivity activity) {
+        String userId = SPUtils.getInstance().getString(SpConfig.USER_ID);
+        int aliasStatus = SPUtils.getInstance().getInt(SpConfig.ALIAS_STATUS, 0);
+        if (!TextUtils.isEmpty(userId) && aliasStatus != 1) {
+            JPushInterface.setAlias(activity, 0, userId);
+            return true;
+        }
+        return false;
     }
 
     /**

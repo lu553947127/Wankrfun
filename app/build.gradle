@@ -24,6 +24,13 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
+
+        //极光推送配置
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "0936a4daf5f16dfaf14910c3", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
 
     buildTypes {
@@ -135,6 +142,10 @@ dependencies {
     implementation 'com.youth.banner:banner:2.0.11'
     //基于谷歌最新AAC架构，MVVM设计模式的一套快速开发库，整合Okhttp+RxJava+Retrofit+Glide等主流模块，满足日常开发需求。使用该框架可以快速开发一个高质量、易维护的Android应用。
     implementation 'com.github.goldze:MVVMHabit:3.1.6'
+    //极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.8.6'
+    //极光推送
+    implementation 'cn.jiguang.sdk:jcore:2.6.0'
 
     //华为推送模块
     implementation 'com.huawei.hms:push:5.0.0.300'

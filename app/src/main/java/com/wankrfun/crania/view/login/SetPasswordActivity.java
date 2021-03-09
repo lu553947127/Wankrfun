@@ -15,7 +15,6 @@ import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
-import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.PermissionUtils;
 import com.wankrfun.crania.view.MainActivity;
 import com.wankrfun.crania.view.login.first.FirstPermissionActivity;
@@ -75,9 +74,6 @@ public class SetPasswordActivity extends BaseActivity {
         if (!TextUtils.isEmpty(getIntent().getStringExtra("type"))){
             tvTitle.setText(getString(R.string.rebuild_password));
             tvInvite.setVisibility(View.GONE);
-            if (getIntent().getStringExtra("type").equals("change")){
-                tvLogin.setText("保存");
-            }
         }
 
         loginViewModel = getViewModel(LoginViewModel.class);
@@ -98,12 +94,7 @@ public class SetPasswordActivity extends BaseActivity {
 
         //重置密码返回结果
         loginViewModel.resetPasswordLiveData.observe(this, object -> {
-            if (getIntent().getStringExtra("type").equals("change")){
-                ToastUtils.showShort("密码修改成功，请您重新登录");
-                LoginUtils.getExitLogin();
-            }else {
-                loginViewModel.getLoginPassword(getIntent().getStringExtra("phone"), etPassword.getTrimmedString());
-            }
+            loginViewModel.getLoginPassword(getIntent().getStringExtra("phone"), etPassword.getTrimmedString());
         });
     }
 

@@ -2,16 +2,19 @@ package com.wankrfun.crania.view.login.first;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.View;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
@@ -28,6 +31,8 @@ import butterknife.OnTextChanged;
  * @Version: 1.0
  */
 public class FirstSetBirthdayActivity extends BaseActivity {
+    @BindView(R.id.tv_error)
+    AppCompatTextView tvError;
     //年键盘输入监听状态
     private boolean isYear = false;
     //月键盘输入监听状态
@@ -55,21 +60,21 @@ public class FirstSetBirthdayActivity extends BaseActivity {
     @OnTextChanged(value = R.id.et_year, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void inputYear(Editable editable) {
         year = editable.toString().trim();
-        isYear = year.length() == 4;
+        isYear = !year.isEmpty();
         getStartUp();
     }
 
     @OnTextChanged(value = R.id.et_month, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void inputMonth(Editable editable) {
         month = editable.toString().trim();
-        isMonth = month.length() == 2;
+        isMonth = !month.isEmpty();
         getStartUp();
     }
 
     @OnTextChanged(value = R.id.et_day, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void inputDay(Editable editable) {
         day = editable.toString().trim();
-        isDay = day.length() == 2;
+        isDay = !day.isEmpty();
         getStartUp();
     }
 
@@ -82,8 +87,9 @@ public class FirstSetBirthdayActivity extends BaseActivity {
             if (RegexUtils.isDate(year + "-" + month + "-" + day)){
                 SPUtils.getInstance().put(SpConfig.BIRTHDAY, year + "-" + month + "-" + day, true);
                 ActivityUtils.startActivity(FirstSetJobActivity.class);
+                tvError.setVisibility(View.INVISIBLE);
             }else {
-                ToastUtils.showShort(getString(R.string.first_birthday_not));
+                tvError.setVisibility(View.VISIBLE);
             }
         }
     }

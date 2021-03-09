@@ -51,8 +51,8 @@ public class BannerExampleAdapter extends BannerAdapter<String, BannerExampleAda
         ImageLoader.load(context, new ImageConfig.Builder()
                 .url(item)
                 .imageView(holder.imageView)
-                .placeholder(R.drawable.icon_empty_events)
-                .errorPic(R.drawable.icon_empty_events)
+                .placeholder(R.drawable.ic_empty_zhihu)
+                .errorPic(R.drawable.ic_empty_zhihu)
                 .build());
     }
 

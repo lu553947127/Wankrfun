@@ -16,7 +16,9 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
+import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
@@ -29,6 +31,7 @@ import com.wankrfun.crania.view.events.EventsDetailActivity;
 import com.wankrfun.crania.view.mine.UserInfoActivity;
 import com.wankrfun.crania.viewmodel.EventsViewModel;
 import com.wankrfun.crania.viewmodel.IMConnectViewModel;
+import com.wankrfun.crania.viewmodel.MeetViewModel;
 import com.wankrfun.crania.widget.CircleImageView;
 import com.wankrfun.crania.widget.CornerImageView;
 
@@ -87,6 +90,8 @@ public class IMPrivateChatActivity extends BaseActivity implements RongIM.Conver
     AppCompatTextView tvContent;
     private String user_id;
     private GroupRelationBean groupRelationBean;
+    private Conversation.ConversationType mConversationType;
+    private MeetViewModel meetViewModel;
 
     @Override
     protected int initLayoutRes() {
@@ -104,8 +109,9 @@ public class IMPrivateChatActivity extends BaseActivity implements RongIM.Conver
 
         IMConnectViewModel imConnectViewModel = getViewModel(IMConnectViewModel.class);
         EventsViewModel eventsViewModel = getViewModel(EventsViewModel.class);
+        meetViewModel = getViewModel(MeetViewModel.class);
 
-        Conversation.ConversationType mConversationType = Conversation.ConversationType.valueOf(getIntent().getData().getLastPathSegment().toUpperCase(Locale.US));
+        mConversationType = Conversation.ConversationType.valueOf(getIntent().getData().getLastPathSegment().toUpperCase(Locale.US));
         user_id = getIntent().getData().getQueryParameter("targetId");
         tvBarTitle.setText(getIntent().getData().getQueryParameter("title"));
         enterFragment(mConversationType, user_id);//加载页面
@@ -114,7 +120,7 @@ public class IMPrivateChatActivity extends BaseActivity implements RongIM.Conver
             ivBarRight.setImageResource(R.drawable.icon_more);
             imConnectViewModel.getGroupRelation(user_id, "group");
         } else if (mConversationType.getName().equals("private")) {
-            ivBarRight.setVisibility(View.GONE);
+            ivBarRight.setImageResource(R.drawable.icon_more);
             //刷新好友头像
             imConnectViewModel.getImUserInfo(user_id);
             imConnectViewModel.getImUserInfo(SPUtils.getInstance().getString(SpConfig.USER_ID));
@@ -185,6 +191,12 @@ public class IMPrivateChatActivity extends BaseActivity implements RongIM.Conver
             ivSex.setImageResource(eventsDetailBean.getData().getEvent().getCreator_sex().equals("male") ? R.drawable.icon_sex_male : R.drawable.icon_sex_female);
             EventsUtils.getEventsIcon(ivIcon, ivIcon, eventsDetailBean.getData().getEvent().getEventType(), eventsDetailBean.getData().getEvent().getEventTypeIcon());
         });
+
+        //解除匹配成功返回结果
+        meetViewModel.unMatchingLiveData.observe(this, eventsCreateBean -> {
+            ToastUtils.showShort(eventsCreateBean.getData().getMsg());
+            finish();
+        });
     }
 
     //加载会话页面
@@ -245,10 +257,25 @@ public class IMPrivateChatActivity extends BaseActivity implements RongIM.Conver
                 finish();
                 break;
             case R.id.iv_bar_right:
-                bundle.putString("group_id", user_id);
-                ActivityUtils.startActivity(bundle, IMGroupDetailsActivity.class);
+                if (mConversationType.getName().equals("group")) {
+                    bundle.putString("group_id", user_id);
+                    ActivityUtils.startActivity(bundle, IMGroupDetailsActivity.class);
+                } else if (mConversationType.getName().equals("private")) {
+                    new XPopup.Builder(activity)
+                            .hasShadowBg(false)
+                            .atView(view)
+                            .asAttachList(new String[]{"解除匹配","取消"}, null,
+                                    (position, text) -> {
+                                        switch (text){
+                                            case "解除匹配":
+                                                meetViewModel.getUnMatching(user_id);
+                                                break;
+                                        }
+                                    }).show();
+                }
                 break;
             case R.id.ll_group://查看活动详情
+
                 bundle.putString("id", groupRelationBean.getData().getEvent().getObjectId());
                 bundle.putString("creator", groupRelationBean.getData().getEvent().getEventCreator());
                 ActivityUtils.startActivity(bundle, EventsDetailActivity.class);

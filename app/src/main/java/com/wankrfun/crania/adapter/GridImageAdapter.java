@@ -1,7 +1,5 @@
 package com.wankrfun.crania.adapter;
 
-import android.graphics.BitmapFactory;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +31,6 @@ import java.util.List;
 public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.ImageViewHolder> {
 
     private List<String> mData;
-    private String type;
     private final int mCountLimit = 6;
     private OnItemClickListener mOnItemClickListener;
 
@@ -73,18 +70,12 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.Imag
             holder.delView.setVisibility(View.INVISIBLE);
             holder.imageView.setOnClickListener(v -> mOnItemClickListener.onTakePhotoClick(v, position));
         } else {
-            if (!TextUtils.isEmpty(type)){
-                // 网络图片
-                ImageLoader.load(MyApplication.getInstance().getApplicationContext(), new ImageConfig.Builder()
-                        .url(mData.get(position))
-                        .imageView(holder.imageView)
-                        .placeholder(R.drawable.ic_empty_zhihu)
-                        .errorPic(R.drawable.ic_empty_zhihu)
-                        .build());
-            }else {
-                holder.imageView.setImageBitmap(BitmapFactory.decodeFile(mData.get(position)));
-            }
-            holder.imageView.setImageBitmap(BitmapFactory.decodeFile(mData.get(position)));
+            ImageLoader.load(MyApplication.getInstance().getApplicationContext(), new ImageConfig.Builder()
+                    .url(mData.get(position))
+                    .imageView(holder.imageView)
+                    .placeholder(R.drawable.ic_empty_zhihu)
+                    .errorPic(R.drawable.ic_empty_zhihu)
+                    .build());
             holder.delView.setVisibility(View.VISIBLE);
             holder.imageView.setOnClickListener(v -> mOnItemClickListener.onItemClick(v, position));
             // 删除
@@ -97,15 +88,6 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.Imag
      */
     public void setNewData(List<String> data) {
         mData = data;
-        notifyDataSetChanged();
-    }
-
-    /**
-     * 添加并更新数据
-     */
-    public void setNewEditData(List<String> data, String type) {
-        mData = data;
-        this.type = type;
         notifyDataSetChanged();
     }
 

@@ -208,8 +208,10 @@ public class MineFragment extends BaseFragment {
             case R.id.iv_label://个性标签切换数量
                 if (!isShow){
                     EventsUtils.getShowTag(mActivity, flLabel, EventsUtils.getMineTag(userInfoBean));
+                    ivLabel.setImageResource(R.drawable.icon_mine_up);
                 }else {
                     EventsUtils.getShowTag(mActivity, flLabel, EventsUtils.getMineTagSmall(userInfoBean));
+                    ivLabel.setImageResource(R.drawable.icon_mine_down);
                 }
                 isShow = !isShow;
                 break;
