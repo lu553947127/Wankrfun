@@ -30,7 +30,6 @@ import com.wankrfun.crania.widget.CustomWebView;
  */
 @SuppressLint({"StaticFieldLeak","InflateParams","SetTextI18n","CutPasteId"})
 public class AgreementDialog {
-
     private final BaseActivity activity;
     private final Dialog dialog;
     private OnCustomClickListener onCustomClickListener;

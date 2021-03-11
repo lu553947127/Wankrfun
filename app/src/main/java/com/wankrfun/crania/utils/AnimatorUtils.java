@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
 import com.wankrfun.crania.R;
 
@@ -75,5 +77,73 @@ public class AnimatorUtils {
         PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat("scaleX", 0f);
         PropertyValuesHolder pvhZ = PropertyValuesHolder.ofFloat("scaleY", 0f);
         ObjectAnimator.ofPropertyValuesHolder(view, pvhX, pvhY,pvhZ).setDuration(400).start();
+    }
+
+    /**
+     * View渐隐动画效果
+     *
+     * @param view
+     * @param duration
+     * @param dialog
+     */
+    public static void setHideAnimation(final View view, int duration, Dialog dialog) {
+        if (null == view || duration < 0) {
+            return;
+        }
+        AlphaAnimation mHideAnimation = new AlphaAnimation(1.0f, 0.0f);
+        mHideAnimation.setDuration(duration);
+        mHideAnimation.setFillAfter(true);
+        mHideAnimation.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation arg0) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                view.setVisibility(View.GONE);
+                dialog.dismiss();
+            }
+        });
+        view.startAnimation(mHideAnimation);
+    }
+
+    /**
+     * View渐现动画效果
+     *
+     * @param view
+     * @param duration
+     */
+    public static void setShowAnimation( final View view, int duration) {
+        if (null == view || duration < 0) {
+            return;
+        }
+        AlphaAnimation mShowAnimation = new AlphaAnimation(0.0f, 1.0f);
+        mShowAnimation.setDuration(duration);
+        mShowAnimation.setFillAfter(true);
+        mShowAnimation.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation arg0) {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+
+            }
+        });
+        view.startAnimation(mShowAnimation);
     }
 }

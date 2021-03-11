@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,9 +21,8 @@ import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
-import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.NotificationsUtils;
-import com.wankrfun.crania.utils.SharedUtils;
+import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.utils.VersionUtils;
 import com.wankrfun.crania.viewmodel.IMConnectViewModel;
 import com.wankrfun.crania.viewmodel.LoginViewModel;
@@ -199,7 +198,10 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (!NotificationsUtils.isNotificationEnabled(this)){
-            showNoticePermissionDialog(getString(R.string.permission_notice));
+            //通知权限开启弹窗 3天只弹出一次
+            if (NumberUtils.dateDiff(SPUtils.getInstance().getString(SpConfig.NOTICE_TIME), TimeUtils.getNowString(), "yyyy-MM-dd hh:mm:ss") >= 3){
+                showNoticePermissionDialog(getString(R.string.permission_notice));
+            }
         }
 
         observer = i -> {

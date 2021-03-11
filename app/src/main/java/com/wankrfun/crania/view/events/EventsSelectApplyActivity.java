@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.EventsSelectApplyAdapter;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.bean.EventsParticipantsBean;
+import com.wankrfun.crania.dialog.AnimationDialog;
 import com.wankrfun.crania.view.mine.UserInfoActivity;
 import com.wankrfun.crania.viewmodel.EventsViewModel;
 
@@ -75,7 +75,7 @@ public class EventsSelectApplyActivity extends BaseActivity {
                     ActivityUtils.startActivity(bundle, UserInfoActivity.class);
                     break;
                 case R.id.tv_adopt://通过活动申请
-                    eventsViewModel.getEventsAccept(getIntent().getStringExtra("creator"), listBean.getObjectId(), listBean.getEventId());
+                    eventsViewModel.getEventsAccept(getIntent().getStringExtra("creator"), listBean.getObjectId(), listBean.getEventId(), listBean.getPhoto());
                     break;
             }
         });
@@ -83,17 +83,20 @@ public class EventsSelectApplyActivity extends BaseActivity {
         //获取申请人列表数据返回
         eventsViewModel.eventsParticipantsLiveData.observe(this, eventsParticipantsBean -> {
             eventsSelectApplyAdapter.setNewData(eventsParticipantsBean.getData().getParticipants());
+            eventsSelectApplyAdapter.setEmptyView(R.layout.layout_empty_matching, recyclerView);
         });
 
         //获取参与人列表数据返回
         eventsViewModel.eventsSponsorLiveData.observe(this, eventsParticipantsBean -> {
             eventsSelectApplyAdapter.setNewData(eventsParticipantsBean.getData().getParticipants());
+            eventsSelectApplyAdapter.setEmptyView(R.layout.layout_empty_matching, recyclerView);
         });
 
         //申请人通过成功返回结果
-        eventsViewModel.eventsAcceptLiveData.observe(this, eventsAcceptBean -> {
-            ToastUtils.showShort(eventsAcceptBean.getData().getMsg());
+        eventsViewModel.eventsAcceptLiveData.observe(this, eventsCreateBean -> {
             eventsViewModel.getEventsParticipants(getIntent().getStringExtra("id"));
+            AnimationDialog animationDialog = new AnimationDialog(activity, "team", eventsCreateBean.getData().getImage());
+            animationDialog.showDialog();
         });
 
         if (TextUtils.isEmpty(getIntent().getStringExtra("type"))){

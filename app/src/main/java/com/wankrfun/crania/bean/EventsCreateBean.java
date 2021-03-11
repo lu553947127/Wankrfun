@@ -57,6 +57,8 @@ public class EventsCreateBean {
 
         private String msg;
         private boolean status;
+        private boolean isMatching;
+        private String image;
 
         public String getMsg() {
             return msg;
@@ -72,6 +74,22 @@ public class EventsCreateBean {
 
         public void setStatus(boolean status) {
             this.status = status;
+        }
+
+        public boolean isMatching() {
+            return isMatching;
+        }
+
+        public void setMatching(boolean matching) {
+            isMatching = matching;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
         }
     }
 }

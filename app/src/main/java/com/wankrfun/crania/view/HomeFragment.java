@@ -178,7 +178,6 @@ public class HomeFragment extends BaseFragment {
                                 }).show();
                 break;
             case R.id.iv_date://签到（任务中心）
-
                 break;
             case R.id.rl_bubbling://冒泡入口
                 ToastUtils.showShort("抱歉，敬请期待");

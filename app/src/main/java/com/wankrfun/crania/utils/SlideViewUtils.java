@@ -72,10 +72,10 @@ public class SlideViewUtils {
                 LogUtils.e("direction" + direction);
                 //左滑不喜欢完成事件操作
                 if (direction == 1) {
-                    meetViewModel.getMeetOperateLike(o.getObjectId(), "DISLIKE");
+                    meetViewModel.getMeetOperateLike(o.getObjectId(), "DISLIKE", o.getPhoto());
                     //右滑喜欢完成事件操作
                 } else if (direction == 4) {
-                    meetViewModel.getMeetOperateLike(o.getObjectId(), "LIKE");
+                    meetViewModel.getMeetOperateLike(o.getObjectId(), "LIKE", o.getPhoto());
                 }
                 meetViewModel.getMeetUserCard();
             }
@@ -95,14 +95,14 @@ public class SlideViewUtils {
             @Override
             public void onLeftClick(View view, RecyclerView.ViewHolder holder, int position) {
                 cardCallback.onSwiped(holder, 4);
-                meetViewModel.getMeetOperateLike(dataList.get(position).getObjectId(), "DISLIKE");
+                meetViewModel.getMeetOperateLike(dataList.get(position).getObjectId(), "DISLIKE", dataList.get(position).getPhoto());
                 meetViewModel.getMeetUserCard();
             }
 
             @Override
             public void onRightClick(View view, RecyclerView.ViewHolder holder, int position) {
                 cardCallback.onSwiped(holder, 8);
-                meetViewModel.getMeetOperateLike(dataList.get(position).getObjectId(), "LIKE");
+                meetViewModel.getMeetOperateLike(dataList.get(position).getObjectId(), "LIKE", dataList.get(position).getPhoto());
                 meetViewModel.getMeetUserCard();
             }
 

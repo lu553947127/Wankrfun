@@ -121,7 +121,7 @@ public class MeetViewModel extends BaseRepository {
     /**
      * 手势操作: 喜欢或不喜欢
      */
-    public void getMeetOperateLike(String newUserId, String operate){
+    public void getMeetOperateLike(String newUserId, String operate, String image){
         HashMap<String, Object> params = new HashMap();
         params.put("userId", userId);
         params.put("newUserId", newUserId);//新用户id, 必选
@@ -133,6 +133,7 @@ public class MeetViewModel extends BaseRepository {
                     LogUtils.e("getMeetOperateLike: "+ new Gson().toJson(object));
                     LogUtils.json(LogUtils.I,new Gson().toJson(object));
                     EventsCreateBean bean = new Gson().fromJson(new Gson().toJson(object), EventsCreateBean.class);
+                    bean.getData().setImage(image);
                     if (bean.getCode() == 0){
                         meetUserCardLiveData.postValue(bean);
                     }else {

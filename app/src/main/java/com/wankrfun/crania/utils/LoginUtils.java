@@ -86,7 +86,7 @@ public class LoginUtils {
             if (StringUtils.isTrimEmpty(currentUser.getUsername())){
                 return false;
             }
-            if (StringUtils.isTrimEmpty(String.valueOf(parseFile.getUrl()))){
+            if (parseFile != null &&StringUtils.isTrimEmpty(parseFile.getUrl())){
                 return false;
             }
         } else {

@@ -27,6 +27,7 @@ import com.wankrfun.crania.bean.EventsCommentsBean;
 import com.wankrfun.crania.bean.EventsDetailBean;
 import com.wankrfun.crania.bean.EventsParticipantsBean;
 import com.wankrfun.crania.bean.EventsStateBean;
+import com.wankrfun.crania.dialog.AnimationDialog;
 import com.wankrfun.crania.dialog.CustomBottomComment;
 import com.wankrfun.crania.event.EventsEvent;
 import com.wankrfun.crania.image.ImageConfig;
@@ -323,9 +324,10 @@ public class EventsDetailActivity extends BaseActivity {
 
         //申请活动成功返回结果
         eventsViewModel.eventsApplyLiveData.observe(this, eventsApplyBean -> {
-            ToastUtils.showShort(eventsApplyBean.getData().getMsg());
             eventsViewModel.getEventsParticipants(getIntent().getStringExtra("id"));
             eventsViewModel.getEventsState(getIntent().getStringExtra("id"));
+            AnimationDialog animationDialog = new AnimationDialog(activity, "sign_up");
+            animationDialog.showDialog();
         });
 
         //删除活动成功返回结果

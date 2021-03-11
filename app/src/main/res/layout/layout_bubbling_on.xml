@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:layout_margin="20dp"
-    android:id="@+id/rl_bubbling">
+    android:id="@+id/rl_bubbling"
+    android:visibility="gone">
 
     <RelativeLayout
         android:layout_width="match_parent"

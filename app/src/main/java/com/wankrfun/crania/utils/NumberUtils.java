@@ -112,7 +112,8 @@ public class NumberUtils {
             Date date = df.parse(oldDate);
             SimpleDateFormat df1 = new SimpleDateFormat ("EEE MMM dd HH:mm:ss Z yyyy", Locale.UK);
             date1 = df1.parse(date.toString());
-            df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            df2 = new SimpleDateFormat("MM月dd日 HH:mm");
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
@@ -319,5 +320,46 @@ public class NumberUtils {
             e.printStackTrace();
         }
         return String.valueOf(calendar.get(Calendar.MONTH) + 1);
+    }
+
+    /**
+     * 判断两个日期相差几天
+     *
+     * @param startTime
+     * @param endTime
+     * @param format
+     * @return
+     */
+    public static long dateDiff(String startTime, String endTime, String format) {
+        // 按照传入的格式生成一个simpledateformate对象
+        SimpleDateFormat sd = new SimpleDateFormat(format);
+        long nd = 1000 * 24 * 60 * 60;// 一天的毫秒数
+        long nh = 1000 * 60 * 60;// 一小时的毫秒数
+        long nm = 1000 * 60;// 一分钟的毫秒数
+        long ns = 1000;// 一秒钟的毫秒数
+        long diff;
+        long day = 0;
+        try {
+            // 获得两个时间的毫秒时间差异
+            diff = sd.parse(endTime).getTime() - sd.parse(startTime).getTime();
+            day = diff / nd;// 计算差多少天
+            long hour = diff % nd / nh;// 计算差多少小时
+            long min = diff % nd % nh / nm;// 计算差多少分钟
+            long sec = diff % nd % nh % nm / ns;// 计算差多少秒
+            // 输出结果
+            System.out.println("时间相差：" + day + "天" + hour + "小时" + min + "分钟" + sec + "秒。");
+            if (day>=1) {
+                return day;
+            }else {
+                if (day==0) {
+                    return 1;
+                }else {
+                    return 0;
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

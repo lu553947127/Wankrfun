@@ -58,7 +58,7 @@ public class MineMatchingActivity extends BaseActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         MineMatchingAdapter mineMatchingAdapter = new MineMatchingAdapter(R.layout.adapter_mine_matching, null);
-        mineMatchingAdapter.setEmptyView(R.layout.layout_empty, recyclerView);
+        mineMatchingAdapter.setEmptyView(R.layout.layout_empty_matching, recyclerView);
         recyclerView.setAdapter(mineMatchingAdapter);
 
         meetViewModel = getViewModel(MeetViewModel.class);

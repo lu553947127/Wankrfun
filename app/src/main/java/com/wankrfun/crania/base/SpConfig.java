@@ -66,4 +66,7 @@ public class SpConfig {
 
     /*省*/
     public static final String PROVINCE = "province";
+
+    /*开启通知权限时间*/
+    public static final String NOTICE_TIME = "notice_time";
 }

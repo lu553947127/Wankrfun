@@ -11,7 +11,6 @@ import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.wankrfun.crania.base.SpConfig;
-import com.wankrfun.crania.bean.EventsAcceptBean;
 import com.wankrfun.crania.bean.EventsApplyBean;
 import com.wankrfun.crania.bean.EventsBean;
 import com.wankrfun.crania.bean.EventsCommentsBean;
@@ -48,7 +47,7 @@ public class EventsViewModel extends BaseRepository {
     public MutableLiveData<EventsCommentsBean> eventsCommentsLiveData;
     public MutableLiveData<EventsStateBean> eventsStateLiveData;
     public MutableLiveData<EventsApplyBean> eventsApplyLiveData;
-    public MutableLiveData<EventsAcceptBean> eventsAcceptLiveData;
+    public MutableLiveData<EventsCreateBean> eventsAcceptLiveData;
     public MutableLiveData<EventsCreateBean> eventsCreateLiveData;
     public MutableLiveData<EventsCreateBean> eventsEditLiveData;
     public MutableLiveData<EventsCreateBean> eventsEventDeleteLiveData;
@@ -92,7 +91,7 @@ public class EventsViewModel extends BaseRepository {
         page = 0;
         HashMap<String, Object> params = new HashMap();
         params.put("pageIndex", page);//页数
-        params.put("pageSize", 10);//条数
+        params.put("pageSize", 20);//条数
         params.put("userId", userId);//用户id
         params.put("longitude", longitude);//经度
         params.put("latitude", latitude);//纬度
@@ -125,7 +124,7 @@ public class EventsViewModel extends BaseRepository {
         page ++;
         HashMap<String, Object> params = new HashMap();
         params.put("pageIndex", page);
-        params.put("pageSize", 10);
+        params.put("pageSize", 20);
         params.put("userId", userId);
         params.put("longitude", longitude);
         params.put("latitude", latitude);
@@ -321,7 +320,7 @@ public class EventsViewModel extends BaseRepository {
     /**
      * 通过活动申请
      */
-    public void getEventsAccept(String creatorId, String applierId, String eventId){
+    public void getEventsAccept(String creatorId, String applierId, String eventId, String image){
         HashMap<String, Object> params = new HashMap();
         params.put("creatorId", creatorId);//活动创建者id, 必选
         params.put("applierId", applierId);//活动申请者（当前用户）id,  必选
@@ -334,11 +333,12 @@ public class EventsViewModel extends BaseRepository {
                 if (e == null) {
                     LogUtils.e("getEventsAccept: "+ new Gson().toJson(object));
                     LogUtils.json(LogUtils.I,new Gson().toJson(object));
-                    EventsAcceptBean eventsAcceptBean = new Gson().fromJson(new Gson().toJson(object), EventsAcceptBean.class);
-                    if (eventsAcceptBean.getCode() == 0){
-                        eventsAcceptLiveData.postValue(eventsAcceptBean);
+                    EventsCreateBean eventsCreateBean = new Gson().fromJson(new Gson().toJson(object), EventsCreateBean.class);
+                    eventsCreateBean.getData().setImage(image);
+                    if (eventsCreateBean.getCode() == 0){
+                        eventsAcceptLiveData.postValue(eventsCreateBean);
                     }else {
-                        ToastUtils.showShort(eventsAcceptBean.getData().getMsg());
+                        ToastUtils.showShort(eventsCreateBean.getData().getMsg());
                     }
                 }else {
                     LogUtils.e("getEventsAccept: " + e.getMessage());

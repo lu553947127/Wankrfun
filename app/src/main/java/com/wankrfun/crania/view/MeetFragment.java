@@ -16,6 +16,7 @@ import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MeetListAdapter;
 import com.wankrfun.crania.base.BaseFragment;
 import com.wankrfun.crania.base.SpConfig;
+import com.wankrfun.crania.dialog.AnimationDialog;
 import com.wankrfun.crania.utils.SlideViewUtils;
 import com.wankrfun.crania.view.meet.MineMatchingActivity;
 import com.wankrfun.crania.viewmodel.MeetViewModel;
@@ -88,6 +89,12 @@ public class MeetFragment extends BaseFragment {
             if (!TextUtils.isEmpty(SPUtils.getInstance().getString(SpConfig.CITY))){
                 meetViewModel.getMeetUploadCard();
             }
+
+            //匹配成功 弹出匹配成功动画弹窗
+            if (eventsCreateBean.getData().isMatching()){
+                AnimationDialog animationDialog = new AnimationDialog(mActivity, "matching", eventsCreateBean.getData().getImage());
+                animationDialog.showDialog();
+            }
         });
     }
 
@@ -100,11 +107,7 @@ public class MeetFragment extends BaseFragment {
     }
 
     @OnClick({R.id.iv_tab_right})
-    void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.iv_tab_right://我的匹配列表
-                ActivityUtils.startActivity(MineMatchingActivity.class);
-                break;
-        }
+    void onClick() {
+        ActivityUtils.startActivity(MineMatchingActivity.class);
     }
 }

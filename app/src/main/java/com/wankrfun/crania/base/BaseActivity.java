@@ -19,6 +19,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.Utils;
 import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
@@ -334,6 +336,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, B
      * 设置通知权限开启弹窗
      */
     public void showNoticePermissionDialog(String title) {
+        SPUtils.getInstance().put(SpConfig.NOTICE_TIME, TimeUtils.getNowString(), true);
         new XPopup.Builder(this).asConfirm(getString(R.string.reminder), title, () -> {
             NotificationsUtils.requestNotify(activity);
         }, () -> {

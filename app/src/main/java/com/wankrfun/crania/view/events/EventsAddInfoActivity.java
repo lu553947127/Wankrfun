@@ -24,6 +24,7 @@ import com.wankrfun.crania.app.MyApplication;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.bean.EventsDetailBean;
+import com.wankrfun.crania.dialog.AnimationDialog;
 import com.wankrfun.crania.dialog.CustomBottomAddress;
 import com.wankrfun.crania.dialog.CustomBottomPeople;
 import com.wankrfun.crania.dialog.CustomBottomQuestions;
@@ -147,7 +148,8 @@ public class EventsAddInfoActivity extends BaseActivity {
         //创建活动成功返回结果
         eventsViewModel.eventsCreateLiveData.observe(this, eventsCreateBean -> {
             hideLoading();
-            ToastUtils.showShort(eventsCreateBean.getData().getMsg());
+            AnimationDialog animationDialog = new AnimationDialog(activity, "release");
+            animationDialog.showDialog();
             EventBus.getDefault().post(new EventsEvent());
             ActivityUtils.finishActivity(EventsAddActivity.class);
             finish();
