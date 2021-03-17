@@ -10,12 +10,42 @@
         android:layout_gravity="center"
         android:background="@drawable/shape_white_15">
 
-        <com.wankrfun.crania.widget.CustomWebView
-            android:id="@+id/web_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="40dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/color_333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="个人信息保护指引"/>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/color_333333"
+                    android:textSize="16sp"
+                    android:text="@string/agreement_content"/>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +62,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/color_EBBB7D"
                 android:textSize="13sp"
                 android:text="同意"/>
 

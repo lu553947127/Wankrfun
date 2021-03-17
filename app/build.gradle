@@ -33,6 +33,9 @@ android {
         ]
     }
 
+    //craniatech@163.com
+    //WITHme!123
+
     buildTypes {
         release {
             minifyEnabled false

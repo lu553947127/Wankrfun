@@ -294,10 +294,10 @@
         <!-- vivo 推送配置项 -->
         <meta-data
             android:name="com.vivo.push.api_key"
-            android:value="您的 vivo 推送平台生成 AppKey"/>
+            android:value="436f403f772b0abe8e0942dd99ed2265"/>
         <meta-data
             android:name="com.vivo.push.app_id"
-            android:value="您的 vivo 推送平台生成 AppID"/>
+            android:value="105471312"/>
         <!-- Vivo消息推送结束 -->
 
         <!--极光推送 start-->
@@ -324,7 +324,7 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
-                <category android:name="com.sjjy_android_teacher" />
+                <category android:name="com.wankrfun.crania" />
             </intent-filter>
         </receiver>
         <!--极光推送 end-->

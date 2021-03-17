@@ -23,6 +23,9 @@ public class BuildConfig {
     //融云appKey测试 正式
     public static final String RONG_YUN_APP_KEY = "y745wfm8yhg3v";
 
+    //用户协议网址
+    public static final String USER_URL = "http://www.wankrfun.com/policy.html";
+
     //隐私协议网址
-    public static final String AGREEMENT_URL = "http://www.wankrfun.com/policy.html";
+    public static final String AGREEMENT_URL = "http://www.wankrfun.com/privacy.html";
 }

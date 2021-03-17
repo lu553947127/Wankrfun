@@ -10,11 +10,10 @@ import android.widget.TextView;
 
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
-import com.wankrfun.crania.base.BuildConfig;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.SharedUtils;
-import com.wankrfun.crania.widget.CustomWebView;
+import com.wankrfun.crania.utils.TextViewUtils;
 
 /**
  * @ProjectName: Wankrfun
@@ -47,16 +46,17 @@ public class AgreementDialog {
         this.onCustomClickListener = onCustomClickListener;
     }
 
-    // 显示软件更新对话框
+    // 显示对话框
     public void showDialog() {
         if (dialog.isShowing()) return;
         dialog.setCancelable(false);
         View view = LayoutInflater.from(activity).inflate(R.layout.dialog_agreement, null);
-        CustomWebView webView = view.findViewById(R.id.web_view);
+        TextView tv_content = view.findViewById(R.id.tv_content);
         TextView tv_agree = view.findViewById(R.id.tv_agree);
         TextView tv_disagree = view.findViewById(R.id.tv_disagree);
 
-        webView.loadUrl(BuildConfig.AGREEMENT_URL);
+        TextViewUtils.setTextInfo(activity, tv_content, activity.getResources().getString(R.string.agreement_content)
+                ,122,128,129,135);
 
         SharedUtils sharedUtils = new SharedUtils(activity);
 

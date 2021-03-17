@@ -194,10 +194,8 @@ public class MyApplication extends Application {
                 .Builder()
                 .enableHWPush(true)
                 .enableMiPush("2882303761519202034", "5801920268034")
-                .enableMeiZuPush("112988", "2fa951a802ac4bd5843d694517307896")
                 .enableVivoPush(true)
-                .enableOppoPush("6bbb2e614c374489b2aca7016c4cbceb", "7e187275fb0645aea6fd3a3e85aedcb5")
-                .enableFCM(true)
+                .enableOppoPush("ef2e82315f9949e09c8b7026b508ca28", "a5c29a118f344d809c7323a26551b8de")
                 .build();
         RongPushClient.setPushConfig(config);
 
