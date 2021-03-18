@@ -89,7 +89,7 @@ public class JsonUtils {
         }
         try {
             String str = jsonObject.getString("data");
-            LogUtils.e(str);
+//            LogUtils.e(str);
             //拿到解析后的List集合
             dateList = getJsonDateList(str, parameter);
         } catch (JSONException jsonException) {
@@ -145,7 +145,7 @@ public class JsonUtils {
      * @return
      */
     public static List<String> getJsonDateList(String json, String parameter){
-        LogUtils.e(parameter);
+//        LogUtils.e(parameter);
         List<String> dateList = new ArrayList<>();
         JSONObject jsonObject = null;//json数据
         try {
@@ -159,7 +159,7 @@ public class JsonUtils {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        LogUtils.e(data);
+//        LogUtils.e(data);
         // 动态获取key值
         if (data != null){
             Iterator<String> iterator = data.keys();//使用迭代器
@@ -167,7 +167,7 @@ public class JsonUtils {
                 String key = iterator.next();//获取key
                 dateList.add(key);
             }
-            LogUtils.e(dateList);
+//            LogUtils.e(dateList);
         }
         return dateList;
     }

@@ -82,6 +82,8 @@ public class RefreshUtils {
             case "#打发时间":
                 icon = R.drawable.icon_expect_time;
                 break;
+            case "组局的人":
+            case "#组局的人":
             case "组局约人":
             case "#组局约人":
                 icon = R.drawable.icon_expect_set;
@@ -121,6 +123,7 @@ public class RefreshUtils {
                 icon = R.drawable.icon_activity_tea;
                 break;
             case "k歌":
+            case "#k歌一起嗨":
                 icon = R.drawable.icon_activity_karaoke;
                 break;
             case "桌游":
@@ -128,6 +131,7 @@ public class RefreshUtils {
                 icon = R.drawable.icon_activity_board_play;
                 break;
             case "电影":
+            case "#看电影约我":
                 icon = R.drawable.icon_activity_film;
                 break;
             case "夜生活":

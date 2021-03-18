@@ -126,13 +126,18 @@ public class FirstSetUserInfoActivity extends BaseActivity {
             ivAvatar.setImageBitmap(BitmapFactory.decodeFile(path));
             parseFile = userInfoViewModel.getUploadFile(new File(path));
             isAvatar = true;
+            if (isName){
+                tvLogin.setVisibility(View.VISIBLE);
+            }else {
+                tvLogin.setVisibility(View.GONE);
+            }
         }
     }
 
     @OnTextChanged(value = R.id.et_name, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void inputName(Editable editable) {
         String password = editable.toString().trim();
-        isName = password.length() < 15;
+        isName = !TextUtils.isEmpty(password);
         if (isName && isAvatar){
             tvLogin.setVisibility(View.VISIBLE);
         }else {
@@ -150,6 +155,11 @@ public class FirstSetUserInfoActivity extends BaseActivity {
                 PermissionUtils.openCameraOfStoragePermission(activity);
                 break;
             case R.id.tv_login://登录
+                if (etName.getText().toString().trim().length() > 15){
+                    ToastUtils.showShort("抱歉，您输入的名称过长哦");
+                    return;
+                }
+
                 userInfoViewModel.getSaveUserInfo(
                         SPUtils.getInstance().getString(SpConfig.PHONE),
                         SPUtils.getInstance().getString(SpConfig.PASSWORD),

@@ -16,13 +16,13 @@
 		"SG_back":"connect-dra.dbankcloud.cn"
 	},
 	"client":{
-		"cp_id":"2850086000455331404",
-		"product_id":"736430079244827149",
-		"client_id":"570077572814090624",
-		"client_secret":"EE672D14875E2E1A46953081B24056472351F1D73BF820F61A17CD341D549CFD",
-		"project_id":"736430079244827149",
-		"app_id":"103896519",
-		"api_key":"CgB6e3x9TQlUyoYqDPgEZqfdKAWuiie/wwmfLukY4WsOf1zrM3Ukm2m9val2kFHbVroDIardmKytfA5XlpxrECG0",
+		"cp_id":"2850086000473996710",
+		"product_id":"736430079244851685",
+		"client_id":"584910421350155328",
+		"client_secret":"526927985E155EE1763376EE67A807C5D866D3DFDBBD40C2C5DE1B8119D69426",
+		"project_id":"736430079244851685",
+		"app_id":"104017531",
+		"api_key":"CgB6e3x9Ut+xJbMI1UYe44eC8dn5+PJWCHwoBOlApvX/+CQUGaD21qxRTc7+Y0ipBxMtuQoL85NCaiaO968N4NzD",
 		"package_name":"com.wankrfun.crania"
 	},
 	"service":{
@@ -46,7 +46,7 @@
 	"appInfos":[
 		{
 			"package_name":"com.wankrfun.crania",
-			"app_id":"103896519"
+			"app_id":"104017531"
 		}
 	]
 }

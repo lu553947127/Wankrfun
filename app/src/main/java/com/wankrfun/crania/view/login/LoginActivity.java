@@ -86,7 +86,7 @@ public class LoginActivity extends BaseActivity {
                     ToastUtils.showShort(object.getMessage());
                     return;
                 }
-                if (etPhone.getTrimmedString().equals("8584058568")){
+                if (etPhone.getTrimmedString().equals("8584058569")){
                     bundle.putString("type", getIntent().getStringExtra("type"));
                     bundle.putString("phone", code + etPhone.getTrimmedString());
                     ActivityUtils.startActivity(bundle, SetPasswordActivity.class);

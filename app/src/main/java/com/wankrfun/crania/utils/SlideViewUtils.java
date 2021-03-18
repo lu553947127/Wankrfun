@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.wankrfun.crania.adapter.MeetListAdapter;
 import com.wankrfun.crania.bean.MeetListBean;
 import com.wankrfun.crania.view.mine.UserInfoActivity;
@@ -69,7 +68,6 @@ public class SlideViewUtils {
                 meetListViewHolder.iv_like.setAlpha(0f);
                 meetListViewHolder.iv_dislike.setAlpha(0f);
 
-                LogUtils.e("direction" + direction);
                 //左滑不喜欢完成事件操作
                 if (direction == 1) {
                     meetViewModel.getMeetOperateLike(o.getObjectId(), "DISLIKE", o.getPhoto());
@@ -95,15 +93,11 @@ public class SlideViewUtils {
             @Override
             public void onLeftClick(View view, RecyclerView.ViewHolder holder, int position) {
                 cardCallback.onSwiped(holder, 4);
-                meetViewModel.getMeetOperateLike(dataList.get(position).getObjectId(), "DISLIKE", dataList.get(position).getPhoto());
-                meetViewModel.getMeetUserCard();
             }
 
             @Override
             public void onRightClick(View view, RecyclerView.ViewHolder holder, int position) {
                 cardCallback.onSwiped(holder, 8);
-                meetViewModel.getMeetOperateLike(dataList.get(position).getObjectId(), "LIKE", dataList.get(position).getPhoto());
-                meetViewModel.getMeetUserCard();
             }
 
             @Override
