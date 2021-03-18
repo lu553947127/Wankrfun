@@ -50,7 +50,7 @@ public class SetActivity extends BaseActivity {
         tvBarTitle.setText("系统设置");
     }
 
-    @OnClick({R.id.iv_bar_back, R.id.tv_user, R.id.tv_agreement, R.id.tv_privacy, R.id.tv_out})
+    @OnClick({R.id.iv_bar_back, R.id.tv_user, R.id.tv_agreement, R.id.tv_privacy, R.id.tv_feedback, R.id.tv_out})
     void onClick(View view) {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
@@ -67,6 +67,9 @@ public class SetActivity extends BaseActivity {
             case R.id.tv_privacy://隐私协议
                 bundle.putString("type", "privacy");
                 ActivityUtils.startActivity(bundle, WebViewActivity.class);
+                break;
+            case R.id.tv_feedback://意见反馈
+                ActivityUtils.startActivity(bundle, FeedbackActivity.class);
                 break;
             case R.id.tv_out://退出登录
                 new XPopup.Builder(this).asConfirm(getString(R.string.reminder), getString(R.string.login_out_is), () -> {

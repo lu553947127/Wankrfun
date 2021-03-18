@@ -75,6 +75,24 @@
             android:background="@color/color_111111"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:drawableRight="@drawable/icon_right_gray"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="意见反馈"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/color_111111"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_out"
             android:layout_width="match_parent"
             android:layout_height="60dp"

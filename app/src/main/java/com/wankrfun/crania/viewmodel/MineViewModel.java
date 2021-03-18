@@ -46,6 +46,7 @@ public class MineViewModel extends BaseRepository {
     public MutableLiveData<EventsCreateBean> userUploadAddressLiveData;
     public MutableLiveData<EventsCreateBean> userUploadJobLiveData;
     public MutableLiveData<EventsCreateBean> userUploadImagesLiveData;
+    public MutableLiveData<EventsCreateBean> userFeedbackLiveData;
     private final String userId;
 
     public MineViewModel() {
@@ -61,6 +62,7 @@ public class MineViewModel extends BaseRepository {
         userUploadAddressLiveData = new MutableLiveData<>();
         userUploadJobLiveData = new MutableLiveData<>();
         userUploadImagesLiveData = new MutableLiveData<>();
+        userFeedbackLiveData = new MutableLiveData<>();
     }
 
     /**
@@ -295,6 +297,33 @@ public class MineViewModel extends BaseRepository {
                     }
                 }else {
                     LogUtils.e("getUploadImages: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 意见反馈
+     */
+    public void getFeedback(String content){
+        HashMap<String, Object> params = new HashMap();
+        params.put("userId", userId);
+        params.put("type", 9);
+        params.put("content", content);
+        ParseCloud.callFunctionInBackground("applyForm", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getFeedback: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    EventsCreateBean bean = new Gson().fromJson(new Gson().toJson(object), EventsCreateBean.class);
+                    if (bean.getCode() == 0){
+                        userFeedbackLiveData.postValue(bean);
+                    }else {
+                        ToastUtils.showShort(bean.getError());
+                    }
+                }else {
+                    LogUtils.e("getFeedback: " + e.getMessage());
                 }
             }
         });
