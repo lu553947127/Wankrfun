@@ -13,6 +13,7 @@ import com.wankrfun.crania.event.ParseEvent;
 import com.wankrfun.crania.http.retrofit.BaseRepository;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,6 +53,8 @@ public class UserInfoViewModel extends BaseRepository {
      * @param event_tag 参加活动tag
      */
     public void getSaveUserInfo(String phone, String password, String name, String sex, String birthday, String job, List<String> tag, List<String> event_tag, ParseFile file){
+        List<ParseFile> list = new ArrayList<>();
+        list.add(file);
         LogUtils.e(file);
         ParseUser user = new ParseUser();
         user.setUsername(phone);
@@ -64,6 +67,7 @@ public class UserInfoViewModel extends BaseRepository {
         user.put("tag", tag);//期待
         user.put("event_tag", event_tag);//活动
         user.put("photo", file);//用户头像
+        user.put("images", list);//相册
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {

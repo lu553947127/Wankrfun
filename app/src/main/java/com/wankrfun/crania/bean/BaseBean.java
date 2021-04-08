@@ -18,6 +18,11 @@ public class BaseBean {
     private int images;
     private boolean checkState;
     private int imagesNot;
+    private String color;
+
+    public BaseBean(String name) {
+        this.name = name;
+    }
 
     public BaseBean(String name, int images) {
         this.name = name;
@@ -64,5 +69,18 @@ public class BaseBean {
 
     public void setImagesNot(int imagesNot) {
         this.imagesNot = imagesNot;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public BaseBean(String name, String color) {
+        this.name = name;
+        this.color = color;
     }
 }

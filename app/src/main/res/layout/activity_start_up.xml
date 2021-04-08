@@ -3,20 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:roundiv="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@mipmap/icon_start_title"/>
 
-    <ImageView
+    <com.wankrfun.crania.widget.CornerImageView
         android:layout_width="39dp"
         android:layout_height="39dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
+        roundiv:radius="5dp"
         android:src="@mipmap/app_logo"/>
 
 </RelativeLayout>

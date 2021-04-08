@@ -16,7 +16,7 @@ import com.wankrfun.crania.adapter.EventsSelectApplyAdapter;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.bean.EventsParticipantsBean;
 import com.wankrfun.crania.dialog.AnimationDialog;
-import com.wankrfun.crania.view.mine.UserInfoActivity;
+import com.wankrfun.crania.view.mine.user.UserInfoActivity;
 import com.wankrfun.crania.viewmodel.EventsViewModel;
 
 import butterknife.BindView;

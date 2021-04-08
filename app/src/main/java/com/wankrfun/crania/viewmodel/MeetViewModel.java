@@ -40,6 +40,7 @@ public class MeetViewModel extends BaseRepository {
     public MutableLiveData<EventsCreateBean> unMatchingLiveData;
     private final String userId;
     public int page = 0;
+    public double longitude, latitude;
 
     public MeetViewModel() {
         userId = SPUtils.getInstance().getString(SpConfig.USER_ID);
@@ -57,8 +58,8 @@ public class MeetViewModel extends BaseRepository {
     public void getMeetList(){
         HashMap<String, Object> params = new HashMap();
         params.put("userId", userId);
-        params.put("longitude", Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LONGITUDE)));
-        params.put("latitude", Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LATITUDE)));
+        params.put("longitude", longitude);
+        params.put("latitude", latitude);
         ParseCloud.callFunctionInBackground("getDailyUserCard-abbv", params, new FunctionCallback<Object>(){
             @Override
             public void done(Object object, ParseException e) {

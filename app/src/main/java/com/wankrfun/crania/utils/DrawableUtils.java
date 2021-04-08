@@ -127,12 +127,30 @@ public class DrawableUtils {
      * @param tvApply
      * @param tvFav
      */
-    public static void setMineEventsTab(BaseActivity activity, int position, AppCompatTextView tvInitiate, AppCompatTextView tvApply, AppCompatTextView tvFav){
+    public static void setMineEventsTab(BaseActivity activity, int position
+            , AppCompatTextView tvAbout, AppCompatTextView tvInitiate, AppCompatTextView tvApply, AppCompatTextView tvFav){
         switch (position){
             case 0:
+                DrawableUtils.setDrawableBottom(activity, tvAbout, R.drawable.icon_tab_line);
+                DrawableUtils.setDrawableBottom(activity, tvInitiate, 0);
+                DrawableUtils.setDrawableBottom(activity, tvApply, 0);
+                DrawableUtils.setDrawableBottom(activity, tvFav, 0);
+                tvAbout.setTextSize(18);
+                tvAbout.setTextColor(activity.getResources().getColor(R.color.white));
+                tvInitiate.setTextSize(16);
+                tvInitiate.setTextColor(activity.getResources().getColor(R.color.color_494949));
+                tvApply.setTextSize(16);
+                tvApply.setTextColor(activity.getResources().getColor(R.color.color_494949));
+                tvFav.setTextSize(16);
+                tvFav.setTextColor(activity.getResources().getColor(R.color.color_494949));
+                break;
+            case 1:
+                DrawableUtils.setDrawableBottom(activity, tvAbout, 0);
                 DrawableUtils.setDrawableBottom(activity, tvInitiate, R.drawable.icon_tab_line);
                 DrawableUtils.setDrawableBottom(activity, tvApply, 0);
                 DrawableUtils.setDrawableBottom(activity, tvFav, 0);
+                tvAbout.setTextSize(16);
+                tvAbout.setTextColor(activity.getResources().getColor(R.color.color_494949));
                 tvInitiate.setTextSize(18);
                 tvInitiate.setTextColor(activity.getResources().getColor(R.color.white));
                 tvApply.setTextSize(16);
@@ -140,10 +158,13 @@ public class DrawableUtils {
                 tvFav.setTextSize(16);
                 tvFav.setTextColor(activity.getResources().getColor(R.color.color_494949));
                 break;
-            case 1:
+            case 2:
+                DrawableUtils.setDrawableBottom(activity, tvAbout, 0);
                 DrawableUtils.setDrawableBottom(activity, tvInitiate, 0);
                 DrawableUtils.setDrawableBottom(activity, tvApply, R.drawable.icon_tab_line);
                 DrawableUtils.setDrawableBottom(activity, tvFav, 0);
+                tvAbout.setTextSize(16);
+                tvAbout.setTextColor(activity.getResources().getColor(R.color.color_494949));
                 tvInitiate.setTextSize(16);
                 tvInitiate.setTextColor(activity.getResources().getColor(R.color.color_494949));
                 tvApply.setTextSize(18);
@@ -151,10 +172,13 @@ public class DrawableUtils {
                 tvFav.setTextSize(16);
                 tvFav.setTextColor(activity.getResources().getColor(R.color.color_494949));
                 break;
-            case 2:
+            case 3:
+                DrawableUtils.setDrawableBottom(activity, tvAbout, 0);
                 DrawableUtils.setDrawableBottom(activity, tvInitiate, 0);
                 DrawableUtils.setDrawableBottom(activity, tvApply, 0);
                 DrawableUtils.setDrawableBottom(activity, tvFav, R.drawable.icon_tab_line);
+                tvAbout.setTextSize(16);
+                tvAbout.setTextColor(activity.getResources().getColor(R.color.color_494949));
                 tvInitiate.setTextSize(16);
                 tvInitiate.setTextColor(activity.getResources().getColor(R.color.color_494949));
                 tvApply.setTextSize(16);

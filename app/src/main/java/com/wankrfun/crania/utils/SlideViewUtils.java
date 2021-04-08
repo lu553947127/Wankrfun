@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.wankrfun.crania.adapter.MeetListAdapter;
 import com.wankrfun.crania.bean.MeetListBean;
-import com.wankrfun.crania.view.mine.UserInfoActivity;
+import com.wankrfun.crania.view.mine.user.UserInfoActivity;
 import com.wankrfun.crania.viewmodel.MeetViewModel;
 import com.wankrfun.crania.widget.swipe.CardConfig;
 import com.wankrfun.crania.widget.swipe.CardItemTouchHelperCallback;
@@ -92,11 +92,17 @@ public class SlideViewUtils {
         meetListAdapter.setOnItemClickListener(new MeetListAdapter.OnItemClickListener() {
             @Override
             public void onLeftClick(View view, RecyclerView.ViewHolder holder, int position) {
+                if (!TextViewUtils.isFastClick()){
+                    return;
+                }
                 cardCallback.onSwiped(holder, 4);
             }
 
             @Override
             public void onRightClick(View view, RecyclerView.ViewHolder holder, int position) {
+                if (!TextViewUtils.isFastClick()){
+                    return;
+                }
                 cardCallback.onSwiped(holder, 8);
             }
 

@@ -13,7 +13,7 @@ import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.IMGroupMemberAdapter;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.bean.ImGroupMembersBean;
-import com.wankrfun.crania.view.mine.UserInfoActivity;
+import com.wankrfun.crania.view.mine.user.UserInfoActivity;
 import com.wankrfun.crania.viewmodel.IMConnectViewModel;
 
 import butterknife.BindView;

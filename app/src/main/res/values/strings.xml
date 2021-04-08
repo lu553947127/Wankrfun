@@ -17,6 +17,8 @@
     <string name="permission_location">为了更好的为您服务，请您打开您的定位权限!</string>
     <string name="permission_notice">为了更好的为您服务，请您打开您的通知权限!</string>
     <string name="photo_size_not">图片数量超过限制，最多上传6张图片哦～</string>
+    <string name="photo_size_not_4">图片数量超过限制，最多上传4张图片哦～</string>
+    <string name="photo_size_not_9">图片数量超过限制，最多上传9张图片哦～</string>
     <string name="empty">暂无</string>
     <string name="login_out_is">确定要退出登录吗？</string>
     <string name="sign_out">退出登录成功</string>
@@ -82,6 +84,11 @@
         \t\n\t\t“玩客“（本隐私政策中指无锡勾股弦网络科技公司，以下亦称“我们”）深知信息安全对您的重要性，且非常重视您的隐私保护和个人信息保护。
         我们将遵循相关法律法规，保护您的个人信息和隐私安全，请认真阅读《用户协议》及《隐私协议》全部内容。
         \t\t\n\t\t若您点击同意即意味着同意我们按照《隐私协议》的内容收集，使用，存储您的相关个人信息。若您点击不同意，则无法使用我们的产品与服务。谢谢您的合作。</string>
+
+    <string-array name="meet_list">
+        <item>遇见</item>
+        <item>谁喜欢我</item>
+    </string-array>
 
     <string-array name="messages_list">
         <item>消息</item>

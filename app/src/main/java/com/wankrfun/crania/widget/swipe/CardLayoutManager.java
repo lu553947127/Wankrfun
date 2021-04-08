@@ -60,6 +60,7 @@ public class CardLayoutManager extends RecyclerView.LayoutManager {
                         widthSpace / 2 + getDecoratedMeasuredWidth(view),
                         heightSpace / 2 + getDecoratedMeasuredHeight(view));
 
+                //关闭左滑右滑效果
                 if (position == CardConfig.DEFAULT_SHOW_ITEM) {
                     view.setScaleX(1 - (position - 1) * CardConfig.DEFAULT_SCALE);
                     view.setScaleY(1 - (position - 1) * CardConfig.DEFAULT_SCALE);
@@ -85,6 +86,7 @@ public class CardLayoutManager extends RecyclerView.LayoutManager {
                         widthSpace / 2 + getDecoratedMeasuredWidth(view),
                         heightSpace / 2 + getDecoratedMeasuredHeight(view));
 
+                //关闭左滑右滑效果
                 if (position > 0) {
                     view.setScaleX(1 - position * CardConfig.DEFAULT_SCALE);
                     view.setScaleY(1 - position * CardConfig.DEFAULT_SCALE);

@@ -31,7 +31,7 @@ import java.util.List;
 public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.ImageViewHolder> {
 
     private List<String> mData;
-    private final int mCountLimit = 6;
+    private int mCountLimit = 6;
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -49,6 +49,11 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.Imag
 
     public GridImageAdapter(List<String> data) {
         this.mData = data;
+    }
+
+    public GridImageAdapter(List<String> data, int mCountLimit) {
+        this.mData = data;
+        this.mCountLimit = mCountLimit;
     }
 
     @NonNull

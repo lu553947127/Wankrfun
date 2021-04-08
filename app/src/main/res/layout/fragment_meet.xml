@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginBottom="60dp">
 
-    <View
-        android:id="@+id/fake_status_bar"
+    <com.wankrfun.crania.widget.CustomVideoView
+        android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="match_parent"/>
 
-    <include layout="@layout/toolbar_meet"/>
-
-    <include layout="@layout/layout_empty_meet"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <View
+            android:id="@+id/fake_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <include layout="@layout/toolbar_meet"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

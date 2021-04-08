@@ -20,9 +20,11 @@ import com.wankrfun.crania.app.MyApplication;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.image.ImageLoader;
+import com.wankrfun.crania.utils.ParseUtils;
 import com.wankrfun.crania.utils.PermissionUtils;
 import com.wankrfun.crania.view.MainActivity;
 import com.wankrfun.crania.viewmodel.LoginViewModel;
+import com.wankrfun.crania.viewmodel.MineViewModel;
 import com.wankrfun.crania.viewmodel.UserInfoViewModel;
 import com.wankrfun.crania.widget.CircleImageView;
 import com.zhihu.matisse.Matisse;
@@ -69,6 +71,8 @@ public class FirstSetUserInfoActivity extends BaseActivity {
     //图片ParseFile
     private ParseFile parseFile;
     private LoginViewModel loginViewModel;
+    private MineViewModel mineViewModel;
+    private final List<Object> editImage = new ArrayList<>();
 
     @Override
     protected int initLayoutRes() {
@@ -87,6 +91,7 @@ public class FirstSetUserInfoActivity extends BaseActivity {
 
         userInfoViewModel = getViewModel(UserInfoViewModel.class);
         loginViewModel = getViewModel(LoginViewModel.class);
+        mineViewModel= getViewModel(MineViewModel.class);
 
         //保存用户数据返回结果
         userInfoViewModel.saveUserInfoLiveData.observe(this, o ->{
@@ -101,6 +106,8 @@ public class FirstSetUserInfoActivity extends BaseActivity {
         loginViewModel.loginLiveData.observe(this, parseUser -> {
             loginViewModel.getInvited(parseUser.getObjectId(), SPUtils.getInstance().getString(SpConfig.INVITE));
             loginViewModel.getSignUp();
+            mineViewModel.getUploadPhoto(ParseUtils.setImageFile(new File(path)), parseUser.getObjectId());
+            mineViewModel.getUploadImages(editImage, parseUser.getObjectId());
             SPUtils.getInstance().put(SpConfig.USER_ID, parseUser.getObjectId(), true);
             SPUtils.getInstance().put(SpConfig.TOKEN, parseUser.getSessionToken(), true);
             if (PermissionUtils.isCheckPermission(activity)){
@@ -125,6 +132,7 @@ public class FirstSetUserInfoActivity extends BaseActivity {
             }
             ivAvatar.setImageBitmap(BitmapFactory.decodeFile(path));
             parseFile = userInfoViewModel.getUploadFile(new File(path));
+            editImage.add(ParseUtils.setImageFile(new File(path)));
             isAvatar = true;
             if (isName){
                 tvLogin.setVisibility(View.VISIBLE);

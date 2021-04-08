@@ -201,7 +201,7 @@ public class MineViewModel extends BaseRepository {
     /**
      * 修改个人头像
      */
-    public void getUploadPhoto(ParseFile parseFile){
+    public void getUploadPhoto(ParseFile parseFile, String userId){
         HashMap<String, Object> params = new HashMap();
         params.put("userId", userId);
         params.put("content", parseFile); //ParseFile, 新头像，必选
@@ -279,7 +279,7 @@ public class MineViewModel extends BaseRepository {
     /**
      * 修改个人相册图片
      */
-    public void getUploadImages(List<Object> images){
+    public void getUploadImages(List<Object> images, String userId){
         HashMap<String, Object> params = new HashMap();
         params.put("userId", userId);
         params.put("content", images); //新相册图片array，必选

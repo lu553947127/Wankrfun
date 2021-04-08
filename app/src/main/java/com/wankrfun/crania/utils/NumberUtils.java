@@ -123,35 +123,41 @@ public class NumberUtils {
     /**
      * 根据日期计算出年龄
      *
-     * @param birthDay
+     * @param time
      * @return
-     * @throws Exception
      */
-    public static int getAge(Date birthDay) throws Exception {
+    public static int getAge(String time) {
+        int  age = 0;
         Calendar cal = Calendar.getInstance();
-        if (cal.before(birthDay)) {
-            throw new IllegalArgumentException( "The birthDay is before Now.It's unbelievable!" );
-        }
-        int  yearNow = cal.get(Calendar.YEAR);
-        int  monthNow = cal.get(Calendar.MONTH);
-        int  dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
-        cal.setTime(birthDay);
-
-        int  yearBirth = cal.get(Calendar.YEAR);
-        int  monthBirth = cal.get(Calendar.MONTH);
-        int  dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
-
-        int  age = yearNow - yearBirth;
-        if (monthNow <= monthBirth) {
-            if (monthNow == monthBirth) {
-                if (dayOfMonthNow < dayOfMonthBirth)
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthDay;
+        try {
+            birthDay = format.parse(time);
+            if (cal.before(birthDay)) {
+                throw new IllegalArgumentException( "The birthDay is before Now.It's unbelievable!" );
+            }
+            int  yearNow = cal.get(Calendar.YEAR);
+            int  monthNow = cal.get(Calendar.MONTH);
+            int  dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+            cal.setTime(birthDay);
+            int  yearBirth = cal.get(Calendar.YEAR);
+            int  monthBirth = cal.get(Calendar.MONTH);
+            int  dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+            age = yearNow - yearBirth;
+            if (monthNow <= monthBirth) {
+                if (monthNow == monthBirth) {
+                    if (dayOfMonthNow < dayOfMonthBirth)
+                        age--;
+                }
+                else {
                     age--;
+                }
             }
-            else {
-                age--;
-            }
+            return  age;
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
         }
-        return  age;
+        return age;
     }
 
     /**

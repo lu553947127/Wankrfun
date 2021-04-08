@@ -115,40 +115,58 @@
         <activity android:name="com.wankrfun.crania.view.messages.chat.IMGroupMemberActivity"/>
 
         <!-- 用户详情页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.UserInfoActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.user.UserInfoActivity"/>
 
         <!-- 设置页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.SetActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.set.SetActivity"/>
 
         <!-- h5加载页 -->
-        <activity android:name="com.wankrfun.crania.view.mine.WebViewActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.set.WebViewActivity"/>
 
         <!-- 账号与安全页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.AccountSecurityActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.set.AccountSecurityActivity"/>
 
         <!-- 修改密码页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.ChangePasswordActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name="com.wankrfun.crania.view.mine.set.ChangePasswordActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
 
-        <!-- 用户协议页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.UserAgreementActivity"/>
-
-        <!-- 用户协议页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.FeedbackActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <!-- 意见反馈页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.set.FeedbackActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <!-- 修改个人信息页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.ChangeUserInfoActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.user.ChangeUserInfoActivity"/>
 
         <!-- 修改用户昵称页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.ChangeNameActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name="com.wankrfun.crania.view.mine.user.ChangeNameActivity" android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <!-- 更改用户头像页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.ChangeAvatarActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.user.ChangeAvatarActivity"/>
 
         <!-- 修改用户位置页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.ChangeAddressActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.user.ChangeAddressActivity"/>
 
         <!-- 更换背景页面 -->
-        <activity android:name="com.wankrfun.crania.view.mine.ChangeBackgroundActivity"/>
+        <activity android:name="com.wankrfun.crania.view.mine.user.ChangeBackgroundActivity"/>
+
+        <!-- 我的心愿列表页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.about.MineWishActivity"/>
+
+        <!-- 我的心愿创建页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.about.MineWishAddActivity"/>
+
+        <!-- 我的生活类型选择页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.about.MineLifeActivity"/>
+
+        <!-- 我的生活创建页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.about.MineLifeAddActivity"/>
+
+        <!-- 活动瞬间选择活动页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.about.MineEventsActivity"/>
+
+        <!-- 活动瞬间添加页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.about.MineEventsAddActivity"/>
+
+        <!-- 创建更多卡片页面 -->
+        <activity android:name="com.wankrfun.crania.view.mine.about.MineMoreCardActivity"/>
 
         <!-- 融云单聊页-->
         <activity

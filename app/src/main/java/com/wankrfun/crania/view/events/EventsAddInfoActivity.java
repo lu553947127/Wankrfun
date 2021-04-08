@@ -290,8 +290,6 @@ public class EventsAddInfoActivity extends BaseActivity {
                 break;
             case R.id.tv_release://发布
 
-                showLoading();
-
                 if (TextUtils.isEmpty(eventType)){
                     ToastUtils.showShort("活动类型不能为空");
                     return;
@@ -332,6 +330,8 @@ public class EventsAddInfoActivity extends BaseActivity {
                     ToastUtils.showShort("参与人不能为空");
                     return;
                 }
+
+                showLoading();
 
                 if (eventsDetailBean != null){
                     eventsViewModel.getEventsEdit(

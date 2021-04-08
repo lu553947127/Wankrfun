@@ -145,7 +145,7 @@ public class MyApplication extends Application {
     private static void initUtils(Application context) {
         Utils.init(context);
         LogUtils.getConfig().setGlobalTag(context.getString(R.string.app_name)).setLogSwitch(true);
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, ConvertUtils.dp2px(100));
+        ToastUtils.setGravity(Gravity.CENTER, 0, ConvertUtils.dp2px(100));
         ToastUtils.setMsgTextSize(13);
         ToastUtils.setMsgColor(context.getResources().getColor(R.color.white));
         if (isAndroidQ) {

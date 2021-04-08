@@ -28,13 +28,14 @@ import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.utils.PictureEnlargeUtils;
 import com.wankrfun.crania.utils.ScrollUtils;
 import com.wankrfun.crania.view.events.EventsAddActivity;
-import com.wankrfun.crania.view.mine.ChangeAvatarActivity;
-import com.wankrfun.crania.view.mine.ChangeBackgroundActivity;
-import com.wankrfun.crania.view.mine.ChangeUserInfoActivity;
+import com.wankrfun.crania.view.mine.user.ChangeAvatarActivity;
+import com.wankrfun.crania.view.mine.user.ChangeBackgroundActivity;
+import com.wankrfun.crania.view.mine.user.ChangeUserInfoActivity;
+import com.wankrfun.crania.view.mine.MineAboutFragment;
 import com.wankrfun.crania.view.mine.MineApplyFragment;
 import com.wankrfun.crania.view.mine.MineFavFragment;
 import com.wankrfun.crania.view.mine.MineInitiateFragment;
-import com.wankrfun.crania.view.mine.SetActivity;
+import com.wankrfun.crania.view.mine.set.SetActivity;
 import com.wankrfun.crania.viewmodel.MineViewModel;
 import com.wankrfun.crania.widget.AdaptationScrollView;
 import com.wankrfun.crania.widget.AutoHeightViewPager;
@@ -86,6 +87,8 @@ public class MineFragment extends BaseFragment {
     FlexboxLayout flLabel;
     @BindView(R.id.rv_album)
     RecyclerView rvAlbum;
+    @BindView(R.id.tv_about)
+    AppCompatTextView tvAbout;
     @BindView(R.id.tv_initiate)
     AppCompatTextView tvInitiate;
     @BindView(R.id.tv_apply)
@@ -114,11 +117,12 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void initDataAndEvent(Bundle savedInstanceState, View view) {
         Fragment[] fragments = {
+                new MineAboutFragment(),
                 new MineInitiateFragment(SPUtils.getInstance().getString(SpConfig.USER_ID), "mine", ""),
                 new MineApplyFragment(),
                 new MineFavFragment()
         };
-        ScrollUtils.getViewPagerAddOnPageChangeListener(mActivity, getChildFragmentManager(), viewPager, fragments, tvInitiate, tvApply, tvFav);
+        ScrollUtils.getViewPagerAddOnPageChangeListener(mActivity, getChildFragmentManager(), viewPager, fragments, tvAbout, tvInitiate, tvApply, tvFav);
         ScrollUtils.getTooBarOnScrollChangeListener(mActivity, scrollView, toolbar, ivAdd);
 
         refresh.setEnableLoadMore(false);
@@ -184,7 +188,8 @@ public class MineFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_set, R.id.iv_set2, R.id.iv_edit, R.id.iv_edit2, R.id.iv_bg, R.id.iv_bg2, R.id.iv_avatar, R.id.iv_avatar2, R.id.iv_label, R.id.tv_initiate, R.id.tv_apply, R.id.tv_fav, R.id.iv_add})
+    @OnClick({R.id.iv_set, R.id.iv_set2, R.id.iv_edit, R.id.iv_edit2, R.id.iv_bg, R.id.iv_bg2, R.id.iv_avatar, R.id.iv_avatar2, R.id.iv_label
+            , R.id.tv_about, R.id.tv_initiate, R.id.tv_apply, R.id.tv_fav, R.id.iv_add})
     void onClick(View view) {
         Bundle bundle = new Bundle();
         switch (view.getId()){
@@ -215,17 +220,21 @@ public class MineFragment extends BaseFragment {
                 }
                 isShow = !isShow;
                 break;
-            case R.id.tv_initiate://我的发起
-                DrawableUtils.setMineEventsTab(mActivity, 0, tvInitiate, tvApply, tvFav);
+            case R.id.tv_about://关于我
                 viewPager.setCurrentItem(0);
+                DrawableUtils.setMineEventsTab(mActivity, 0, tvAbout, tvInitiate, tvApply, tvFav);
                 break;
-            case R.id.tv_apply://我的申请
-                DrawableUtils.setMineEventsTab(mActivity, 1, tvInitiate, tvApply, tvFav);
+            case R.id.tv_initiate://我的发起
+                DrawableUtils.setMineEventsTab(mActivity, 1, tvAbout, tvInitiate, tvApply, tvFav);
                 viewPager.setCurrentItem(1);
                 break;
-            case R.id.tv_fav://我的想去
-                DrawableUtils.setMineEventsTab(mActivity, 2, tvInitiate, tvApply, tvFav);
+            case R.id.tv_apply://我的申请
+                DrawableUtils.setMineEventsTab(mActivity, 2, tvAbout, tvInitiate, tvApply, tvFav);
                 viewPager.setCurrentItem(2);
+                break;
+            case R.id.tv_fav://我的想去
+                DrawableUtils.setMineEventsTab(mActivity, 3, tvAbout, tvInitiate, tvApply, tvFav);
+                viewPager.setCurrentItem(3);
                 break;
             case R.id.iv_add://活动添加
                 ActivityUtils.startActivity(EventsAddActivity.class);

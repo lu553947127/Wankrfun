@@ -151,6 +151,10 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:2.6.0'
     //原生渲染After Effects动画
     implementation 'com.airbnb.android:lottie:3.6.1'
+    //ViewPagerIndicator
+    implementation 'com.github.LinweiJ:ViewPagerIndicator:0.3.0'
+    //播放webp和gif图片
+    implementation 'com.github.humorousz:AnimationSequenceDrawable:1.0.1-SNAPSHOT'
 
     //华为推送模块
     implementation 'com.huawei.hms:push:5.0.0.300'

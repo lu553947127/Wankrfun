@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.bean.MatchingListBean;
-import com.wankrfun.crania.view.mine.UserInfoActivity;
+import com.wankrfun.crania.view.mine.user.UserInfoActivity;
 
 import java.util.HashMap;
 import java.util.List;

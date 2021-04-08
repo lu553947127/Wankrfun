@@ -144,7 +144,8 @@ public class ScrollUtils {
      * @param tvApply
      * @param tvFav
      */
-    public static void getViewPagerAddOnPageChangeListener(BaseActivity activity, FragmentManager fragment, AutoHeightViewPager viewPager, Fragment[] fragments, AppCompatTextView tvInitiate, AppCompatTextView tvApply, AppCompatTextView tvFav){
+    public static void getViewPagerAddOnPageChangeListener(BaseActivity activity, FragmentManager fragment, AutoHeightViewPager viewPager, Fragment[] fragments
+            ,AppCompatTextView tvAbout, AppCompatTextView tvInitiate, AppCompatTextView tvApply, AppCompatTextView tvFav){
         viewPager.setAdapter(new ViewPagerAdapter(fragment, fragments, null));
         //初始化记录是否保存高度的下标
         //注：在重新刷新加载页面的时候，需要对下标进行重新初始化
@@ -159,7 +160,7 @@ public class ScrollUtils {
             public void onPageSelected(int position) {
                 //在每次切换的时候更新高度
                 viewPager.updateHeight(position);
-                DrawableUtils.setMineEventsTab(activity, position, tvInitiate, tvApply, tvFav);
+                DrawableUtils.setMineEventsTab(activity, position, tvAbout, tvInitiate, tvApply, tvFav);
             }
 
             @Override

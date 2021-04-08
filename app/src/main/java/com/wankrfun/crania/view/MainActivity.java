@@ -114,8 +114,8 @@ public class MainActivity extends BaseActivity {
         mFragments.add(new MessagesFragment());
         mFragments.add(new MineFragment());
 
-        switchFragment(lastFragment,0);lastFragment=0;
-        navigation.getMenu().getItem(0).setChecked(true);
+        switchFragment(lastFragment,1);lastFragment=1;
+        navigation.getMenu().getItem(1).setChecked(true);
         //判断选择的菜单
         navigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {

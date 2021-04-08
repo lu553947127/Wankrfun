@@ -28,7 +28,7 @@ import com.wankrfun.crania.image.ImageLoader;
 import com.wankrfun.crania.utils.EventsUtils;
 import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.view.events.EventsDetailActivity;
-import com.wankrfun.crania.view.mine.UserInfoActivity;
+import com.wankrfun.crania.view.mine.user.UserInfoActivity;
 import com.wankrfun.crania.viewmodel.EventsViewModel;
 import com.wankrfun.crania.viewmodel.IMConnectViewModel;
 import com.wankrfun.crania.viewmodel.MeetViewModel;

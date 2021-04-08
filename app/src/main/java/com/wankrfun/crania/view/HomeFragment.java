@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lxj.xpopup.XPopup;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -20,10 +21,9 @@ import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.EventsAdapter;
 import com.wankrfun.crania.adapter.EventsTypeAdapter;
 import com.wankrfun.crania.base.BaseFragment;
+import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.bean.EventsBean;
 import com.wankrfun.crania.event.EventsEvent;
-import com.wankrfun.crania.event.LocationEvent;
-import com.wankrfun.crania.utils.LocationUtils;
 import com.wankrfun.crania.utils.ParseUtils;
 import com.wankrfun.crania.utils.RefreshUtils;
 import com.wankrfun.crania.utils.ScrollUtils;
@@ -150,7 +150,10 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initDataFromService() {
-        LocationUtils.getInstance().startLocalService();
+        tvLocation.setText(SPUtils.getInstance().getString(SpConfig.CITY));
+        eventsViewModel.latitude = Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LATITUDE));
+        eventsViewModel.longitude = Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LONGITUDE));
+        eventsViewModel.getEventsList(strList);
     }
 
     @OnClick({R.id.tv_title, R.id.iv_date, R.id.rl_bubbling, R.id.iv_add})
@@ -189,29 +192,11 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * 定位成功，加载活动列表
-     * @param event
-     */
-    @Subscribe
-    public void onEventLocation(LocationEvent event) {
-        tvLocation.setText(event.getCity());
-        eventsViewModel.latitude = event.getLatitude();
-        eventsViewModel.longitude = event.getLongitude();
-        eventsViewModel.getEventsList(strList);
-    }
-
-    /**
      * 活动创建成功，刷新活动列表
      * @param event
      */
     @Subscribe
     public void onEventEvents(EventsEvent event) {
         eventsViewModel.getEventsList(strList);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        LocationUtils.getInstance().stopLocalService();
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipChildren="false"
+    android:background="@color/black"
+    android:id="@+id/rl">
+
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/svg_icon_back"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="选择卡片类型" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@color/color_FEFEDA"
+        android:textSize="18sp"
+        android:text="记录活动的精彩瞬间"/>
+
+    <com.wankrfun.crania.widget.gallery.ClipViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="200dp"
+        android:layout_height="350dp"
+        android:clipChildren="false"
+        android:layout_margin="25dp"
+        android:layout_below="@+id/tv_title"/>
+
+    <com.lwj.widget.viewpagerindicator.ViewPagerIndicator
+        android:id="@+id/indicator_line"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/view_pager"
+        app:vpi_default_color="@color/color_505050"
+        app:vpi_selected_color="@color/color_FEFEDA"
+        app:vpi_animation="true"
+        app:vpi_distanceType="BY_RADIUS"
+        app:vpi_indicatorType="CIRCLE"
+        app:vpi_radius="3dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_add"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="25dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_yellow_15"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:text="创建卡片"/>
+
+</RelativeLayout>

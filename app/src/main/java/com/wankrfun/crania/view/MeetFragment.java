@@ -1,25 +1,23 @@
 package com.wankrfun.crania.view;
 
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.SPUtils;
+import com.kcrason.dynamicpagerindicatorlibrary.DynamicPagerIndicator;
 import com.wankrfun.crania.R;
-import com.wankrfun.crania.adapter.MeetListAdapter;
+import com.wankrfun.crania.adapter.ViewPagerAdapter;
 import com.wankrfun.crania.base.BaseFragment;
-import com.wankrfun.crania.base.SpConfig;
-import com.wankrfun.crania.dialog.AnimationDialog;
-import com.wankrfun.crania.utils.SlideViewUtils;
+import com.wankrfun.crania.view.meet.MeetHomeFragment;
+import com.wankrfun.crania.view.meet.MeetLikeFragment;
 import com.wankrfun.crania.view.meet.MineMatchingActivity;
-import com.wankrfun.crania.viewmodel.MeetViewModel;
+import com.wankrfun.crania.widget.CustomVideoView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,15 +37,14 @@ import butterknife.OnClick;
 public class MeetFragment extends BaseFragment {
     @BindView(R.id.fake_status_bar)
     View fakeStatusBar;
-    @BindView(R.id.tv_location)
-    AppCompatTextView tvLocation;
-    @BindView(R.id.tv_bar_title)
-    AppCompatTextView tvBarTitle;
-    @BindView(R.id.rv)
-    RecyclerView recyclerView;
-    @BindView(R.id.rl_empty)
-    RelativeLayout rlEmpty;
-    private MeetViewModel meetViewModel;
+    @BindView(R.id.video_view)
+    CustomVideoView videoView;
+    @BindView(R.id.tv_num)
+    AppCompatTextView tvNum;
+    @BindView(R.id.dynamic_pager_indicator)
+    DynamicPagerIndicator dynamicPagerIndicator;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
 
     @Override
     protected int initLayout() {
@@ -61,53 +58,48 @@ public class MeetFragment extends BaseFragment {
 
     @Override
     protected void initDataAndEvent(Bundle savedInstanceState, View view) {
-        BarUtils.setStatusBarColor(fakeStatusBar, getResources().getColor(R.color.black));
+        BarUtils.setStatusBarColor(fakeStatusBar, getResources().getColor(android.R.color.transparent));
 
-        tvLocation.setText(SPUtils.getInstance().getString(SpConfig.CITY));
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        MeetListAdapter meetListAdapter = new MeetListAdapter();
-        recyclerView.setAdapter(meetListAdapter);
-
-        meetViewModel = mActivity.getViewModel(MeetViewModel.class);
-
-        //获取遇见卡片列表返回结果
-        meetViewModel.meetListLiveData.observe(this, meetListBean -> {
-            tvBarTitle.setText("今日剩余喜欢: " + meetListBean.getData().getAllowedToday());
-            meetListAdapter.setNewData(meetListBean.getData().getList());
-            if (meetListBean.getData().getList().size() != 0){
-                rlEmpty.setVisibility(View.GONE);
-            }else {
-                rlEmpty.setVisibility(View.VISIBLE);
-            }
-            SlideViewUtils.getSlideResult(recyclerView, meetListBean.getData().getList(), rlEmpty, meetListAdapter, meetViewModel);
-        });
-
-        //手势操作: 喜欢或不喜欢成功返回结果
-        meetViewModel.meetUserCardLiveData.observe(this, eventsCreateBean -> {
-            meetViewModel.getMeetList();
-            if (!TextUtils.isEmpty(SPUtils.getInstance().getString(SpConfig.CITY))){
-                meetViewModel.getMeetUploadCard();
-            }
-
-            //匹配成功 弹出匹配成功动画弹窗
-            if (eventsCreateBean.getData().isMatching()){
-                AnimationDialog animationDialog = new AnimationDialog(mActivity, "matching", eventsCreateBean.getData().getImage());
-                animationDialog.showDialog();
-            }
-        });
+        Fragment[] fragments = {
+                new MeetHomeFragment(),
+                new MeetLikeFragment()
+        };
+        viewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), fragments, getResources().getStringArray(R.array.meet_list)));
+        dynamicPagerIndicator.setViewPager(viewPager);
     }
 
     @Override
     protected void initDataFromService() {
-        meetViewModel.getMeetList();
-        if (!TextUtils.isEmpty(SPUtils.getInstance().getString(SpConfig.CITY))){
-            meetViewModel.getMeetUploadCard();
-        }
+
     }
 
     @OnClick({R.id.iv_tab_right})
     void onClick() {
         ActivityUtils.startActivity(MineMatchingActivity.class);
+    }
+
+    /**
+     * 视频初始化
+     */
+    private void initVideo() {
+        //设置播放加载路径
+        videoView.setVideoURI(Uri.parse("android.resource://" + mActivity.getPackageName() + "/" + R.raw.meet_video));
+        //播放
+        videoView.start();
+        //循环播放
+        videoView.setOnCompletionListener(mediaPlayer -> videoView.start());
+    }
+
+    @Override
+    public void onResume() {
+        initVideo();
+        super.onResume();
+    }
+
+    //防止锁屏或者切出的时候，音乐在播放
+    @Override
+    public void onDestroyView() {
+        videoView.stopPlayback();
+        super.onDestroyView();
     }
 }

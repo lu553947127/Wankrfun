@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:roundiv="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <com.wankrfun.crania.widget.CornerImageView
+        android:id="@+id/iv_one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        roundiv:radius="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon_bg" />
+
+    <LinearLayout
+        android:id="@+id/ll_images_two"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <com.wankrfun.crania.widget.CornerImageView
+            android:id="@+id/iv_two"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            roundiv:radius="5dp"
+            android:src="@drawable/icon_bg"/>
+
+        <com.wankrfun.crania.widget.CornerImageView
+            android:id="@+id/iv_three"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:scaleType="centerCrop"
+            roundiv:radius="5dp"
+            android:src="@drawable/icon_bg"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_images_three"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <com.wankrfun.crania.widget.CornerImageView
+            android:id="@+id/iv_four"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            roundiv:radius="5dp"
+            android:src="@drawable/icon_bg"/>
+
+        <com.wankrfun.crania.widget.CornerImageView
+            android:id="@+id/iv_five"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:scaleType="centerCrop"
+            roundiv:radius="5dp"
+            android:src="@drawable/icon_bg"/>
+
+        <com.wankrfun.crania.widget.CornerImageView
+            android:id="@+id/iv_six"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:scaleType="centerCrop"
+            roundiv:radius="5dp"
+            android:src="@drawable/icon_bg"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_images_four"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.wankrfun.crania.widget.CornerImageView
+                android:id="@+id/iv_seven"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                roundiv:radius="5dp"
+                android:src="@drawable/icon_bg"/>
+
+            <com.wankrfun.crania.widget.CornerImageView
+                android:id="@+id/iv_eight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerCrop"
+                roundiv:radius="5dp"
+                android:src="@drawable/icon_bg"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <com.wankrfun.crania.widget.CornerImageView
+                android:id="@+id/iv_night"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                roundiv:radius="5dp"
+                android:src="@drawable/icon_bg"/>
+
+            <com.wankrfun.crania.widget.CornerImageView
+                android:id="@+id/iv_ten"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:scaleType="centerCrop"
+                roundiv:radius="5dp"
+                android:src="@drawable/icon_bg"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

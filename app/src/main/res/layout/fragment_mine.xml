@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -182,45 +183,62 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_initiate"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableBottom="@drawable/icon_tab_line"
-                        android:drawablePadding="5dp"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:text="我的发起"/>
+                        android:orientation="horizontal"
+                        tools:ignore="ScrollViewSize">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_apply"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="5dp"
-                        android:layout_marginLeft="25dp"
-                        android:textColor="@color/color_494949"
-                        android:textSize="16sp"
-                        android:text="我的申请"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_about"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableBottom="@drawable/icon_tab_line"
+                            android:drawablePadding="5dp"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:text="关于我"/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_fav"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="5dp"
-                        android:layout_marginLeft="25dp"
-                        android:textColor="@color/color_494949"
-                        android:textSize="16sp"
-                        android:text="我的想去"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_initiate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:layout_marginLeft="25dp"
+                            android:textColor="@color/color_494949"
+                            android:textSize="18sp"
+                            android:text="我的发起"/>
 
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_apply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:layout_marginLeft="25dp"
+                            android:textColor="@color/color_494949"
+                            android:textSize="16sp"
+                            android:text="我的申请"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_fav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:layout_marginLeft="25dp"
+                            android:textColor="@color/color_494949"
+                            android:textSize="16sp"
+                            android:text="我的想去"/>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
 
                 <com.wankrfun.crania.widget.AutoHeightViewPager
                     android:id="@+id/view_pager"
