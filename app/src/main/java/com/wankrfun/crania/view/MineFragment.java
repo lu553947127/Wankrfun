@@ -1,6 +1,7 @@
 package com.wankrfun.crania.view;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -36,6 +37,7 @@ import com.wankrfun.crania.view.mine.MineApplyFragment;
 import com.wankrfun.crania.view.mine.MineFavFragment;
 import com.wankrfun.crania.view.mine.MineInitiateFragment;
 import com.wankrfun.crania.view.mine.set.SetActivity;
+import com.wankrfun.crania.viewmodel.MeetViewModel;
 import com.wankrfun.crania.viewmodel.MineViewModel;
 import com.wankrfun.crania.widget.AdaptationScrollView;
 import com.wankrfun.crania.widget.AutoHeightViewPager;
@@ -100,6 +102,7 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.iv_add)
     AppCompatImageView ivAdd;
     private MineViewModel mineViewModel;
+    private MeetViewModel meetViewModel;
     private UserInfoBean userInfoBean;
     //切换个性标签布尔值
     private boolean isShow;
@@ -143,6 +146,7 @@ public class MineFragment extends BaseFragment {
         });
 
         mineViewModel = mActivity.getViewModel(MineViewModel.class);
+        meetViewModel = mActivity.getViewModel(MeetViewModel.class);
 
         //获取用户详情返回结果
         mineViewModel.userInfoLiveData.observe(this, userInfoBean -> {
@@ -179,6 +183,10 @@ public class MineFragment extends BaseFragment {
                 ivLabel.setVisibility(View.VISIBLE);
             }else {
                 ivLabel.setVisibility(View.GONE);
+            }
+
+            if (!TextUtils.isEmpty(userInfoBean.getData().getProfile().getPhoto())){
+                meetViewModel.getMeetUploadCard();
             }
         });
     }

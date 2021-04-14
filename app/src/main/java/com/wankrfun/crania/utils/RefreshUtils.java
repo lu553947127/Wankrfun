@@ -62,6 +62,80 @@ public class RefreshUtils {
     }
 
     /**
+     * 设置我的生活瞬间类型icon
+     *
+     * @param tag
+     * @return
+     */
+    public static int setMineLifeIcon(String tag){
+        int icon = 0;
+        switch (tag){
+            case "mood":
+                icon = R.drawable.icon_mine_life;
+                break;
+            case "homestay":
+                icon = R.drawable.icon_mine_life2;
+                break;
+            case "play":
+                icon = R.drawable.icon_mine_life3;
+                break;
+            case "outfit":
+                icon = R.drawable.icon_mine_life4;
+                break;
+            case "pet":
+                icon = R.drawable.icon_mine_life5;
+                break;
+            case "food":
+                icon = R.drawable.icon_mine_life6;
+                break;
+            case "scene":
+                icon = R.drawable.icon_mine_life7;
+                break;
+            case "other":
+                icon = R.drawable.icon_mine_life8;
+                break;
+        }
+        return icon;
+    }
+
+    /**
+     * 设置我的生活瞬间
+     *
+     * @param tag
+     * @return
+     */
+    public static String setMineLifeType(String tag){
+        String type = "";
+        switch (tag){
+            case "mood":
+                type = "心愿";
+                break;
+            case "homestay":
+                type = "宅家";
+                break;
+            case "play":
+                type = "玩耍";
+                break;
+            case "outfit":
+                type = "穿搭";
+                break;
+            case "pet":
+                type = "宠物";
+                break;
+            case "food":
+                type = "美食";
+                break;
+            case "scene":
+                type = "风景";
+                break;
+            case "other":
+                type = "其他";
+                break;
+        }
+        return type;
+    }
+
+    /**
      * 期待列表显示转换
      *
      * @param tag

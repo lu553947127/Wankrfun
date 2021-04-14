@@ -190,25 +190,24 @@
                     android:layout_marginRight="15dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_initiate"
+                        android:id="@+id/tv_about"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableBottom="@drawable/icon_tab_line"
                         android:drawablePadding="5dp"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:text="我的发起"/>
+                        android:text="关于TA" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_apply"
+                        android:id="@+id/tv_initiate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="5dp"
                         android:layout_marginLeft="25dp"
+                        android:drawablePadding="5dp"
                         android:textColor="@color/color_494949"
                         android:textSize="16sp"
-                        android:text="我的申请"
-                        android:visibility="gone"/>
+                        android:text="我的发起"/>
 
                 </LinearLayout>
 

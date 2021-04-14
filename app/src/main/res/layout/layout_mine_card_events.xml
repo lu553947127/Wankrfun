@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    android:id="@+id/ll_events">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -18,12 +19,12 @@
         android:id="@+id/banner_events"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        app:is_infinite_loop="false"/>
+        app:is_infinite_loop="false" />
 
     <com.youth.banner.indicator.CircleIndicator
         android:id="@+id/indicator_events"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="10dp"
         android:layout_gravity="center_horizontal" />
 
     <RelativeLayout
@@ -31,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/shape_gray_10"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -1,6 +1,7 @@
 package com.wankrfun.crania.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,14 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wankrfun.crania.R;
-import com.wankrfun.crania.bean.BaseBean;
+import com.wankrfun.crania.bean.MeetListBean;
+import com.wankrfun.crania.bean.MineLifeListBean;
+import com.wankrfun.crania.utils.PictureUtils;
+import com.wankrfun.crania.utils.RefreshUtils;
 import com.wankrfun.crania.widget.CornerImageView;
 import com.youth.banner.adapter.BannerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,9 +35,11 @@ import java.util.List;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class MineAboutLifeAdapter extends BannerAdapter<BaseBean, MineAboutLifeAdapter.BannerViewHolder> {
+public class MineAboutLifeAdapter<T> extends BannerAdapter<T, MineAboutLifeAdapter.BannerViewHolder> {
     public Context context;
-    public MineAboutLifeAdapter(Context context, List<BaseBean> beanList) {
+    private String icon, content;
+    private List<String> images = new ArrayList<>();
+    public MineAboutLifeAdapter(Context context, List<T> beanList) {
         //设置数据，也可以调用banner提供的方法,或者自己在adapter中实现
         super(beanList);
         this.context = context;
@@ -46,32 +53,60 @@ public class MineAboutLifeAdapter extends BannerAdapter<BaseBean, MineAboutLifeA
     }
 
     @Override
-    public void onBindView(MineAboutLifeAdapter.BannerViewHolder holder, BaseBean item, int position, int size) {
-        switch (item.getColor()){
-            case "E3B492":
-                holder.cornerImageView1.setVisibility(View.VISIBLE);
-                holder.linearLayout2.setVisibility(View.GONE);
-                holder.linearLayout3.setVisibility(View.GONE);
-                holder.linearLayout4.setVisibility(View.GONE);
-                break;
-            case "92C1E3":
-                holder.cornerImageView1.setVisibility(View.GONE);
-                holder.linearLayout2.setVisibility(View.VISIBLE);
-                holder.linearLayout3.setVisibility(View.GONE);
-                holder.linearLayout4.setVisibility(View.GONE);
-                break;
-            case "92E3B2":
-                holder.cornerImageView1.setVisibility(View.GONE);
-                holder.linearLayout2.setVisibility(View.GONE);
-                holder.linearLayout3.setVisibility(View.VISIBLE);
-                holder.linearLayout4.setVisibility(View.GONE);
-                break;
-            case "E392AF":
-                holder.cornerImageView1.setVisibility(View.GONE);
-                holder.linearLayout2.setVisibility(View.GONE);
-                holder.linearLayout3.setVisibility(View.GONE);
-                holder.linearLayout4.setVisibility(View.VISIBLE);
-                break;
+    public void onBindView(MineAboutLifeAdapter.BannerViewHolder holder, T item, int position, int size) {
+
+        if (item instanceof MineLifeListBean.DataBean.ListBean){
+            icon = ((MineLifeListBean.DataBean.ListBean) item).getIcon();
+            content = ((MineLifeListBean.DataBean.ListBean) item).getContent();
+            images = ((MineLifeListBean.DataBean.ListBean) item).getImages();
+        }else if (item instanceof MeetListBean.DataBean.ListBean.LifeMomentsBean){
+            icon = ((MeetListBean.DataBean.ListBean.LifeMomentsBean) item).getIcon();
+            content = ((MeetListBean.DataBean.ListBean.LifeMomentsBean) item).getContent();
+            images = ((MeetListBean.DataBean.ListBean.LifeMomentsBean) item).getImages();
+        }
+
+        holder.appCompatImageView.setImageResource(RefreshUtils.setMineLifeIcon(icon));
+        holder.appCompatTextView.setText(RefreshUtils.setMineLifeType(icon));
+        holder.appCompatTextView2.setText(content);
+        holder.appCompatTextView2.setVisibility(TextUtils.isEmpty(content) ? View.GONE : View.VISIBLE);
+
+        if (images != null && images.size() > 0){
+            switch (images.size()){
+                case 1:
+                    holder.cornerImageView1.setVisibility(View.VISIBLE);
+                    holder.linearLayout2.setVisibility(View.GONE);
+                    holder.linearLayout3.setVisibility(View.GONE);
+                    holder.linearLayout4.setVisibility(View.GONE);
+                    PictureUtils.setImage(context, images.get(0), holder.cornerImageView1);
+                    break;
+                case 2:
+                    holder.cornerImageView1.setVisibility(View.GONE);
+                    holder.linearLayout2.setVisibility(View.VISIBLE);
+                    holder.linearLayout3.setVisibility(View.GONE);
+                    holder.linearLayout4.setVisibility(View.GONE);
+                    PictureUtils.setImage(context, images.get(0), holder.cornerImageView2);
+                    PictureUtils.setImage(context, images.get(1), holder.cornerImageView3);
+                    break;
+                case 3:
+                    holder.cornerImageView1.setVisibility(View.GONE);
+                    holder.linearLayout2.setVisibility(View.GONE);
+                    holder.linearLayout3.setVisibility(View.VISIBLE);
+                    holder.linearLayout4.setVisibility(View.GONE);
+                    PictureUtils.setImage(context, images.get(0), holder.cornerImageView4);
+                    PictureUtils.setImage(context, images.get(1), holder.cornerImageView5);
+                    PictureUtils.setImage(context, images.get(2), holder.cornerImageView6);
+                    break;
+                case 4:
+                    holder.cornerImageView1.setVisibility(View.GONE);
+                    holder.linearLayout2.setVisibility(View.GONE);
+                    holder.linearLayout3.setVisibility(View.GONE);
+                    holder.linearLayout4.setVisibility(View.VISIBLE);
+                    PictureUtils.setImage(context, images.get(0), holder.cornerImageView7);
+                    PictureUtils.setImage(context, images.get(1), holder.cornerImageView8);
+                    PictureUtils.setImage(context, images.get(2), holder.cornerImageView9);
+                    PictureUtils.setImage(context, images.get(3), holder.cornerImageView10);
+                    break;
+            }
         }
     }
 

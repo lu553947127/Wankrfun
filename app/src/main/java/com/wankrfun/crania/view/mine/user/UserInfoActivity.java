@@ -18,6 +18,7 @@ import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.bean.UserInfoBean;
 import com.wankrfun.crania.image.ImageConfig;
 import com.wankrfun.crania.image.ImageLoader;
+import com.wankrfun.crania.utils.DrawableUtils;
 import com.wankrfun.crania.utils.EventsUtils;
 import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.utils.PictureEnlargeUtils;
@@ -74,10 +75,10 @@ public class UserInfoActivity extends BaseActivity {
     FlexboxLayout flLabel;
     @BindView(R.id.rv_album)
     RecyclerView rvAlbum;
+    @BindView(R.id.tv_about)
+    AppCompatTextView tvAbout;
     @BindView(R.id.tv_initiate)
     AppCompatTextView tvInitiate;
-    @BindView(R.id.tv_apply)
-    AppCompatTextView tvApply;
     @BindView(R.id.view_pager)
     AutoHeightViewPager viewPager;
     private MineViewModel mineViewModel;
@@ -98,9 +99,10 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void initDataAndEvent(Bundle savedInstanceState) {
         Fragment[] fragments = {
+                new MineAboutTAFragment(getIntent().getStringExtra("id")),
                 new MineInitiateFragment(getIntent().getStringExtra("id"), "other", getIntent().getStringExtra("sex"))
         };
-        ScrollUtils.getViewPagerAddOnPageChangeListener(activity, viewPager, fragments);
+        ScrollUtils.getViewPagerAddOnPageChangeListener(activity, viewPager, fragments, tvAbout, tvInitiate);
         ScrollUtils.getTooBarOnScrollChangeListener(activity, scrollView, toolbar, null);
 
         refresh.setEnableLoadMore(false);
@@ -163,7 +165,7 @@ public class UserInfoActivity extends BaseActivity {
         mineViewModel.getUserInfo(getIntent().getStringExtra("id"));
     }
 
-    @OnClick({R.id.iv_set, R.id.iv_set2, R.id.iv_more, R.id.iv_more2, R.id.iv_label})
+    @OnClick({R.id.iv_set, R.id.iv_set2, R.id.iv_more, R.id.iv_more2, R.id.iv_label, R.id.tv_about, R.id.tv_initiate})
     void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_set:
@@ -182,6 +184,14 @@ public class UserInfoActivity extends BaseActivity {
                     ivLabel.setImageResource(R.drawable.icon_mine_down);
                 }
                 isShow = !isShow;
+                break;
+            case R.id.tv_about://关于我
+                viewPager.setCurrentItem(0);
+                DrawableUtils.setMineEventsTab(activity, 0, tvAbout, tvInitiate);
+                break;
+            case R.id.tv_initiate://我的发起
+                DrawableUtils.setMineEventsTab(activity, 1, tvAbout, tvInitiate);
+                viewPager.setCurrentItem(1);
                 break;
         }
     }

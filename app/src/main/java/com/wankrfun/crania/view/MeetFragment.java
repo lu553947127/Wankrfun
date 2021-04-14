@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -14,9 +13,9 @@ import com.kcrason.dynamicpagerindicatorlibrary.DynamicPagerIndicator;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.ViewPagerAdapter;
 import com.wankrfun.crania.base.BaseFragment;
+import com.wankrfun.crania.view.meet.MeetChallengeActivity;
 import com.wankrfun.crania.view.meet.MeetHomeFragment;
 import com.wankrfun.crania.view.meet.MeetLikeFragment;
-import com.wankrfun.crania.view.meet.MineMatchingActivity;
 import com.wankrfun.crania.widget.CustomVideoView;
 
 import butterknife.BindView;
@@ -39,8 +38,6 @@ public class MeetFragment extends BaseFragment {
     View fakeStatusBar;
     @BindView(R.id.video_view)
     CustomVideoView videoView;
-    @BindView(R.id.tv_num)
-    AppCompatTextView tvNum;
     @BindView(R.id.dynamic_pager_indicator)
     DynamicPagerIndicator dynamicPagerIndicator;
     @BindView(R.id.view_pager)
@@ -75,7 +72,7 @@ public class MeetFragment extends BaseFragment {
 
     @OnClick({R.id.iv_tab_right})
     void onClick() {
-        ActivityUtils.startActivity(MineMatchingActivity.class);
+        ActivityUtils.startActivity(MeetChallengeActivity.class);
     }
 
     /**

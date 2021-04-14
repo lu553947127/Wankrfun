@@ -36,36 +36,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/shape_black_bottom_20">
+                    android:background="@drawable/shape_black_bottom_20"
+                    android:visibility="gone">
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_start_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:textColor="@color/color_BC9438"
-                            android:textSize="14sp"
-                            android:text="TA通过默契挑战和你达成默契两星哦"/>
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
-                            android:src="@drawable/icon_meet_star1"/>
-
-                    </LinearLayout>
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/color_BC9438"
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
             </RelativeLayout>
+
+            <include layout="@layout/layout_challenge_start"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -221,10 +210,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_wish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -249,10 +240,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_life"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -277,10 +270,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_events"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -329,10 +324,10 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/icon_meet_like_new" />
 
-            <com.humrousz.sequence.AnimationImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_like_animation"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_centerInParent="true"
                 android:scaleType="centerCrop"
                 android:visibility="gone"/>

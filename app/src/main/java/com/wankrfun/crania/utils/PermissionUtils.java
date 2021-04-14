@@ -59,7 +59,9 @@ public class PermissionUtils {
                     EventBus.getDefault().post("true");
                 })
                 .onDenied(permissions ->{
-                    activity.showPermissionDialog(activity.getResources().getString(R.string.permission_location));
+                    EventBus.getDefault().post("true");
+                    LocationUtils.getInstance().getLocalLocation();
+//                    activity.showPermissionDialog(activity.getResources().getString(R.string.permission_location));
                 })
                 .start();
     }

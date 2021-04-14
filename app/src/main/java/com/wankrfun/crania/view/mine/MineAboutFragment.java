@@ -2,23 +2,28 @@ package com.wankrfun.crania.view.mine;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineAboutEventsAdapter;
 import com.wankrfun.crania.adapter.MineAboutLifeAdapter;
 import com.wankrfun.crania.adapter.MineAboutWishAdapter;
 import com.wankrfun.crania.base.BaseLazyFragment;
-import com.wankrfun.crania.bean.BaseBean;
+import com.wankrfun.crania.base.SpConfig;
+import com.wankrfun.crania.bean.WishListBean;
+import com.wankrfun.crania.utils.PictureEnlargeUtils;
+import com.wankrfun.crania.view.events.EventsDetailActivity;
 import com.wankrfun.crania.view.mine.about.MineEventsActivity;
 import com.wankrfun.crania.view.mine.about.MineLifeActivity;
 import com.wankrfun.crania.view.mine.about.MineMoreCardActivity;
 import com.wankrfun.crania.view.mine.about.MineWishActivity;
+import com.wankrfun.crania.viewmodel.MineCardViewModel;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,7 +54,11 @@ public class MineAboutFragment extends BaseLazyFragment {
     Banner bannerEvents;
     @BindView(R.id.indicator_events)
     CircleIndicator indicatorEvents;
-    private List<BaseBean> list = new ArrayList<>();
+    @BindView(R.id.rl_card_life)
+    RelativeLayout relativeLayoutLife;
+    @BindView(R.id.rl_card_events)
+    RelativeLayout relativeLayoutEvents;
+    private MineCardViewModel mineCardViewModel;
 
     @Override
     protected int initLayout() {
@@ -59,53 +68,69 @@ public class MineAboutFragment extends BaseLazyFragment {
     @Override
     protected void initDataAndEvent(Bundle savedInstanceState) {
 
-        list.add(new BaseBean("\"想去啊上的卡上看到哈\"","E3B492"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","92C1E3"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","92E3B2"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","E392AF"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","E3DB92"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","2AA7ED"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","BB92E3"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","E39292"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","929FE3"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","E392E0"));
-        list.add(new BaseBean("想去啊客户搭建可视电话卡圣诞贺卡上的卡上的卡上看到哈","E3C992"));
-        list.add(new BaseBean("更多","E3C992"));
+        mineCardViewModel = mActivity.getViewModel(MineCardViewModel.class);
 
-        bannerWish.addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setAdapter(new MineAboutWishAdapter(mActivity, list))//添加数据
-                .isAutoLoop(false)
-                .setIndicator(indicatorWish, false)
-                .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
-                .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
-                .setOnBannerListener((data, position) -> {
-                    if (list.get(position).getName().equals("更多")){
+        //获取心愿列表数据返回成功结果
+        mineCardViewModel.wishListLiveData.observe(mActivity, wishListBean -> {
+            List<WishListBean.DataBean.ListBean> wishList = wishListBean.getData().getList();
+            wishList.add(new WishListBean.DataBean.ListBean("","更多"));
+            bannerWish.addBannerLifecycleObserver(this)//添加生命周期观察者
+                    .setAdapter(new MineAboutWishAdapter(mActivity, wishList, "mine"))//添加数据
+                    .isAutoLoop(false)
+                    .setIndicator(indicatorWish, false)
+                    .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                    .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                    .setOnBannerListener((data, position) -> {
                         ActivityUtils.startActivity(MineWishActivity.class);
-                    }else {
-                        ToastUtils.showShort(list.get(position).getName());
-                    }
-                }).start();
+                    }).start();
+        });
 
+        //获取生活瞬间列表数据返回结果
+        mineCardViewModel.lifeListLiveData.observe(mActivity, mineLifeListBean -> {
+            if (mineLifeListBean.getData().getList().size() != 0){
+                relativeLayoutLife.setVisibility(View.GONE);
+                bannerLife.setVisibility(View.VISIBLE);
+                indicatorLife.setVisibility(View.VISIBLE);
+            }else {
+                relativeLayoutLife.setVisibility(View.VISIBLE);
+                bannerLife.setVisibility(View.GONE);
+                indicatorLife.setVisibility(View.GONE);
+            }
+            bannerLife.addBannerLifecycleObserver(this)//添加生命周期观察者
+                    .setAdapter(new MineAboutLifeAdapter(mActivity, mineLifeListBean.getData().getList()))//添加数据
+                    .isAutoLoop(false)
+                    .setIndicator(indicatorLife, false)
+                    .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                    .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                    .setOnBannerListener((data, position) -> {
+                        PictureEnlargeUtils.getPictureEnlargeList(mActivity, mineLifeListBean.getData().getList().get(position).getImages(), 0);
+                    }).start();
+        });
 
-        bannerLife.addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setAdapter(new MineAboutLifeAdapter(mActivity, list))//添加数据
-                .isAutoLoop(false)
-                .setIndicator(indicatorLife, false)
-                .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
-                .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
-                .setOnBannerListener((data, position) -> {
-
-                }).start();
-
-        bannerEvents.addBannerLifecycleObserver(this)//添加生命周期观察者
-                .setAdapter(new MineAboutEventsAdapter(mActivity, list))//添加数据
-                .isAutoLoop(false)
-                .setIndicator(indicatorEvents, false)
-                .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
-                .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
-                .setOnBannerListener((data, position) -> {
-
-                }).start();
+        //获取活动瞬间数据返回结果
+        mineCardViewModel.eventsListLiveData.observe(mActivity, mineEventsListBean -> {
+            if (mineEventsListBean.getData().getList().size() != 0){
+                relativeLayoutEvents.setVisibility(View.GONE);
+                bannerEvents.setVisibility(View.VISIBLE);
+                indicatorEvents.setVisibility(View.VISIBLE);
+            }else {
+                relativeLayoutEvents.setVisibility(View.VISIBLE);
+                bannerEvents.setVisibility(View.GONE);
+                indicatorEvents.setVisibility(View.GONE);
+            }
+            bannerEvents.addBannerLifecycleObserver(this)//添加生命周期观察者
+                    .setAdapter(new MineAboutEventsAdapter(mActivity, mineEventsListBean.getData().getList()))//添加数据
+                    .isAutoLoop(false)
+                    .setIndicator(indicatorEvents, false)
+                    .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                    .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                    .setOnBannerListener((data, position) -> {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", mineEventsListBean.getData().getList().get(position).getEventId());
+                        bundle.putString("creator", mineEventsListBean.getData().getList().get(position).getCreatorId());
+                        ActivityUtils.startActivity(bundle, EventsDetailActivity.class);
+                    }).start();
+        });
     }
 
     @Override
@@ -115,7 +140,9 @@ public class MineAboutFragment extends BaseLazyFragment {
 
     @Override
     protected void initDataFromService() {
-
+        mineCardViewModel.getWishList(SPUtils.getInstance().getString(SpConfig.USER_ID));
+        mineCardViewModel.getLifeList(SPUtils.getInstance().getString(SpConfig.USER_ID));
+        mineCardViewModel.getEventsList(SPUtils.getInstance().getString(SpConfig.USER_ID));
     }
 
     @OnClick({R.id.rl_card_life, R.id.rl_card_events, R.id.rl_card_idea, R.id.rl_card_more})

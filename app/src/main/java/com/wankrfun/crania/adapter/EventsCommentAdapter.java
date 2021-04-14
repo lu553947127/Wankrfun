@@ -1,5 +1,7 @@
 package com.wankrfun.crania.adapter;
 
+import android.text.TextUtils;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +42,7 @@ public class EventsCommentAdapter extends BaseQuickAdapter<EventsCommentsBean.Da
     protected void convert(BaseViewHolder helper, EventsCommentsBean.DataBean.CommentsBean item) {
         helper.setText(R.id.tv_name, item.getComment_userName())
                 .setText(R.id.tv_content, item.getContent())
-                .setText(R.id.tv_time, NumberUtils.dateToStamp(item.getTime()));
+                .setText(R.id.tv_time, TextUtils.isEmpty(item.getTime()) ? "未知" : NumberUtils.dateToStamp(item.getTime()));
         CircleImageView imageView = helper.getView(R.id.iv_avatar);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getComment_userPhoto())

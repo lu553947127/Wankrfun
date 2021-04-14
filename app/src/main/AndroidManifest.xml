@@ -105,8 +105,11 @@
         <!-- 活动添加详细信息页面 -->
         <activity android:name="com.wankrfun.crania.view.events.EventsAddInfoActivity"/>
 
+        <!-- 默契挑战页面 -->
+        <activity android:name="com.wankrfun.crania.view.meet.MeetChallengeActivity"/>
+
         <!-- 我的匹配列表页面 -->
-        <activity android:name="com.wankrfun.crania.view.meet.MineMatchingActivity"/>
+        <activity android:name="com.wankrfun.crania.view.messages.MineMatchingActivity"/>
 
         <!-- 群聊详情页面 -->
         <activity android:name="com.wankrfun.crania.view.messages.chat.IMGroupDetailsActivity"/>

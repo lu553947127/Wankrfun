@@ -37,6 +37,10 @@ public class EventsEvent {
 
     }
 
+    public EventsEvent(String title) {
+        this.title = title;
+    }
+
     public EventsEvent(String type, String title) {
         this.type = type;
         this.title = title;

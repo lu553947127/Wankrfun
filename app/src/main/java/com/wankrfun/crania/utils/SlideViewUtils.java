@@ -69,12 +69,12 @@ public class SlideViewUtils {
                 meetListViewHolder.iv_dislike.setAlpha(0f);
 
                 //左滑不喜欢完成事件操作
-                if (direction == 1) {
-                    meetViewModel.getMeetOperateLike(o.getObjectId(), "DISLIKE", o.getPhoto());
-                    //右滑喜欢完成事件操作
-                } else if (direction == 4) {
-                    meetViewModel.getMeetOperateLike(o.getObjectId(), "LIKE", o.getPhoto());
-                }
+//                if (direction == 1) {
+//                    meetViewModel.getMeetOperateLike(o.getObjectId(), "DISLIKE", o.getPhoto());
+//                    //右滑喜欢完成事件操作
+//                } else if (direction == 4) {
+//                    meetViewModel.getMeetOperateLike(o.getObjectId(), "LIKE", o.getPhoto());
+//                }
                 meetViewModel.getMeetUserCard();
             }
 
@@ -108,10 +108,10 @@ public class SlideViewUtils {
 
             @Override
             public void onItemClick(View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("id", dataList.get(position).getObjectId());
-                bundle.putString("sex", dataList.get(position).getSex());
-                ActivityUtils.startActivity(bundle, UserInfoActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("id", dataList.get(position).getObjectId());
+//                bundle.putString("sex", dataList.get(position).getSex());
+//                ActivityUtils.startActivity(bundle, UserInfoActivity.class);
             }
         });
     }

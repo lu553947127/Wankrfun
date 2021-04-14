@@ -1,19 +1,24 @@
 package com.wankrfun.crania.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wankrfun.crania.R;
-import com.wankrfun.crania.bean.BaseBean;
+import com.wankrfun.crania.bean.MeetListBean;
+import com.wankrfun.crania.bean.WishListBean;
+import com.wankrfun.crania.event.EventsEvent;
+import com.wankrfun.crania.widget.AnimatorImageView;
 import com.youth.banner.adapter.BannerAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -29,12 +34,14 @@ import java.util.List;
  * @UpdateRemark: helper.getPosition() %2 == 0
  * @Version: 1.0
  */
-public class MineAboutWishAdapter extends BannerAdapter<BaseBean, MineAboutWishAdapter.BannerViewHolder> {
+public class MineAboutWishAdapter<T> extends BannerAdapter<T, MineAboutWishAdapter.BannerViewHolder> {
     public Context context;
-    public MineAboutWishAdapter(Context context, List<BaseBean> beanList) {
+    private String type, content, color;
+    public MineAboutWishAdapter(Context context, List<T> beanList, String type) {
         //设置数据，也可以调用banner提供的方法,或者自己在adapter中实现
         super(beanList);
         this.context = context;
+        this.type = type;
     }
 
     //创建ViewHolder，可以用viewType这个字段来区分不同的ViewHolder
@@ -45,16 +52,33 @@ public class MineAboutWishAdapter extends BannerAdapter<BaseBean, MineAboutWishA
     }
 
     @Override
-    public void onBindView(MineAboutWishAdapter.BannerViewHolder holder, BaseBean item, int position, int size) {
-        if (item.getName().equals("更多")){
+    public void onBindView(MineAboutWishAdapter.BannerViewHolder holder, T item, int position, int size) {
+
+        if (item instanceof WishListBean.DataBean.ListBean){
+            content = ((WishListBean.DataBean.ListBean) item).getContent();
+            color = ((WishListBean.DataBean.ListBean) item).getColor();
+        }else if (item instanceof MeetListBean.DataBean.ListBean.WishesBean){
+            content = ((MeetListBean.DataBean.ListBean.WishesBean) item).getContent();
+            color = ((MeetListBean.DataBean.ListBean.WishesBean) item).getColor();
+        }
+
+        if (!TextUtils.isEmpty(type)){
+            holder.animatorImageView.setVisibility(View.GONE);
+        }else {
+            holder.animatorImageView.setVisibility(View.VISIBLE);
+        }
+
+        if (content.equals("更多")){
             holder.relativeLayout.setVisibility(View.GONE);
             holder.relativeLayout2.setVisibility(View.VISIBLE);
         }else {
             holder.relativeLayout.setVisibility(View.VISIBLE);
             holder.relativeLayout2.setVisibility(View.GONE);
         }
-        holder.appCompatTextView.setText(item.getName());
-        switch (item.getColor()){
+
+        holder.appCompatTextView.setText("“" + content + "”");
+
+        switch (color){
             case "E3B492":
                 holder.relativeLayout.setBackgroundResource(R.drawable.shape_card1_5);
                 break;
@@ -89,19 +113,26 @@ public class MineAboutWishAdapter extends BannerAdapter<BaseBean, MineAboutWishA
                 holder.relativeLayout.setBackgroundResource(R.drawable.shape_card11_5);
                 break;
         }
+
+        holder.animatorImageView.setOnClickListener(view -> {
+            holder.animatorImageView.animator(true);
+            if (item instanceof MeetListBean.DataBean.ListBean.WishesBean){
+                EventBus.getDefault().post(new EventsEvent(((MeetListBean.DataBean.ListBean.WishesBean) item).getContent()));
+            }
+        });
     }
 
     static class BannerViewHolder extends RecyclerView.ViewHolder {
         private RelativeLayout relativeLayout;
         private RelativeLayout relativeLayout2;
         private AppCompatTextView appCompatTextView;
-        private AppCompatImageView appCompatImageView;
+        private AnimatorImageView animatorImageView;
         public BannerViewHolder(@NonNull View itemView) {
             super(itemView);
             relativeLayout = itemView.findViewById(R.id.rl);
             relativeLayout2 = itemView.findViewById(R.id.rl_next);
             appCompatTextView = itemView.findViewById(R.id.tv_title);
-            appCompatImageView = itemView.findViewById(R.id.iv_high_five);
+            animatorImageView = itemView.findViewById(R.id.iv_high_five);
         }
     }
 }

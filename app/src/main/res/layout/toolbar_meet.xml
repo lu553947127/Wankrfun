@@ -14,35 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_meet_left"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="11dp"
-                android:layout_centerVertical="true"
-                android:textStyle="bold"
-                android:textColor="@color/color_F6BF47"
-                android:textSize="11sp"
-                android:text="0"/>
-
-        </RelativeLayout>
-
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieAnimationView"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true"
-            android:visibility="gone"/>
+            android:layout_centerVertical="true" />
 
         <com.kcrason.dynamicpagerindicatorlibrary.DynamicPagerIndicator
             android:id="@+id/dynamic_pager_indicator"

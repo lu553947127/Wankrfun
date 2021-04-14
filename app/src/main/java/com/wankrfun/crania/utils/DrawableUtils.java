@@ -119,6 +119,35 @@ public class DrawableUtils {
     }
 
     /**
+     * 设置用户详情 tab切换
+     *
+     * @param activity
+     * @param position
+     * @param tvAbout
+     * @param tvInitiate
+     */
+    public static void setMineEventsTab(BaseActivity activity, int position, AppCompatTextView tvAbout, AppCompatTextView tvInitiate){
+        switch (position){
+            case 0:
+                DrawableUtils.setDrawableBottom(activity, tvAbout, R.drawable.icon_tab_line);
+                DrawableUtils.setDrawableBottom(activity, tvInitiate, 0);
+                tvAbout.setTextSize(18);
+                tvAbout.setTextColor(activity.getResources().getColor(R.color.white));
+                tvInitiate.setTextSize(16);
+                tvInitiate.setTextColor(activity.getResources().getColor(R.color.color_494949));
+                break;
+            case 1:
+                DrawableUtils.setDrawableBottom(activity, tvAbout, 0);
+                DrawableUtils.setDrawableBottom(activity, tvInitiate, R.drawable.icon_tab_line);
+                tvAbout.setTextSize(16);
+                tvAbout.setTextColor(activity.getResources().getColor(R.color.color_494949));
+                tvInitiate.setTextSize(18);
+                tvInitiate.setTextColor(activity.getResources().getColor(R.color.white));
+                break;
+        }
+    }
+
+    /**
      * 设置个人中心活动标签tab显示
      *
      * @param activity

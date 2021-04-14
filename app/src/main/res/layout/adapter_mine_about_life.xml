@@ -17,7 +17,6 @@
             android:id="@+id/iv_icon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/icon_mine_life"
             android:layout_gravity="center_vertical"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -28,8 +27,7 @@
             android:layout_gravity="center_vertical"
             android:singleLine="true"
             android:textColor="@color/color_979797"
-            android:textSize="13sp"
-            android:text="心愿"/>
+            android:textSize="13sp" />
 
     </LinearLayout>
 
@@ -40,7 +38,6 @@
         android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:text="今天去了最爱的海边"
         android:layout_margin="10dp"/>
 
     <include layout="@layout/layout_various_images"/>

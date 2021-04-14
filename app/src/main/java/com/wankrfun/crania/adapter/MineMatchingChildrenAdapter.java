@@ -1,5 +1,6 @@
 package com.wankrfun.crania.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -27,8 +28,18 @@ import java.util.List;
  * @Version: 1.0
  */
 public class MineMatchingChildrenAdapter extends BaseQuickAdapter<MatchingListBean, BaseViewHolder> {
+    private String type;
     public MineMatchingChildrenAdapter(int layoutResId, @Nullable List<MatchingListBean> data) {
         super(layoutResId, data);
+    }
+
+    /**
+     * 判断当前是否为谁喜欢我/匹配列表
+     *
+     * @param type
+     */
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
@@ -39,11 +50,17 @@ public class MineMatchingChildrenAdapter extends BaseQuickAdapter<MatchingListBe
         CornerImageView imageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getPhoto())
-                .placeholder(R.drawable.rc_default_portrait)
-                .errorPic(R.drawable.rc_default_portrait)
+                .placeholder(R.drawable.ic_empty_zhihu)
+                .errorPic(R.drawable.ic_empty_zhihu)
                 .imageView(imageView)
                 .build());
         View view = helper.getView(R.id.view);
         view.getBackground().setAlpha(110);
+
+        if (!TextUtils.isEmpty(type)){
+            helper.setImageResource(R.id.iv_message, R.drawable.icon_meet_like);
+        }else {
+            helper.setImageResource(R.id.iv_message, R.drawable.icon_mine_message);
+        }
     }
 }

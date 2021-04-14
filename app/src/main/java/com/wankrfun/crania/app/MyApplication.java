@@ -204,7 +204,7 @@ public class MyApplication extends Application {
             switch (connectionStatus) {
                 //融云账号在其他设备上进行登录
                 case KICKED_OFFLINE_BY_OTHER_CLIENT:
-                    LoginUtils.getExitLogin();
+//                    LoginUtils.getExitLogin();
                     break;
             }
         });

@@ -205,17 +205,17 @@ public class EventsAddInfoActivity extends BaseActivity {
             switch (eventsDetailBean.getData().getEvent().getEventSex()){
                 case "x":
                 case "x:":
-                    eventSex = "x:";
+                    eventSex = "x";
                     tvPeople.setText(peopleNum + ",不限性别");
                     break;
                 case "m":
                 case "m:":
-                    eventSex = "m:";
+                    eventSex = "m";
                     tvPeople.setText(peopleNum + ",限男生");
                     break;
                 case "f":
                 case "f:":
-                    eventSex = "f:";
+                    eventSex = "f";
                     tvPeople.setText(peopleNum + ",限女生");
                     break;
             }
@@ -407,13 +407,13 @@ public class EventsAddInfoActivity extends BaseActivity {
 
                 switch (event.getSex()){
                     case "不限性别":
-                        eventSex = "x:";
+                        eventSex = "x";
                         break;
                     case "限男生":
-                        eventSex = "m:";
+                        eventSex = "m";
                         break;
                     case "限女生":
-                        eventSex = "f:";
+                        eventSex = "f";
                         break;
                 }
                 break;

@@ -51,7 +51,7 @@ public class MineLifeActivity extends BaseActivity {
         list.add(new BaseBean("心愿", R.drawable.icon_mine_life));
         list.add(new BaseBean("宅家", R.drawable.icon_mine_life2));
         list.add(new BaseBean("玩耍", R.drawable.icon_mine_life3));
-        list.add(new BaseBean("穿搭", R.drawable.icon_activity_food));
+        list.add(new BaseBean("穿搭", R.drawable.icon_mine_life4));
         list.add(new BaseBean("宠物", R.drawable.icon_mine_life5));
         list.add(new BaseBean("美食", R.drawable.icon_mine_life6));
         list.add(new BaseBean("风景", R.drawable.icon_mine_life7));

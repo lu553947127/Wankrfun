@@ -1,5 +1,6 @@
 package com.wankrfun.crania.utils;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Dialog;
@@ -8,6 +9,7 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.OvershootInterpolator;
 
 import com.wankrfun.crania.R;
 
@@ -145,5 +147,42 @@ public class AnimatorUtils {
             }
         });
         view.startAnimation(mShowAnimation);
+    }
+
+    /**
+     * 点击View实现前后翻转动画
+     *
+     * @param oldView
+     * @param newView
+     * @param time
+     */
+    public static void FlipAnimatorXViewShow(final View oldView, final View newView, final long time) {
+        ObjectAnimator animator1 = ObjectAnimator.ofFloat(oldView, "rotationX", 0, 90);
+        final ObjectAnimator animator2 = ObjectAnimator.ofFloat(newView, "rotationX", -90, 0);
+        animator2.setInterpolator(new OvershootInterpolator(2.0f));
+        animator1.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                oldView.setVisibility(View.GONE);
+                animator2.setDuration(time).start();
+                newView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator1.setDuration(time).start();
     }
 }

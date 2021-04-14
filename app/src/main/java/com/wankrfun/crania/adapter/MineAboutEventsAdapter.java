@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wankrfun.crania.R;
-import com.wankrfun.crania.bean.BaseBean;
+import com.wankrfun.crania.bean.MeetListBean;
+import com.wankrfun.crania.bean.MineEventsListBean;
+import com.wankrfun.crania.utils.EventsUtils;
+import com.wankrfun.crania.utils.NumberUtils;
+import com.wankrfun.crania.utils.PictureUtils;
 import com.wankrfun.crania.widget.CornerImageView;
 import com.youth.banner.adapter.BannerAdapter;
 
@@ -32,9 +36,11 @@ import java.util.List;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class MineAboutEventsAdapter extends BannerAdapter<BaseBean, MineAboutEventsAdapter.BannerViewHolder> {
+public class MineAboutEventsAdapter<T> extends BannerAdapter<T, MineAboutEventsAdapter.BannerViewHolder> {
     public Context context;
-    public MineAboutEventsAdapter(Context context, List<BaseBean> beanList) {
+    private String createdAt, eventIcon, content;
+    private List<String> images = new ArrayList<>();
+    public MineAboutEventsAdapter(Context context, List<T> beanList) {
         //设置数据，也可以调用banner提供的方法,或者自己在adapter中实现
         super(beanList);
         this.context = context;
@@ -48,23 +54,41 @@ public class MineAboutEventsAdapter extends BannerAdapter<BaseBean, MineAboutEve
     }
 
     @Override
-    public void onBindView(MineAboutEventsAdapter.BannerViewHolder holder, BaseBean item, int position, int size) {
+    public void onBindView(MineAboutEventsAdapter.BannerViewHolder holder, T item, int position, int size) {
+
+        if (item instanceof MineEventsListBean.DataBean.ListBean){
+            createdAt = ((MineEventsListBean.DataBean.ListBean) item).getCreatedAt();
+            eventIcon = ((MineEventsListBean.DataBean.ListBean) item).getEventIcon();
+            content = ((MineEventsListBean.DataBean.ListBean) item).getContent();
+            images = ((MineEventsListBean.DataBean.ListBean) item).getImages();
+        }else if (item instanceof MeetListBean.DataBean.ListBean.EventMomentsBean){
+            createdAt = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getCreatedAt();
+            eventIcon = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getEventIcon();
+            content = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getContent();
+            images = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getImages();
+        }
+
         holder.view.getBackground().setAlpha(110);
         holder.ll_time.getBackground().setAlpha(60);
         holder.ll_events.getBackground().setAlpha(60);
 
-        List<String> list = new ArrayList<>();
-        list.add("https://img-blog.csdn.net/20160413112832792?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center");
-        list.add("https://img-blog.csdn.net/20160413112832792?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center");
-        list.add("https://img-blog.csdn.net/20160413112832792?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center");
+        PictureUtils.setImage(context, images.get(0), holder.iv_image);
+
+        holder.tv_month.setText(NumberUtils.getTimeMonth("yyyy-MM-dd HH:mm:ss", createdAt) + "月");
+        holder.tv_day.setText(NumberUtils.getTimeDay("yyyy-MM-dd HH:mm:ss", createdAt));
+
+        EventsUtils.getEventsIcon(holder.iv_icon, holder.iv_icon, eventIcon, eventIcon);
+
+        holder.tv_title.setText(content);
 
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context ,LinearLayoutManager.HORIZONTAL,false));
-        MineAboutImagesAdapter mineAboutImagesAdapter = new MineAboutImagesAdapter(R.layout.adapter_mine_about_images, list);
+        MineAboutImagesAdapter mineAboutImagesAdapter = new MineAboutImagesAdapter(R.layout.adapter_mine_about_images, images);
         holder.recyclerView.setAdapter(mineAboutImagesAdapter);
         mineAboutImagesAdapter.setIsSelect(0);
 
         mineAboutImagesAdapter.setOnItemClickListener((adapter, view, position1) -> {
             mineAboutImagesAdapter.setIsSelect(position1);
+            PictureUtils.setImage(context, images.get(position1), holder.iv_image);
         });
     }
 

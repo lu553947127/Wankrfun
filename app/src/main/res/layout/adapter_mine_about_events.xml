@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             roundiv:radius="5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/icon_bg" />
+            android:scaleType="centerCrop" />
 
         <View
             android:id="@+id/view"
@@ -47,8 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/white"
-                    android:textSize="13sp"
-                    android:text="3月"/>
+                    android:textSize="13sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_day"
@@ -58,8 +56,7 @@
                     android:layout_gravity="center_horizontal"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:text="30"/>
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -81,8 +78,7 @@
                         android:id="@+id/iv_icon"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/icon_activity_food"/>
+                        android:layout_gravity="center_vertical" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
@@ -110,8 +106,7 @@
                     android:layout_marginTop="5dp"
                     android:singleLine="true"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:text="很浪漫的一次晚餐"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

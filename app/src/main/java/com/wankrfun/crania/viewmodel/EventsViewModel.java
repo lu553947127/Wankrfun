@@ -298,6 +298,7 @@ public class EventsViewModel extends BaseRepository {
         params.put("userId", userId);
         params.put("longitude", Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LONGITUDE)));
         params.put("latitude", Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LATITUDE)));
+        params.put("platform", "Android");//用户所用设备系统, “iOS" : "Android", 必选
         ParseCloud.callFunctionInBackground("apply-event-v001", params, new FunctionCallback<Object>(){
             @Override
             public void done(Object object, ParseException e) {
@@ -391,6 +392,7 @@ public class EventsViewModel extends BaseRepository {
         params.put("eventSex", eventSex);//f:女性; m: 男性; x: 不限性别,必选
 //        params.put("event_num_of_questions", event_num_of_questions);//活动合拍问答题数
 //        params.put("event_questions", event_questions);//活动合拍问答
+        params.put("platform", "Android");//用户所用设备系统, “iOS" : "Android", 必选
 
         ParseCloud.callFunctionInBackground("create-event-v001", params, new FunctionCallback<Object>(){
             @Override

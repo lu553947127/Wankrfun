@@ -1,4 +1,4 @@
-package com.wankrfun.crania.view.meet;
+package com.wankrfun.crania.view.messages;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineMatchingAdapter;

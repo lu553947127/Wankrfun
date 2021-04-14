@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--dialog通用动画-->
     <style name="DialogAnimCustom" parent="android:Animation.Dialog">

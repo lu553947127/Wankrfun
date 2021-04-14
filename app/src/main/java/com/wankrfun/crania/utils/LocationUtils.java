@@ -20,6 +20,10 @@ import com.wankrfun.crania.event.LocationEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * @ProjectName: Wankrfun
  * @Package: com.wankrfun.crania.utils
@@ -37,6 +41,7 @@ public class LocationUtils {
 
     private static AMapLocationClient mLocationClient;
     private AMapLocationClientOption mLocationOption = null;
+    private List<LocationEvent> localLocationList = new ArrayList<>();
 
     private static class LocationHolder {
         private static final LocationUtils INSTANCE = new LocationUtils();
@@ -44,6 +49,29 @@ public class LocationUtils {
 
     public static LocationUtils getInstance() {
         return LocationHolder.INSTANCE;
+    }
+
+
+    /**
+     * 获取一个本地随机数定位地址
+     */
+    public void getLocalLocation(){
+        localLocationList.add(new LocationEvent(121.433727, 31.197776, "上海"));
+        localLocationList.add(new LocationEvent(121.446182, 31.19639, "上海"));
+        localLocationList.add(new LocationEvent(121.458897, 31.219871, "上海"));
+        localLocationList.add(new LocationEvent(121.474269, 31.230181, "上海"));
+        localLocationList.add(new LocationEvent(121.499836, 31.239447, "上海"));
+        localLocationList.add(new LocationEvent(121.552193, 31.208895, "上海"));
+        localLocationList.add(new LocationEvent(121.666307, 31.141802, "上海"));
+        localLocationList.add(new LocationEvent(121.492974, 31.183082, "上海"));
+        localLocationList.add(new LocationEvent(121.568407, 31.210071, "上海"));
+        localLocationList.add(new LocationEvent(121.582166, 31.219901, "上海"));
+
+        Random random = new Random();
+        int pos = random.nextInt(localLocationList.size());
+        SPUtils.getInstance().put(SpConfig.LONGITUDE, String.valueOf(localLocationList.get(pos).getLongitude()), true);
+        SPUtils.getInstance().put(SpConfig.LATITUDE, String.valueOf(localLocationList.get(pos).getLatitude()), true);
+        getAddressChange(localLocationList.get(pos).getLatitude(), localLocationList.get(pos).getLongitude());
     }
 
     /**

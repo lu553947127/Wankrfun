@@ -5,7 +5,7 @@ buildscript {
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         //华为推送maven仓库
-        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url 'http://developer.huawei.com/repo/' }
         mavenCentral()
     }
     dependencies {
@@ -19,18 +19,16 @@ buildscript {
 
 allprojects {
     repositories {
+        //导入本地aar包
+        flatDir { dirs 'libs' }
         maven { url "https://jitpack.io" }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         //融云即时通讯maven仓库
-        maven {url  "https://dl.bintray.com/rongcloud/maven"}
+        maven { url "https://dl.bintray.com/rongcloud/maven" }
         //华为推送maven仓库
         maven { url 'https://developer.huawei.com/repo/' }
-        //导入本地aar包
-        flatDir {
-            dirs 'libs'
-        }
     }
 }
 

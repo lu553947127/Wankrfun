@@ -12,8 +12,7 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         roundiv:radius="5dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/icon_bg" />
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:id="@+id/ll_images_two"
@@ -30,8 +29,7 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            roundiv:radius="5dp"
-            android:src="@drawable/icon_bg"/>
+            roundiv:radius="5dp" />
 
         <com.wankrfun.crania.widget.CornerImageView
             android:id="@+id/iv_three"
@@ -41,8 +39,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:scaleType="centerCrop"
-            roundiv:radius="5dp"
-            android:src="@drawable/icon_bg"/>
+            roundiv:radius="5dp" />
 
     </LinearLayout>
 
@@ -61,8 +58,7 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            roundiv:radius="5dp"
-            android:src="@drawable/icon_bg"/>
+            roundiv:radius="5dp" />
 
         <com.wankrfun.crania.widget.CornerImageView
             android:id="@+id/iv_five"
@@ -72,8 +68,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:scaleType="centerCrop"
-            roundiv:radius="5dp"
-            android:src="@drawable/icon_bg"/>
+            roundiv:radius="5dp" />
 
         <com.wankrfun.crania.widget.CornerImageView
             android:id="@+id/iv_six"
@@ -83,8 +78,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:scaleType="centerCrop"
-            roundiv:radius="5dp"
-            android:src="@drawable/icon_bg"/>
+            roundiv:radius="5dp" />
 
     </LinearLayout>
 
@@ -108,8 +102,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                roundiv:radius="5dp"
-                android:src="@drawable/icon_bg"/>
+                roundiv:radius="5dp" />
 
             <com.wankrfun.crania.widget.CornerImageView
                 android:id="@+id/iv_eight"
@@ -118,8 +111,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:scaleType="centerCrop"
-                roundiv:radius="5dp"
-                android:src="@drawable/icon_bg"/>
+                roundiv:radius="5dp" />
 
         </LinearLayout>
 
@@ -136,8 +128,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                roundiv:radius="5dp"
-                android:src="@drawable/icon_bg"/>
+                roundiv:radius="5dp" />
 
             <com.wankrfun.crania.widget.CornerImageView
                 android:id="@+id/iv_ten"
@@ -146,8 +137,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:scaleType="centerCrop"
-                roundiv:radius="5dp"
-                android:src="@drawable/icon_bg"/>
+                roundiv:radius="5dp" />
 
         </LinearLayout>
 

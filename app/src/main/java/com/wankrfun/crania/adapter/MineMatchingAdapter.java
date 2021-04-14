@@ -1,6 +1,7 @@
 package com.wankrfun.crania.adapter;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,6 +37,7 @@ import io.rong.imkit.RongIM;
  */
 public class MineMatchingAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     private Map<String, String> mapList = new HashMap<>();
+    private String type;
     public MineMatchingAdapter(int layoutResId, @Nullable List<String> data) {
         super(layoutResId, data);
     }
@@ -49,6 +51,15 @@ public class MineMatchingAdapter extends BaseQuickAdapter<String, BaseViewHolder
         this.mapList = mapList;
     }
 
+    /**
+     * 判断当前是否为谁喜欢我/匹配列表
+     *
+     * @param type
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         helper.setText(R.id.tv_time, item);
@@ -57,6 +68,7 @@ public class MineMatchingAdapter extends BaseQuickAdapter<String, BaseViewHolder
         recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2, LinearLayoutManager.VERTICAL, false));
         MineMatchingChildrenAdapter mineMatchingChildrenAdapter = new MineMatchingChildrenAdapter(R.layout.adapter_mine_matching_children, matchingListBeanList);
         recyclerView.setAdapter(mineMatchingChildrenAdapter);
+        mineMatchingChildrenAdapter.setType(type);
 
         mineMatchingChildrenAdapter.setOnItemClickListener((adapter, view, position) -> {
             MatchingListBean listBean = mineMatchingChildrenAdapter.getData().get(position);
@@ -67,6 +79,9 @@ public class MineMatchingAdapter extends BaseQuickAdapter<String, BaseViewHolder
         });
 
         mineMatchingChildrenAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            if (!TextUtils.isEmpty(type)){
+                return;
+            }
             MatchingListBean listBean = mineMatchingChildrenAdapter.getData().get(position);
             RongIM.getInstance().startPrivateChat(mContext, listBean.getObjectId(), listBean.getName());
         });

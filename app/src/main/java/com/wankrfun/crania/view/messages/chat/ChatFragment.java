@@ -13,7 +13,7 @@ import com.wankrfun.crania.adapter.ConversationListAdapterEx;
 import com.wankrfun.crania.app.MyApplication;
 import com.wankrfun.crania.base.BaseLazyFragment;
 import com.wankrfun.crania.base.SpConfig;
-import com.wankrfun.crania.view.meet.MineMatchingActivity;
+import com.wankrfun.crania.view.messages.MineMatchingActivity;
 import com.wankrfun.crania.view.mine.user.UserInfoActivity;
 import com.wankrfun.crania.viewmodel.IMConnectViewModel;
 

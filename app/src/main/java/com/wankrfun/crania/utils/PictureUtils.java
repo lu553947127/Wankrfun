@@ -1,6 +1,13 @@
 package com.wankrfun.crania.utils;
 
+import android.content.Context;
+
+import androidx.appcompat.widget.AppCompatImageView;
+
+import com.wankrfun.crania.R;
 import com.wankrfun.crania.app.MyApplication;
+import com.wankrfun.crania.image.ImageConfig;
+import com.wankrfun.crania.image.ImageLoader;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,5 +54,21 @@ public class PictureUtils {
             return path;
         }
         return path;
+    }
+
+    /**
+     * 设置图片显示
+     *
+     * @param context
+     * @param image
+     * @param appCompatImageView
+     */
+    public static void setImage(Context context, String image, AppCompatImageView appCompatImageView){
+        ImageLoader.load(context, new ImageConfig.Builder()
+                .url(image)
+                .placeholder(R.drawable.ic_empty_zhihu)
+                .errorPic(R.drawable.ic_empty_zhihu)
+                .imageView(appCompatImageView)
+                .build());
     }
 }
