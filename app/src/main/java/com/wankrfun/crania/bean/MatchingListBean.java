@@ -13,6 +13,7 @@ package com.wankrfun.crania.bean;
  * @Version: 1.0
  */
 public class MatchingListBean {
+
     /**
      * sex : female
      * name : vacation
@@ -24,6 +25,11 @@ public class MatchingListBean {
     private String name;
     private String photo;
     private String objectId;
+
+    public MatchingListBean(String photo, String objectId) {
+        this.photo = photo;
+        this.objectId = objectId;
+    }
 
     public String getSex() {
         return sex;

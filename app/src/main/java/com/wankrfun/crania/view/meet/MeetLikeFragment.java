@@ -9,7 +9,11 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineMatchingAdapter;
 import com.wankrfun.crania.base.BaseLazyFragment;
+import com.wankrfun.crania.bean.MatchingListBean;
+import com.wankrfun.crania.dialog.AnimationDialog;
 import com.wankrfun.crania.viewmodel.MeetViewModel;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 
@@ -39,7 +43,7 @@ public class MeetLikeFragment extends BaseLazyFragment {
 
     @Override
     public boolean isUseEventBus() {
-        return false;
+        return true;
     }
 
     @Override
@@ -57,11 +61,20 @@ public class MeetLikeFragment extends BaseLazyFragment {
             mineMatchingAdapter.setType("like");
         });
 
-        meetViewModel.getWhoLikeMe();
+        //手势操作: 喜欢或不喜欢成功返回结果
+        meetViewModel.meetUserCardLiveData.observe(this, eventsCreateBean -> {
+            meetViewModel.getWhoLikeMe();
+
+            //匹配成功 弹出匹配成功动画弹窗
+            if (eventsCreateBean.getData().isMatching()){
+                AnimationDialog animationDialog = new AnimationDialog(mActivity, "matching", eventsCreateBean.getData().getImage());
+                animationDialog.showDialog();
+            }
+        });
 
         refresh.setEnableLoadMore(false);
         refresh.setOnRefreshListener(refreshLayout -> {
-            meetViewModel.getMatchingList();
+            meetViewModel.getWhoLikeMe();
             refreshLayout.finishRefresh(1000);
         });
     }
@@ -69,5 +82,14 @@ public class MeetLikeFragment extends BaseLazyFragment {
     @Override
     protected void initDataFromService() {
         meetViewModel.getWhoLikeMe();
+    }
+
+    /**
+     * 点击喜欢按钮去匹配成功
+     * @param event
+     */
+    @Subscribe
+    public void onOperateLike(MatchingListBean event) {
+        meetViewModel.getMeetOperateLike(event.getObjectId(), "LIKE", event.getPhoto(), "");
     }
 }

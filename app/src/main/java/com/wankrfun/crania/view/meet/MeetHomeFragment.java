@@ -157,7 +157,7 @@ public class MeetHomeFragment extends BaseLazyFragment {
     private LottieAnimationView lottieAnimationView;
     private MeetViewModel meetViewModel;
     private List<MeetListBean.DataBean.ListBean> dataList = new ArrayList<>();
-    private String wish;
+    private String wish;//点击小手后获取到的心愿文字
     private int pos = 0;//默契答题索引
     private int score = 0;//默契答题 答对数量
     private List<String> challengeIds = new ArrayList<>();
@@ -337,6 +337,12 @@ public class MeetHomeFragment extends BaseLazyFragment {
         //手势操作: 喜欢或不喜欢成功返回结果
         meetViewModel.meetUserCardLiveData.observe(this, eventsCreateBean -> {
             iv_like_animation.setVisibility(View.GONE);
+            wish = "";
+
+            if (eventsCreateBean.getCode() != 0){
+                ToastUtils.showShort(eventsCreateBean.getError());
+                return;
+            }
 
             meetViewModel.latitude = Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LATITUDE));
             meetViewModel.longitude = Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LONGITUDE));

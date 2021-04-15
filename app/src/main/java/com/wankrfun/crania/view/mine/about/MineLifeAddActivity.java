@@ -11,20 +11,27 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lxj.xpopup.XPopup;
+import com.parse.ParseFile;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.GridImageAdapter;
 import com.wankrfun.crania.app.MyApplication;
 import com.wankrfun.crania.base.BaseActivity;
+import com.wankrfun.crania.event.CardEvent;
 import com.wankrfun.crania.event.CompressEvent;
 import com.wankrfun.crania.image.ImageLoader;
 import com.wankrfun.crania.utils.CompressUtils;
+import com.wankrfun.crania.utils.ParseUtils;
 import com.wankrfun.crania.utils.PermissionUtils;
 import com.wankrfun.crania.utils.PictureEnlargeUtils;
 import com.wankrfun.crania.utils.PictureUtils;
+import com.wankrfun.crania.utils.RefreshUtils;
+import com.wankrfun.crania.viewmodel.MineCardViewModel;
 import com.zhihu.matisse.Matisse;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
@@ -59,6 +66,8 @@ public class MineLifeAddActivity extends BaseActivity {
     AppCompatTextView tvRelease;
     private GridImageAdapter gridImageAdapter;
     private final List<String> picture_list = new ArrayList<>();
+    private final List<ParseFile> images = new ArrayList<>();
+    private MineCardViewModel mineCardViewModel;
 
     @Override
     protected int initLayoutRes() {
@@ -96,9 +105,19 @@ public class MineLifeAddActivity extends BaseActivity {
             public void onItemDelClick(View view, int position) {
                 new XPopup.Builder(activity).asConfirm(getString(R.string.reminder), "确认要删除该图片？", () -> {
                     picture_list.remove(position);
+                    images.remove(position);
                     gridImageAdapter.setNewData(picture_list);
                 }).show();
             }
+        });
+
+        mineCardViewModel = getViewModel(MineCardViewModel.class);
+
+        //添加成功生活瞬间返回结果
+        mineCardViewModel.lifeCreateLiveData.observe(this, challengeStatusBean -> {
+            EventBus.getDefault().post(new CardEvent("life"));
+            ActivityUtils.finishActivity(MineLifeActivity.class);
+            finish();
         });
     }
 
@@ -130,6 +149,7 @@ public class MineLifeAddActivity extends BaseActivity {
     public void onEventCompress(CompressEvent event) {
         picture_list.add(String.valueOf(event.getCompressFile()));
         gridImageAdapter.setNewData(picture_list);
+        images.add(ParseUtils.setImageFile(event.getCompressFile()));
     }
 
     @OnClick({R.id.iv_bar_back, R.id.tv_release})
@@ -139,6 +159,13 @@ public class MineLifeAddActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_release:
+
+                if (images.size() == 0){
+                    ToastUtils.showShort("请至少添加一张图片吧");
+                    return;
+                }
+
+                mineCardViewModel.getLifeCreate(RefreshUtils.setMineLifeType2(getIntent().getStringExtra("title")), etEvents.getText().toString().trim(), images);
                 break;
         }
     }

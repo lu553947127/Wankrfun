@@ -9,10 +9,8 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineEventsAdapter;
 import com.wankrfun.crania.base.BaseActivity;
-import com.wankrfun.crania.bean.BaseBean;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.wankrfun.crania.bean.EventsJoinedListBean;
+import com.wankrfun.crania.viewmodel.MineCardViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,7 +30,6 @@ import butterknife.OnClick;
 public class MineEventsActivity extends BaseActivity {
     @BindView(R.id.rv)
     RecyclerView recyclerView;
-    private List<BaseBean> list = new ArrayList<>();
 
     @Override
     protected int initLayoutRes() {
@@ -47,20 +44,25 @@ public class MineEventsActivity extends BaseActivity {
     @Override
     protected void initDataAndEvent(Bundle savedInstanceState) {
 
-        list.add(new BaseBean(0));
-        list.add(new BaseBean(0));
-        list.add(new BaseBean(0));
-        list.add(new BaseBean(0));
-        list.add(new BaseBean(0));
-        list.add(new BaseBean(0));
-
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        MineEventsAdapter mineEventsAdapter = new MineEventsAdapter(R.layout.adapter_mine_events, list);
+        MineEventsAdapter mineEventsAdapter = new MineEventsAdapter(R.layout.adapter_mine_events, null);
         recyclerView.setAdapter(mineEventsAdapter);
 
         mineEventsAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ActivityUtils.startActivity(MineEventsAddActivity.class);
+            EventsJoinedListBean.DataBean.ListBean listBean = mineEventsAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("bean", listBean);
+            ActivityUtils.startActivity(bundle, MineEventsAddActivity.class);
         });
+
+        MineCardViewModel mineCardViewModel = getViewModel(MineCardViewModel.class);
+
+        //获取所有参与过的活动列表
+        mineCardViewModel.eventsJoinedListLiveData.observe(this, eventsJoinedListBean -> {
+            mineEventsAdapter.setNewData(eventsJoinedListBean.getData().getList());
+        });
+
+        mineCardViewModel.getEventsJoinedList();
     }
 
     @OnClick({R.id.iv_bar_back})

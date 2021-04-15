@@ -158,11 +158,7 @@ public class MeetViewModel extends BaseRepository {
                     LogUtils.json(LogUtils.I,new Gson().toJson(object));
                     EventsCreateBean bean = new Gson().fromJson(new Gson().toJson(object), EventsCreateBean.class);
                     bean.getData().setImage(image);
-                    if (bean.getCode() == 0){
-                        meetUserCardLiveData.postValue(bean);
-                    }else {
-                        ToastUtils.showShort(bean.getData().getMsg());
-                    }
+                    meetUserCardLiveData.postValue(bean);
                 }else {
                     LogUtils.e("getMeetOperateLike: " + e.getMessage());
                 }

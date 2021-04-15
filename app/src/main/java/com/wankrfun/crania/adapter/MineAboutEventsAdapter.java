@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class MineAboutEventsAdapter<T> extends BannerAdapter<T, MineAboutEventsAdapter.BannerViewHolder> {
     public Context context;
-    private String createdAt, eventIcon, content;
+    private String createdAt, eventIcon, eventIcon2, content;
     private List<String> images = new ArrayList<>();
     public MineAboutEventsAdapter(Context context, List<T> beanList) {
         //设置数据，也可以调用banner提供的方法,或者自己在adapter中实现
@@ -58,12 +58,14 @@ public class MineAboutEventsAdapter<T> extends BannerAdapter<T, MineAboutEventsA
 
         if (item instanceof MineEventsListBean.DataBean.ListBean){
             createdAt = ((MineEventsListBean.DataBean.ListBean) item).getCreatedAt();
-            eventIcon = ((MineEventsListBean.DataBean.ListBean) item).getEventIcon();
+            eventIcon = ((MineEventsListBean.DataBean.ListBean) item).getEventType();
+            eventIcon2 = ((MineEventsListBean.DataBean.ListBean) item).getEventIcon();
             content = ((MineEventsListBean.DataBean.ListBean) item).getContent();
             images = ((MineEventsListBean.DataBean.ListBean) item).getImages();
         }else if (item instanceof MeetListBean.DataBean.ListBean.EventMomentsBean){
             createdAt = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getCreatedAt();
-            eventIcon = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getEventIcon();
+            eventIcon = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getEventType();
+            eventIcon2 = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getEventIcon();
             content = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getContent();
             images = ((MeetListBean.DataBean.ListBean.EventMomentsBean) item).getImages();
         }
@@ -77,7 +79,7 @@ public class MineAboutEventsAdapter<T> extends BannerAdapter<T, MineAboutEventsA
         holder.tv_month.setText(NumberUtils.getTimeMonth("yyyy-MM-dd HH:mm:ss", createdAt) + "月");
         holder.tv_day.setText(NumberUtils.getTimeDay("yyyy-MM-dd HH:mm:ss", createdAt));
 
-        EventsUtils.getEventsIcon(holder.iv_icon, holder.iv_icon, eventIcon, eventIcon);
+        EventsUtils.getEventsIcon(holder.iv_icon, holder.iv_icon, eventIcon, eventIcon2);
 
         holder.tv_title.setText(content);
 

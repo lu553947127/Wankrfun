@@ -46,6 +46,7 @@ public class MineMatchingChildrenAdapter extends BaseQuickAdapter<MatchingListBe
     protected void convert(BaseViewHolder helper, MatchingListBean item) {
         helper.setText(R.id.tv_name,item.getName())
                 .setImageResource(R.id.iv_sex, item.getSex().equals("female") ? R.drawable.icon_sex_female : R.drawable.icon_sex_male)
+                .addOnClickListener(R.id.iv_like)
                 .addOnClickListener(R.id.iv_message);
         CornerImageView imageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
@@ -58,9 +59,11 @@ public class MineMatchingChildrenAdapter extends BaseQuickAdapter<MatchingListBe
         view.getBackground().setAlpha(110);
 
         if (!TextUtils.isEmpty(type)){
-            helper.setImageResource(R.id.iv_message, R.drawable.icon_meet_like);
+            helper.setVisible(R.id.iv_like, true)
+                    .setVisible(R.id.iv_message, false);
         }else {
-            helper.setImageResource(R.id.iv_message, R.drawable.icon_mine_message);
+            helper.setVisible(R.id.iv_like, false)
+                    .setVisible(R.id.iv_message, true);
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.wankrfun.crania.adapter;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,6 +15,8 @@ import com.google.gson.reflect.TypeToken;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.bean.MatchingListBean;
 import com.wankrfun.crania.view.mine.user.UserInfoActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -79,11 +80,15 @@ public class MineMatchingAdapter extends BaseQuickAdapter<String, BaseViewHolder
         });
 
         mineMatchingChildrenAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            if (!TextUtils.isEmpty(type)){
-                return;
-            }
             MatchingListBean listBean = mineMatchingChildrenAdapter.getData().get(position);
-            RongIM.getInstance().startPrivateChat(mContext, listBean.getObjectId(), listBean.getName());
+            switch (view.getId()){
+                case R.id.iv_like:
+                    EventBus.getDefault().post(new MatchingListBean(listBean.getPhoto(), listBean.getObjectId()));
+                    break;
+                case R.id.iv_message:
+                    RongIM.getInstance().startPrivateChat(mContext, listBean.getObjectId(), listBean.getName());
+                    break;
+            }
         });
     }
 }

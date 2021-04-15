@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wankrfun.crania.R;
+import com.wankrfun.crania.bean.WishListBean;
 
 import java.util.List;
 
@@ -22,17 +23,17 @@ import java.util.List;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class MineWishAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-    public MineWishAdapter(int layoutResId, @Nullable List<String> data) {
+public class MineWishAdapter extends BaseQuickAdapter<WishListBean.DataBean.ListBean, BaseViewHolder> {
+    public MineWishAdapter(int layoutResId, @Nullable List<WishListBean.DataBean.ListBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, WishListBean.DataBean.ListBean item) {
         RelativeLayout relativeLayout = helper.getView(R.id.rl);
         relativeLayout.getBackground().setAlpha(60);
 
-        if (item.equals("更多")){
+        if (item.getContent().equals("更多")){
             if (helper.getPosition() == 0){
                 helper.setText(R.id.tv_title, "添加一个心愿")
                         .setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.color_FEFFD6));
@@ -42,7 +43,7 @@ public class MineWishAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
             }
             helper.setVisible(R.id.tv_add, true);
         }else {
-            helper.setText(R.id.tv_title, item)
+            helper.setText(R.id.tv_title, item.getContent())
                     .setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.white))
                     .setVisible(R.id.tv_add, false);
         }

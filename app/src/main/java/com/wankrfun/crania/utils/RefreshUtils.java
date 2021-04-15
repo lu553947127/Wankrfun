@@ -136,6 +136,43 @@ public class RefreshUtils {
     }
 
     /**
+     * 设置我的生活瞬间
+     *
+     * @param tag
+     * @return
+     */
+    public static String setMineLifeType2(String tag){
+        String type = "";
+        switch (tag){
+            case "心愿":
+                type = "mood";
+                break;
+            case "宅家":
+                type = "homestay";
+                break;
+            case "玩耍":
+                type = "play";
+                break;
+            case "穿搭":
+                type = "outfit";
+                break;
+            case "宠物":
+                type = "pet";
+                break;
+            case "美食":
+                type = "food";
+                break;
+            case "风景":
+                type = "scene";
+                break;
+            case "其他":
+                type = "other";
+                break;
+        }
+        return type;
+    }
+
+    /**
      * 期待列表显示转换
      *
      * @param tag
@@ -216,6 +253,31 @@ public class RefreshUtils {
                 break;
         }
         return icon;
+    }
+
+    /**
+     * 获取随机数颜色
+     *
+     * @return
+     */
+    public static String getRandomColor(){
+        String color = "";
+        List<String> colorList = new ArrayList<>();
+        colorList.add("E3B492");
+        colorList.add("92C1E3");
+        colorList.add("92E3B2");
+        colorList.add("E392AF");
+        colorList.add("E3DB92");
+        colorList.add("2AA7ED");
+        colorList.add("BB92E3");
+        colorList.add("E39292");
+        colorList.add("929FE3");
+        colorList.add("E392E0");
+        colorList.add("E3C992");
+        Random random = new Random();
+        int pos = random.nextInt(colorList.size());
+        color = colorList.get(pos);
+        return color;
     }
 
     //活动类型列表

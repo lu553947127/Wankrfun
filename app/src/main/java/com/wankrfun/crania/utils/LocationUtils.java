@@ -41,7 +41,7 @@ public class LocationUtils {
 
     private static AMapLocationClient mLocationClient;
     private AMapLocationClientOption mLocationOption = null;
-    private List<LocationEvent> localLocationList = new ArrayList<>();
+    private final List<LocationEvent> localLocationList = new ArrayList<>();
 
     private static class LocationHolder {
         private static final LocationUtils INSTANCE = new LocationUtils();

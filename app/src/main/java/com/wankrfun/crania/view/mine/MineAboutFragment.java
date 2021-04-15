@@ -14,6 +14,7 @@ import com.wankrfun.crania.adapter.MineAboutWishAdapter;
 import com.wankrfun.crania.base.BaseLazyFragment;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.bean.WishListBean;
+import com.wankrfun.crania.event.CardEvent;
 import com.wankrfun.crania.utils.PictureEnlargeUtils;
 import com.wankrfun.crania.view.events.EventsDetailActivity;
 import com.wankrfun.crania.view.mine.about.MineEventsActivity;
@@ -23,6 +24,8 @@ import com.wankrfun.crania.view.mine.about.MineWishActivity;
 import com.wankrfun.crania.viewmodel.MineCardViewModel;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -135,7 +138,7 @@ public class MineAboutFragment extends BaseLazyFragment {
 
     @Override
     public boolean isUseEventBus() {
-        return false;
+        return true;
     }
 
     @Override
@@ -159,6 +162,25 @@ public class MineAboutFragment extends BaseLazyFragment {
                 break;
             case R.id.rl_card_more://更多卡片
                 ActivityUtils.startActivity(MineMoreCardActivity.class);
+                break;
+        }
+    }
+
+    /**
+     * 卡片创建成功，刷新列表
+     * @param event
+     */
+    @Subscribe
+    public void onCardSuccess(CardEvent event) {
+        switch (event.getType()){
+            case "wish":
+                mineCardViewModel.getWishList(SPUtils.getInstance().getString(SpConfig.USER_ID));
+                break;
+            case "life":
+                mineCardViewModel.getLifeList(SPUtils.getInstance().getString(SpConfig.USER_ID));
+                break;
+            case "events":
+                mineCardViewModel.getEventsList(SPUtils.getInstance().getString(SpConfig.USER_ID));
                 break;
         }
     }
