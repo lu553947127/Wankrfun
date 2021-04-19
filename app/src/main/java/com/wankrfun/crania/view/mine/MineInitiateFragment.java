@@ -1,6 +1,7 @@
 package com.wankrfun.crania.view.mine;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -92,6 +93,10 @@ public class MineInitiateFragment extends BaseLazyFragment {
             if (type.equals("mine")){
                 tvInitiate.setText("我的发起 • " + (userEventsListBean.getUserEventsListBean().getData().getTotal()));
             }else {
+                if (TextUtils.isEmpty(sex)){
+                    tvInitiate.setText("TA的发起 • " + (userEventsListBean.getUserEventsListBean().getData().getTotal()));
+                    return;
+                }
                 tvInitiate.setText(sex.equals("male") ? "他的发起 • " + (userEventsListBean.getUserEventsListBean().getData().getTotal())
                         : "她的发起 • " + (userEventsListBean.getUserEventsListBean().getData().getTotal()));
             }

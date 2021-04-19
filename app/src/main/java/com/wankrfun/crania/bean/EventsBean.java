@@ -124,6 +124,7 @@ public class EventsBean {
             private List<ImagesBean> images;
             private List<String> event_questions;
             private boolean isShow;
+            private boolean isJoined;
 
             public String getActivity_time() {
                 return activity_time;
@@ -422,6 +423,14 @@ public class EventsBean {
 
             public void setShow(boolean show) {
                 isShow = show;
+            }
+
+            public boolean isJoined() {
+                return isJoined;
+            }
+
+            public void setJoined(boolean joined) {
+                isJoined = joined;
             }
         }
     }

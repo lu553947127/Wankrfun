@@ -223,7 +223,7 @@ public class MeetHomeFragment extends BaseLazyFragment {
                     relativeLayout.getBackground().setAlpha(170);
                     if (meetListBean.getData().getList().get(0).getChallenges().size() != 0){
                         relativeLayout.setVisibility(View.VISIBLE);
-                        tv_start_title.setText("TA的默契跳转已开启。对TA感兴趣就双击卡片试试吧");
+                        tv_start_title.setText("TA的默契挑战已开启。对TA感兴趣就双击卡片试试吧");
                         pos = 0;
                         getTacitAnswer(dataList.get(0).getChallenges(), pos, "");
 
@@ -418,6 +418,7 @@ public class MeetHomeFragment extends BaseLazyFragment {
                 getTacitAnswer(dataList.get(0).getChallenges(), pos, "B");
                 break;
             case R.id.tv_ok://好的
+                AnimatorUtils.FlipAnimatorXViewShow(rlChallenge, rlUser, 400);
                 linearLayout.setVisibility(View.VISIBLE);
                 meetViewModel.latitude = Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LATITUDE));
                 meetViewModel.longitude = Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LONGITUDE));

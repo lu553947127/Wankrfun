@@ -222,7 +222,6 @@ public class IMPrivateChatActivity extends BaseActivity implements RongIM.Conver
             if (!userInfo.getUserId().equals(SPUtils.getInstance().getString(SpConfig.USER_ID))) {
                 Bundle bundle = new Bundle();
                 bundle.putString("id", userInfo.getUserId());
-                bundle.putString("sex", "male");
                 ActivityUtils.startActivity(bundle, UserInfoActivity.class) ;
             }
         }

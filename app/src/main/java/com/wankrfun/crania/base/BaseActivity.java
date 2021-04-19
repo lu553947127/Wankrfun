@@ -25,7 +25,7 @@ import com.blankj.utilcode.util.Utils;
 import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.app.MyApplication;
-import com.wankrfun.crania.receiver.SealNotificationReceiver;
+import com.wankrfun.crania.receiver.rongyun.SealNotificationReceiver;
 import com.wankrfun.crania.utils.AutoUtils;
 import com.wankrfun.crania.utils.NotificationsUtils;
 import com.wankrfun.crania.utils.PermissionUtils;

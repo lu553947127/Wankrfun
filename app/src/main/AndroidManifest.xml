@@ -207,7 +207,7 @@
         <!-- 融云推送 通知接受自定义服务-->
         <!-- push start-->
         <receiver
-            android:name=".receiver.SealNotificationReceiver"
+            android:name=".receiver.rongyun.SealNotificationReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />

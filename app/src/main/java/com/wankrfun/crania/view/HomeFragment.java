@@ -23,6 +23,7 @@ import com.wankrfun.crania.adapter.EventsTypeAdapter;
 import com.wankrfun.crania.base.BaseFragment;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.bean.EventsBean;
+import com.wankrfun.crania.dialog.AnimationDialog;
 import com.wankrfun.crania.event.EventsEvent;
 import com.wankrfun.crania.utils.ParseUtils;
 import com.wankrfun.crania.utils.RefreshUtils;
@@ -121,6 +122,23 @@ public class HomeFragment extends BaseFragment {
             ActivityUtils.startActivity(bundle, EventsDetailActivity.class);
         });
 
+        eventsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            EventsBean.DataBean.ListBean listBean = eventsAdapter.getData().get(position);
+            if (listBean.isJoined()){
+                ToastUtils.showShort("您已报名，无需再次报名");
+                return;
+            }
+
+            if (SPUtils.getInstance().getString(SpConfig.USER_ID).equals(listBean.getEventCreator())){
+                ToastUtils.showShort("您是活动创始人，无需报名");
+                return;
+            }
+
+            listBean.setJoined(true);
+            eventsAdapter.notifyDataSetChanged();
+            eventsViewModel.getEventsApply(listBean.getObjectId());
+        });
+
         eventsViewModel = mActivity.getViewModel(EventsViewModel.class);
 
         //获取活动列表返回结果
@@ -132,6 +150,12 @@ public class HomeFragment extends BaseFragment {
                 eventsAdapter.addData(eventsAdapter.getData().size(), eventsBean.getData().getList());
             }
             RefreshUtils.setNoMore(smartRefreshLayout,eventsViewModel.page, eventsBean.getData().getTotal());
+        });
+
+        //申请活动成功返回结果
+        eventsViewModel.eventsApplyLiveData.observe(this, eventsApplyBean -> {
+            AnimationDialog animationDialog = new AnimationDialog(mActivity, "sign_up");
+            animationDialog.showDialog();
         });
 
         //刷新和加载

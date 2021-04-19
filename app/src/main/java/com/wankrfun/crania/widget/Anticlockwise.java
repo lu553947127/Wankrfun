@@ -12,7 +12,7 @@ import java.util.Date;
  * @ProjectName: Wankrfun
  * @Package: com.wankrfun.crania.widget
  * @ClassName: Anticlockwise
- * @Description: java类作用描述
+ * @Description: 倒计时显示view
  * @Author: 鹿鸿祥
  * @CreateDate: 4/9/21 4:12 PM
  * @UpdateUser: 更新者

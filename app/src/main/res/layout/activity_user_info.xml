@@ -207,7 +207,7 @@
                         android:drawablePadding="5dp"
                         android:textColor="@color/color_494949"
                         android:textSize="16sp"
-                        android:text="我的发起"/>
+                        android:text="TA的发起"/>
 
                 </LinearLayout>
 

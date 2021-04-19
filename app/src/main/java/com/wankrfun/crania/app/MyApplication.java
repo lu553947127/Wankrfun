@@ -32,13 +32,20 @@ import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BuildConfig;
 import com.wankrfun.crania.http.api.ApiService;
 import com.wankrfun.crania.http.retrofit.BaseRequest;
+import com.wankrfun.crania.receiver.rongyun.CustomExtensionModule;
+import com.wankrfun.crania.receiver.rongyun.CustomMessage;
+import com.wankrfun.crania.receiver.rongyun.CustomMessageProvider;
 import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.RongIMUtils;
 
 import java.io.File;
+import java.util.List;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import cn.jpush.android.api.JPushInterface;
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -204,7 +211,7 @@ public class MyApplication extends Application {
             switch (connectionStatus) {
                 //融云账号在其他设备上进行登录
                 case KICKED_OFFLINE_BY_OTHER_CLIENT:
-//                    LoginUtils.getExitLogin();
+                    LoginUtils.getExitLogin();
                     break;
             }
         });
@@ -216,12 +223,36 @@ public class MyApplication extends Application {
                 Conversation.ConversationType.DISCUSSION
         };
         RongIM.getInstance().setReadReceiptConversationTypeList(types);
-        //注册复写的会话列表布局
-//        RongIM.getInstance().registerConversationTemplate(new CustomPrivateConversationProvider());
         //开启高清语音
         RongIM.getInstance().setVoiceMessageType(RongIM.VoiceMessageType.HighQuality);
         //获取发出去的消息监听
         RongIMUtils.getSendMessageListener();
+        //加号区域内置扩展项
+        registerExtensionPlugin();
+        //注册自定义消息接收
+        RongIM.registerMessageType(CustomMessage.class);
+        //初始化自定义消息布局
+        RongIM.getInstance().registerMessageTemplate(new CustomMessageProvider());
+    }
+
+    /**
+     * 融云单聊页面加号区域内置扩展项
+     */
+    private static void registerExtensionPlugin() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new CustomExtensionModule());
+            }
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
  * @ProjectName: Wankrfun
  * @Package: com.wankrfun.crania.widget.gallery
  * @ClassName: ClipViewPager
- * @Description: java类作用描述
+ * @Description: 左右滑动变大动画效果viewpager
  * @Author: 鹿鸿祥
  * @CreateDate: 3/31/21 4:41 PM
  * @UpdateUser: 更新者

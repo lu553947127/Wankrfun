@@ -64,7 +64,7 @@ public class EventsAdapter extends BaseQuickAdapter<EventsBean.DataBean.ListBean
                 .setImageResource(R.id.iv_sex, item.getCreator_sex().equals("female") ? R.drawable.icon_sex_female : R.drawable.icon_sex_male)
                 .setImageResource(R.id.iv_sex2, item.getCreator_sex().equals("female") ? R.drawable.icon_sex_female : R.drawable.icon_sex_male)
                 .addOnClickListener(R.id.tv_sign)
-                .addOnClickListener(R.id.tv_sign);
+                .addOnClickListener(R.id.tv_sign2);
 
         CornerImageView cornerImageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
@@ -133,5 +133,23 @@ public class EventsAdapter extends BaseQuickAdapter<EventsBean.DataBean.ListBean
                 ll_b2.setVisibility(View.GONE);
             }
         });
+
+        AppCompatTextView tv_sign = helper.getView(R.id.tv_sign);
+        AppCompatTextView tv_sign2 = helper.getView(R.id.tv_sign2);
+        if (SPUtils.getInstance().getString(SpConfig.USER_ID).equals(item.getEventCreator())){
+            tv_sign.setBackgroundResource(R.drawable.shape_gray_15);
+            tv_sign2.setBackgroundResource(R.drawable.shape_gray_15);
+        }else {
+            tv_sign.setBackgroundResource(R.drawable.shape_yellow_15);
+            tv_sign2.setBackgroundResource(R.drawable.shape_yellow_15);
+        }
+
+        if (item.isJoined()){
+            tv_sign.setText("已报名");
+            tv_sign2.setText("已报名");
+        }else {
+            tv_sign.setText("报名");
+            tv_sign2.setText("报名");
+        }
     }
 }

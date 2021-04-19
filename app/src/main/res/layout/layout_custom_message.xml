@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    xmlns:roundiv="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_group"
+    android:background="@color/black"
+    android:paddingTop="15dp">
+
+    <RelativeLayout
+        android:id="@+id/ll_group"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/shape_gray_5">
+
+       <androidx.appcompat.widget.AppCompatTextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_margin="20dp"
+           android:textColor="@color/color_FEFEDA"
+           android:textSize="15sp"
+           android:text="我想实现你看落日飞车的心愿"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:autoLink="all"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:text="@string/meet_send"/>
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/icon_activity_motion15"/>
+
+</RelativeLayout>
