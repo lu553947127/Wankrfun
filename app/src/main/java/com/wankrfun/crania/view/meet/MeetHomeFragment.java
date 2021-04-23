@@ -20,6 +20,7 @@ import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineAboutEventsAdapter;
 import com.wankrfun.crania.adapter.MineAboutLifeAdapter;
 import com.wankrfun.crania.adapter.MineAboutWishAdapter;
+import com.wankrfun.crania.adapter.TaAboutQuestionsAdapter;
 import com.wankrfun.crania.base.BaseLazyFragment;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.bean.MeetListBean;
@@ -130,6 +131,12 @@ public class MeetHomeFragment extends BaseLazyFragment {
     Banner bannerEvents;
     @BindView(R.id.indicator_events)
     CircleIndicator indicatorEvents;
+    @BindView(R.id.ll_questions)
+    LinearLayout llQuestions;
+    @BindView(R.id.banner_questions)
+    Banner bannerQuestions;
+    @BindView(R.id.indicator_questions)
+    CircleIndicator indicatorQuestions;
     @BindView(R.id.ll_tacit_one)
     LinearLayout llTacitOne;
     @BindView(R.id.ll_tacit_two)
@@ -323,6 +330,21 @@ public class MeetHomeFragment extends BaseLazyFragment {
                                 }).start();
                     }else {
                         llEvents.setVisibility(View.GONE);
+                    }
+
+                    if (meetListBean.getData().getList().get(0).getBioQAs().size() !=0){
+                        llQuestions.setVisibility(View.VISIBLE);
+                        bannerQuestions.addBannerLifecycleObserver(this)//添加生命周期观察者
+                                .setAdapter(new TaAboutQuestionsAdapter(mActivity, NumberUtils.getBisectionList(meetListBean.getData().getList().get(0).getBioQAs(), 3)))//添加数据
+                                .isAutoLoop(false)
+                                .setIndicator(indicatorQuestions, false)
+                                .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                                .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                                .setOnBannerListener((data, position) -> {
+
+                                }).start();
+                    }else {
+                        llQuestions.setVisibility(View.GONE);
                     }
                 }else {
                     rlEmpty.setVisibility(View.VISIBLE);

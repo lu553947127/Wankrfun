@@ -52,8 +52,8 @@ public class MineEventsAdapter extends BaseQuickAdapter<EventsJoinedListBean.Dat
         CornerImageView cornerImageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getEventImage())
-                .placeholder(R.drawable.ic_empty_zhihu)
-                .errorPic(R.drawable.ic_empty_zhihu)
+                .placeholder(R.drawable.icon_images_empty2)
+                .errorPic(R.drawable.icon_images_empty2)
                 .imageView(cornerImageView)
                 .build());
 

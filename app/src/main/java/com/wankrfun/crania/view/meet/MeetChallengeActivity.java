@@ -129,7 +129,7 @@ public class MeetChallengeActivity extends BaseActivity {
             meetViewModel.getChallengeList();
             if (isSwitch){
                 tvSwitch.setText("默契挑战已开启");
-                tvBarRight.setText("关闭");
+                tvBarRight.setText("暂停");
             }else {
                 tvSwitch.setText("默契挑战已关闭");
                 tvBarRight.setText("开启");

@@ -1,9 +1,11 @@
 package com.wankrfun.crania.view;
 
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -16,6 +18,7 @@ import com.wankrfun.crania.base.BaseFragment;
 import com.wankrfun.crania.view.meet.MeetChallengeActivity;
 import com.wankrfun.crania.view.meet.MeetHomeFragment;
 import com.wankrfun.crania.view.meet.MeetLikeFragment;
+import com.wankrfun.crania.viewmodel.MeetViewModel;
 import com.wankrfun.crania.widget.CustomVideoView;
 
 import butterknife.BindView;
@@ -36,12 +39,15 @@ import butterknife.OnClick;
 public class MeetFragment extends BaseFragment {
     @BindView(R.id.fake_status_bar)
     View fakeStatusBar;
+    @BindView(R.id.tv_tab_right)
+    AppCompatTextView tvTabRight;
     @BindView(R.id.video_view)
     CustomVideoView videoView;
     @BindView(R.id.dynamic_pager_indicator)
     DynamicPagerIndicator dynamicPagerIndicator;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    private MeetViewModel meetViewModel;
 
     @Override
     protected int initLayout() {
@@ -63,6 +69,18 @@ public class MeetFragment extends BaseFragment {
         };
         viewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), fragments, getResources().getStringArray(R.array.meet_list)));
         dynamicPagerIndicator.setViewPager(viewPager);
+
+        meetViewModel = mActivity.getViewModel(MeetViewModel.class);
+
+        //获取默契挑战开关状态返回结果
+        meetViewModel.challengeStatusLiveData.observe(this, challengeStatusBean -> {
+            tvTabRight.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+            if (challengeStatusBean.getData().isStatus()){
+                tvTabRight.setText(getString(R.string.meet_challenge_off));
+            }else {
+                tvTabRight.setText(getString(R.string.meet_challenge_on));
+            }
+        });
     }
 
     @Override
@@ -70,7 +88,7 @@ public class MeetFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_tab_right})
+    @OnClick({R.id.tv_tab_right})
     void onClick() {
         ActivityUtils.startActivity(MeetChallengeActivity.class);
     }
@@ -90,6 +108,7 @@ public class MeetFragment extends BaseFragment {
     @Override
     public void onResume() {
         initVideo();
+        meetViewModel.getChallengeStatus();
         super.onResume();
     }
 

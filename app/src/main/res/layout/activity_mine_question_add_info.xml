@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_events_add">
+
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/svg_icon_back"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="创建问答" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_margin="25dp"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <fj.edittextcount.lib.FJEditTextCount
+        android:id="@+id/et_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_question"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/shape_white_10"
+        app:etHintColor="@color/color_979797"
+        app:etLineColor="@android:color/transparent"
+        app:etMaxLength="20"
+        app:etMinHeight="88dp"
+        app:etPromptTextColor="@color/white"
+        app:etPromptTextSize="15sp"
+        app:etTextColor="@color/white"
+        app:etTextSize="15sp"
+        app:etType="percentage"
+        app:etHint="请输入你的答案"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_release"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/shape_white_10"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="发布"/>
+
+</RelativeLayout>

@@ -32,20 +32,15 @@
             app:tabSelectedTextSize="20sp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/iv_tab_right"
+            android:id="@+id/tv_tab_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:drawableLeft="@drawable/icon_meet_right"
-            android:drawablePadding="5dp"
-            android:background="@drawable/shape_gray_10"
             android:layout_alignParentRight="true"
-            android:padding="5dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:textSize="11sp"
-            android:textColor="@color/white"
-            android:text="设置默契挑战"/>
+            android:textSize="10sp"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

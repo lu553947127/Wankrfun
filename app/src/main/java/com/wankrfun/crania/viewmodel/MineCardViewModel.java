@@ -15,6 +15,8 @@ import com.wankrfun.crania.bean.ChallengeStatusBean;
 import com.wankrfun.crania.bean.EventsJoinedListBean;
 import com.wankrfun.crania.bean.MineEventsListBean;
 import com.wankrfun.crania.bean.MineLifeListBean;
+import com.wankrfun.crania.bean.QuestionListBean;
+import com.wankrfun.crania.bean.QuestionTemplateListBean;
 import com.wankrfun.crania.bean.WishListBean;
 import com.wankrfun.crania.http.retrofit.BaseRepository;
 
@@ -45,6 +47,11 @@ public class MineCardViewModel extends BaseRepository {
     public MutableLiveData<MineEventsListBean> eventsListLiveData;
     public MutableLiveData<EventsJoinedListBean> eventsJoinedListLiveData;
     public MutableLiveData<ChallengeStatusBean> eventsCreateLiveData;
+    public MutableLiveData<QuestionListBean> questionListLiveData;
+    public MutableLiveData<ChallengeStatusBean> questionDeleteLiveData;
+    public MutableLiveData<QuestionTemplateListBean> questionTemplateLiveData;
+    public MutableLiveData<ChallengeStatusBean> questionCreateLiveData;
+    public MutableLiveData<ChallengeStatusBean> questionEditLiveData;
     private final String userId;
 
     public MineCardViewModel() {
@@ -60,6 +67,11 @@ public class MineCardViewModel extends BaseRepository {
         eventsListLiveData = new MutableLiveData<>();
         eventsJoinedListLiveData = new MutableLiveData<>();
         eventsCreateLiveData = new MutableLiveData<>();
+        questionListLiveData = new MutableLiveData<>();
+        questionDeleteLiveData = new MutableLiveData<>();
+        questionTemplateLiveData = new MutableLiveData<>();
+        questionCreateLiveData = new MutableLiveData<>();
+        questionEditLiveData = new MutableLiveData<>();
     }
 
     /**
@@ -295,6 +307,136 @@ public class MineCardViewModel extends BaseRepository {
                     }
                 }else {
                     LogUtils.e("getEventsCreate: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取问答卡片列表
+     */
+    public void getQuestionList(String userId){
+        HashMap<String, Object> params = new HashMap();
+        params.put("creatorId", userId);
+        params.put("limit", 9);
+        ParseCloud.callFunctionInBackground("fetch-bioQAs-v001", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getQuestionList: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    QuestionListBean bean = new Gson().fromJson(new Gson().toJson(object), QuestionListBean.class);
+                    if (bean.getCode() == 0){
+                        questionListLiveData.postValue(bean);
+                    }else {
+                        ToastUtils.showShort(bean.getError());
+                    }
+                }else {
+                    LogUtils.e("getQuestionList: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 删除问答
+     */
+    public void getQuestionDelete(String objectId){
+        HashMap<String, Object> params = new HashMap();
+        params.put("objectId", objectId);//目标QAid,必选
+        ParseCloud.callFunctionInBackground("delete-bioQA-v001", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getQuestionDelete: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    ChallengeStatusBean bean = new Gson().fromJson(new Gson().toJson(object), ChallengeStatusBean.class);
+                    if (bean.getCode() == 0){
+                        questionDeleteLiveData.postValue(bean);
+                    }else {
+                        ToastUtils.showShort(bean.getError());
+                    }
+                }else {
+                    LogUtils.e("getQuestionDelete: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取问答模版列表
+     */
+    public void getQuestionTemplateList(String userId){
+        HashMap<String, Object> params = new HashMap();
+        params.put("creatorId", userId);
+        params.put("limit", 9);
+        ParseCloud.callFunctionInBackground("get-template-bio-QA-v001", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getQuestionTemplateList: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    QuestionTemplateListBean bean = new Gson().fromJson(new Gson().toJson(object), QuestionTemplateListBean.class);
+                    if (bean.getCode() == 0){
+                        questionTemplateLiveData.postValue(bean);
+                    }else {
+                        ToastUtils.showShort(bean.getError());
+                    }
+                }else {
+                    LogUtils.e("getQuestionTemplateList: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 创建问答
+     */
+    public void getQuestionCreate(String question, String answer){
+        HashMap<String, Object> params = new HashMap();
+        params.put("creatorId", userId);//创建者用户id,必选
+        params.put("question", question);//问题,必选
+        params.put("answer", answer);//回答,必选
+        ParseCloud.callFunctionInBackground("create-bioQA-v001", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getQuestionCreate: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    ChallengeStatusBean bean = new Gson().fromJson(new Gson().toJson(object), ChallengeStatusBean.class);
+                    if (bean.getCode() == 0){
+                        questionCreateLiveData.postValue(bean);
+                    }else {
+                        ToastUtils.showShort(bean.getError());
+                    }
+                }else {
+                    LogUtils.e("getQuestionCreate: " + e.getMessage());
+                }
+            }
+        });
+    }
+
+    /**
+     * 编辑问答
+     */
+    public void getQuestionEdit(String objectId, String answer){
+        HashMap<String, Object> params = new HashMap();
+        params.put("objectId", objectId);//目标问答id,必选
+        params.put("answer", answer);//回答,必选
+        ParseCloud.callFunctionInBackground("edit-bioQA-v001", params, new FunctionCallback<Object>(){
+            @Override
+            public void done(Object object, ParseException e) {
+                if (e == null) {
+                    LogUtils.e("getQuestionEdit: "+ new Gson().toJson(object));
+                    LogUtils.json(LogUtils.I,new Gson().toJson(object));
+                    ChallengeStatusBean bean = new Gson().fromJson(new Gson().toJson(object), ChallengeStatusBean.class);
+                    if (bean.getCode() == 0){
+                        questionEditLiveData.postValue(bean);
+                    }else {
+                        ToastUtils.showShort(bean.getError());
+                    }
+                }else {
+                    LogUtils.e("getQuestionEdit: " + e.getMessage());
                 }
             }
         });

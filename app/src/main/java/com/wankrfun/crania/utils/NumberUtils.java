@@ -10,8 +10,10 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import io.michaelrocks.libphonenumber.android.NumberParseException;
@@ -387,5 +389,40 @@ public class NumberUtils {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 将list按照指定元素个数(n)分割
+     *
+     * @param source
+     * @param n 每次分割的个数
+     * @return
+     */
+    public static <T> List<List<T>> getBisectionList(List<T> source, int n) {
+        if (source == null) {
+            return null;
+        }
+
+        if (n == 0) {
+            return null;
+        }
+        List<List<T>> result = new ArrayList<List<T>>();
+        // 集合长度
+        int size = source.size();
+        // 余数
+        int remaider = size % n;
+        // 商
+        int number = size / n;
+
+        for (int i = 0; i < number; i++) {
+            List<T> value = source.subList(i * n, (i + 1) * n);
+            result.add(value);
+        }
+
+        if (remaider > 0) {
+            List<T> subList = source.subList(size - remaider, size);
+            result.add(subList);
+        }
+        return result;
     }
 }

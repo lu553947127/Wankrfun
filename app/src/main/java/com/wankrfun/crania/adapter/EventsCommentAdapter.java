@@ -6,10 +6,12 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
+import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.bean.EventsCommentsBean;
 import com.wankrfun.crania.event.EventsEvent;
 import com.wankrfun.crania.image.ImageConfig;
@@ -57,10 +59,12 @@ public class EventsCommentAdapter extends BaseQuickAdapter<EventsCommentsBean.Da
 
         eventsCommentChildrenAdapter.setOnItemClickListener((adapter, view, position) -> {
             EventsCommentsBean.DataBean.CommentsBean.ReplysBean listBean = eventsCommentChildrenAdapter.getData().get(position);
-            new XPopup.Builder(mContext).asConfirm(mContext.getResources().getString(R.string.reminder), "您确定要删除这条评论吗", () -> {
-                eventsCommentChildrenAdapter.remove(position);
-                EventBus.getDefault().post(new EventsEvent("delete_reply", listBean.getObjectId()));
-            }).show();
+            if (SPUtils.getInstance().getString(SpConfig.USER_ID).equals(listBean.getReply_user())){
+                new XPopup.Builder(mContext).asConfirm(mContext.getResources().getString(R.string.reminder), "您确定要删除这条回复吗", () -> {
+                    eventsCommentChildrenAdapter.remove(position);
+                    EventBus.getDefault().post(new EventsEvent("delete_reply", listBean.getObjectId()));
+                }).show();
+            }
         });
     }
 }

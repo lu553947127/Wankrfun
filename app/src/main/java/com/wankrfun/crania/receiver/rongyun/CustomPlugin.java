@@ -34,7 +34,7 @@ public class CustomPlugin implements IPluginModule {
 
     @Override
     public Drawable obtainDrawable(Context context) {
-        return ContextCompat.getDrawable(context, R.drawable.icon_meet_like_new);
+        return ContextCompat.getDrawable(context, R.drawable.icon_meet_like);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CustomPlugin implements IPluginModule {
              */
             @Override
             public void onAttached(Message message) {
-
+                LogUtils.e("消息发送前回调","message-------"+message.getContent());
             }
             /**
              * 消息发送成功。
@@ -61,7 +61,7 @@ public class CustomPlugin implements IPluginModule {
              */
             @Override
             public void onSuccess(Message message) {
-                LogUtils.e("tag","message-------"+message.getContent());
+                LogUtils.e("消息发送成功","message-------"+message.getContent());
             }
 
             /**
@@ -71,7 +71,10 @@ public class CustomPlugin implements IPluginModule {
              */
             @Override
             public void onError(Message message, RongIMClient.ErrorCode errorCode) {
-
+                LogUtils.e("消息发送失败","message-------"+message.getContent());
+                LogUtils.e("消息发送失败","errorCode-------"+errorCode);
+                LogUtils.e("消息发送失败","errorCode-------"+errorCode.getMessage());
+                LogUtils.e("消息发送失败","errorCode-------"+errorCode.getValue());
             }
         });
     }

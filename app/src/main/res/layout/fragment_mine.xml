@@ -315,14 +315,4 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_add"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="60dp"
-        android:src="@drawable/icon_activity_add"/>
-
 </RelativeLayout>

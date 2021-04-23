@@ -51,8 +51,8 @@ public class MineMatchingChildrenAdapter extends BaseQuickAdapter<MatchingListBe
         CornerImageView imageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getPhoto())
-                .placeholder(R.drawable.ic_empty_zhihu)
-                .errorPic(R.drawable.ic_empty_zhihu)
+                .placeholder(R.drawable.icon_images_empty)
+                .errorPic(R.drawable.icon_images_empty)
                 .imageView(imageView)
                 .build());
         View view = helper.getView(R.id.view);

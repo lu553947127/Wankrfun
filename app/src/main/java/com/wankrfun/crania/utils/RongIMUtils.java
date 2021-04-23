@@ -1,6 +1,7 @@
 package com.wankrfun.crania.utils;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.wankrfun.crania.receiver.rongyun.CustomMessage;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Message;
@@ -76,6 +77,9 @@ public class RongIMUtils {
                 } else if (messageContent instanceof RichContentMessage) {//图文消息
                     RichContentMessage richContentMessage = (RichContentMessage) messageContent;
                     LogUtils.e(  "onSent-RichContentMessage:" + richContentMessage.getContent());
+                } else if (messageContent instanceof CustomMessage) {//自定义消息
+                    CustomMessage customMessage = (CustomMessage) messageContent;
+                    LogUtils.e(  "onSent-CustomMessage:" + customMessage.getContent());
                 } else {
                     LogUtils.e(  "onSent-其他消息，自己来判断处理");
                 }

@@ -11,10 +11,13 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineAboutEventsAdapter;
 import com.wankrfun.crania.adapter.MineAboutLifeAdapter;
+import com.wankrfun.crania.adapter.MineAboutQuestionsAdapter;
 import com.wankrfun.crania.adapter.MineAboutWishAdapter;
 import com.wankrfun.crania.base.BaseLazyFragment;
+import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.utils.PictureEnlargeUtils;
 import com.wankrfun.crania.view.events.EventsDetailActivity;
+import com.wankrfun.crania.view.mine.about.MineQuestionActivity;
 import com.wankrfun.crania.viewmodel.MineCardViewModel;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
@@ -56,10 +59,12 @@ public class MineAboutTAFragment extends BaseLazyFragment {
     Banner bannerEvents;
     @BindView(R.id.indicator_events)
     CircleIndicator indicatorEvents;
-    @BindView(R.id.rl_card_life)
-    RelativeLayout relativeLayoutLife;
-    @BindView(R.id.rl_card_events)
-    RelativeLayout relativeLayoutEvents;
+    @BindView(R.id.ll_questions)
+    LinearLayout llQuestions;
+    @BindView(R.id.banner_questions)
+    Banner bannerQuestions;
+    @BindView(R.id.indicator_questions)
+    CircleIndicator indicatorQuestions;
     @BindView(R.id.rl_empty)
     RelativeLayout rlEmpty;
     @BindView(R.id.tv_empty)
@@ -144,6 +149,25 @@ public class MineAboutTAFragment extends BaseLazyFragment {
                 llEvents.setVisibility(View.GONE);
             }
         });
+
+        //获取问答列表返回数据
+        mineCardViewModel.questionListLiveData.observe(this, questionListBean -> {
+            if (questionListBean.getData().getList().size() != 0){
+                llQuestions.setVisibility(View.GONE);
+                rlEmpty.setVisibility(View.GONE);
+                bannerQuestions.addBannerLifecycleObserver(this)//添加生命周期观察者
+                        .setAdapter(new MineAboutQuestionsAdapter(mActivity, NumberUtils.getBisectionList(questionListBean.getData().getList(), 3)))//添加数据
+                        .isAutoLoop(false)
+                        .setIndicator(indicatorQuestions, false)
+                        .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                        .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                        .setOnBannerListener((data, position) -> {
+                            ActivityUtils.startActivity(MineQuestionActivity.class);
+                        }).start();
+            }else {
+                llQuestions.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -156,5 +180,6 @@ public class MineAboutTAFragment extends BaseLazyFragment {
         mineCardViewModel.getWishList(userId);
         mineCardViewModel.getLifeList(userId);
         mineCardViewModel.getEventsList(userId);
+        mineCardViewModel.getQuestionList(userId);
     }
 }

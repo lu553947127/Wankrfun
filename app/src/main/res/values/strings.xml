@@ -80,6 +80,8 @@
     <string name="meet_my_matching">我的匹配：</string>
     <string name="meet_accept"><u>邀约已发出</u></string>
     <string name="meet_send"><u>点击接受邀约</u></string>
+    <string name="meet_challenge_on">去设置默契挑战</string>
+    <string name="meet_challenge_off">默契挑战已开启</string>
 
     <string name="agreement_content">
         \t\t欢迎您使用“玩客APP”软件及服务！

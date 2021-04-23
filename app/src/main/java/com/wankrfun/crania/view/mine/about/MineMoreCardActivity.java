@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.lwj.widget.viewpagerindicator.ViewPagerIndicator;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.ViewPageAdapter;
@@ -119,8 +118,7 @@ public class MineMoreCardActivity extends BaseActivity {
                         ActivityUtils.startActivity(MineLifeActivity.class);
                         break;
                     case 3:
-                        finish();
-                        ToastUtils.showShort("敬请期待");
+                        ActivityUtils.startActivity(MineQuestionAddActivity.class);
                         break;
                 }
                 break;

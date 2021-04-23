@@ -69,8 +69,8 @@ public class EventsAdapter extends BaseQuickAdapter<EventsBean.DataBean.ListBean
         CornerImageView cornerImageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item.getEventImage())
-                .placeholder(R.drawable.ic_empty_zhihu)
-                .errorPic(R.drawable.ic_empty_zhihu)
+                .placeholder(R.drawable.icon_images_empty)
+                .errorPic(R.drawable.icon_images_empty)
                 .imageView(cornerImageView)
                 .build());
 

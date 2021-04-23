@@ -78,8 +78,8 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.Imag
             ImageLoader.load(MyApplication.getInstance().getApplicationContext(), new ImageConfig.Builder()
                     .url(mData.get(position))
                     .imageView(holder.imageView)
-                    .placeholder(R.drawable.ic_empty_zhihu)
-                    .errorPic(R.drawable.ic_empty_zhihu)
+                    .placeholder(R.drawable.icon_images_empty)
+                    .errorPic(R.drawable.icon_images_empty)
                     .build());
             holder.delView.setVisibility(View.VISIBLE);
             holder.imageView.setOnClickListener(v -> mOnItemClickListener.onItemClick(v, position));

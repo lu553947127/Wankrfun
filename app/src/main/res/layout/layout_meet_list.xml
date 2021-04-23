@@ -27,7 +27,6 @@
                     android:id="@+id/iv_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/bbb3"
                     android:scaleType="centerCrop"
                     roundiv:radius="25dp" />
 
@@ -293,6 +292,36 @@
 
                 <com.youth.banner.indicator.CircleIndicator
                     android:id="@+id/indicator_events"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_questions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:text="活动瞬间"/>
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner_questions"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    app:is_infinite_loop="false"/>
+
+                <com.youth.banner.indicator.CircleIndicator
+                    android:id="@+id/indicator_questions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal" />

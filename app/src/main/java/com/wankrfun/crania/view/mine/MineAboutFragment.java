@@ -6,20 +6,22 @@ import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.adapter.MineAboutEventsAdapter;
 import com.wankrfun.crania.adapter.MineAboutLifeAdapter;
+import com.wankrfun.crania.adapter.MineAboutQuestionsAdapter;
 import com.wankrfun.crania.adapter.MineAboutWishAdapter;
 import com.wankrfun.crania.base.BaseLazyFragment;
 import com.wankrfun.crania.base.SpConfig;
 import com.wankrfun.crania.bean.WishListBean;
 import com.wankrfun.crania.event.CardEvent;
+import com.wankrfun.crania.utils.NumberUtils;
 import com.wankrfun.crania.utils.PictureEnlargeUtils;
 import com.wankrfun.crania.view.events.EventsDetailActivity;
 import com.wankrfun.crania.view.mine.about.MineEventsActivity;
 import com.wankrfun.crania.view.mine.about.MineLifeActivity;
 import com.wankrfun.crania.view.mine.about.MineMoreCardActivity;
+import com.wankrfun.crania.view.mine.about.MineQuestionActivity;
 import com.wankrfun.crania.view.mine.about.MineWishActivity;
 import com.wankrfun.crania.viewmodel.MineCardViewModel;
 import com.youth.banner.Banner;
@@ -57,10 +59,16 @@ public class MineAboutFragment extends BaseLazyFragment {
     Banner bannerEvents;
     @BindView(R.id.indicator_events)
     CircleIndicator indicatorEvents;
+    @BindView(R.id.banner_questions)
+    Banner bannerQuestions;
+    @BindView(R.id.indicator_questions)
+    CircleIndicator indicatorQuestions;
     @BindView(R.id.rl_card_life)
     RelativeLayout relativeLayoutLife;
     @BindView(R.id.rl_card_events)
     RelativeLayout relativeLayoutEvents;
+    @BindView(R.id.rl_card_questions)
+    RelativeLayout relativeLayoutQuestions;
     private MineCardViewModel mineCardViewModel;
 
     @Override
@@ -94,20 +102,20 @@ public class MineAboutFragment extends BaseLazyFragment {
                 relativeLayoutLife.setVisibility(View.GONE);
                 bannerLife.setVisibility(View.VISIBLE);
                 indicatorLife.setVisibility(View.VISIBLE);
+                bannerLife.addBannerLifecycleObserver(this)//添加生命周期观察者
+                        .setAdapter(new MineAboutLifeAdapter(mActivity, mineLifeListBean.getData().getList()))//添加数据
+                        .isAutoLoop(false)
+                        .setIndicator(indicatorLife, false)
+                        .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                        .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                        .setOnBannerListener((data, position) -> {
+                            PictureEnlargeUtils.getPictureEnlargeList(mActivity, mineLifeListBean.getData().getList().get(position).getImages(), 0);
+                        }).start();
             }else {
                 relativeLayoutLife.setVisibility(View.VISIBLE);
                 bannerLife.setVisibility(View.GONE);
                 indicatorLife.setVisibility(View.GONE);
             }
-            bannerLife.addBannerLifecycleObserver(this)//添加生命周期观察者
-                    .setAdapter(new MineAboutLifeAdapter(mActivity, mineLifeListBean.getData().getList()))//添加数据
-                    .isAutoLoop(false)
-                    .setIndicator(indicatorLife, false)
-                    .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
-                    .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
-                    .setOnBannerListener((data, position) -> {
-                        PictureEnlargeUtils.getPictureEnlargeList(mActivity, mineLifeListBean.getData().getList().get(position).getImages(), 0);
-                    }).start();
         });
 
         //获取活动瞬间数据返回结果
@@ -116,23 +124,45 @@ public class MineAboutFragment extends BaseLazyFragment {
                 relativeLayoutEvents.setVisibility(View.GONE);
                 bannerEvents.setVisibility(View.VISIBLE);
                 indicatorEvents.setVisibility(View.VISIBLE);
+                bannerEvents.addBannerLifecycleObserver(this)//添加生命周期观察者
+                        .setAdapter(new MineAboutEventsAdapter(mActivity, mineEventsListBean.getData().getList()))//添加数据
+                        .isAutoLoop(false)
+                        .setIndicator(indicatorEvents, false)
+                        .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                        .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                        .setOnBannerListener((data, position) -> {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("id", mineEventsListBean.getData().getList().get(position).getEventId());
+                            bundle.putString("creator", mineEventsListBean.getData().getList().get(position).getCreatorId());
+                            ActivityUtils.startActivity(bundle, EventsDetailActivity.class);
+                        }).start();
             }else {
                 relativeLayoutEvents.setVisibility(View.VISIBLE);
                 bannerEvents.setVisibility(View.GONE);
                 indicatorEvents.setVisibility(View.GONE);
             }
-            bannerEvents.addBannerLifecycleObserver(this)//添加生命周期观察者
-                    .setAdapter(new MineAboutEventsAdapter(mActivity, mineEventsListBean.getData().getList()))//添加数据
-                    .isAutoLoop(false)
-                    .setIndicator(indicatorEvents, false)
-                    .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
-                    .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
-                    .setOnBannerListener((data, position) -> {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("id", mineEventsListBean.getData().getList().get(position).getEventId());
-                        bundle.putString("creator", mineEventsListBean.getData().getList().get(position).getCreatorId());
-                        ActivityUtils.startActivity(bundle, EventsDetailActivity.class);
-                    }).start();
+        });
+
+        //获取问答列表返回数据
+        mineCardViewModel.questionListLiveData.observe(this, questionListBean -> {
+            if (questionListBean.getData().getList().size() != 0){
+                relativeLayoutQuestions.setVisibility(View.GONE);
+                bannerQuestions.setVisibility(View.VISIBLE);
+                indicatorQuestions.setVisibility(View.VISIBLE);
+                bannerQuestions.addBannerLifecycleObserver(this)//添加生命周期观察者
+                        .setAdapter(new MineAboutQuestionsAdapter(mActivity, NumberUtils.getBisectionList(questionListBean.getData().getList(), 3)))//添加数据
+                        .isAutoLoop(false)
+                        .setIndicator(indicatorQuestions, false)
+                        .setIndicatorSelectedColor(mActivity.getResources().getColor(R.color.color_FEFEDA))
+                        .setIndicatorNormalColor(mActivity.getResources().getColor(R.color.color_E0E0E0))
+                        .setOnBannerListener((data, position) -> {
+                            ActivityUtils.startActivity(MineQuestionActivity.class);
+                        }).start();
+            }else {
+                relativeLayoutQuestions.setVisibility(View.VISIBLE);
+                bannerQuestions.setVisibility(View.GONE);
+                indicatorQuestions.setVisibility(View.GONE);
+            }
         });
     }
 
@@ -146,9 +176,10 @@ public class MineAboutFragment extends BaseLazyFragment {
         mineCardViewModel.getWishList(SPUtils.getInstance().getString(SpConfig.USER_ID));
         mineCardViewModel.getLifeList(SPUtils.getInstance().getString(SpConfig.USER_ID));
         mineCardViewModel.getEventsList(SPUtils.getInstance().getString(SpConfig.USER_ID));
+        mineCardViewModel.getQuestionList(SPUtils.getInstance().getString(SpConfig.USER_ID));
     }
 
-    @OnClick({R.id.rl_card_life, R.id.rl_card_events, R.id.rl_card_idea, R.id.rl_card_more})
+    @OnClick({R.id.rl_card_life, R.id.rl_card_events, R.id.rl_card_questions, R.id.rl_card_more})
     void onClick(View view) {
         switch (view.getId()){
             case R.id.rl_card_life://我的生活
@@ -157,8 +188,8 @@ public class MineAboutFragment extends BaseLazyFragment {
             case R.id.rl_card_events://活动瞬间
                 ActivityUtils.startActivity(MineEventsActivity.class);
                 break;
-            case R.id.rl_card_idea://我的想法
-                ToastUtils.showShort("敬请期待");
+            case R.id.rl_card_questions://我的想法
+                ActivityUtils.startActivity(MineQuestionActivity.class);
                 break;
             case R.id.rl_card_more://更多卡片
                 ActivityUtils.startActivity(MineMoreCardActivity.class);
@@ -181,6 +212,9 @@ public class MineAboutFragment extends BaseLazyFragment {
                 break;
             case "events":
                 mineCardViewModel.getEventsList(SPUtils.getInstance().getString(SpConfig.USER_ID));
+                break;
+            case "questions":
+                mineCardViewModel.getQuestionList(SPUtils.getInstance().getString(SpConfig.USER_ID));
                 break;
         }
     }

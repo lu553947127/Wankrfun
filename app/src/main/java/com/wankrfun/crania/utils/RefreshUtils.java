@@ -310,23 +310,6 @@ public class RefreshUtils {
         return list;
     }
 
-
-
-    //个人中心标签列表
-    public static List<BaseBean> getActivityLists(){
-        List<BaseBean> list =new ArrayList<>();
-        list.add(new BaseBean("想恋爱", R.drawable.icon_activity_food));
-        list.add(new BaseBean("吃饭叫我吃饭叫我吃饭叫我", R.drawable.icon_activity_motion));
-        list.add(new BaseBean("北京", R.drawable.icon_activity_game));
-        list.add(new BaseBean("清华", R.drawable.icon_activity_tea));
-        list.add(new BaseBean("喜欢猫", R.drawable.icon_activity_karaoke));
-        list.add(new BaseBean("沉迷锻炼", R.drawable.icon_activity_board_play));
-        list.add(new BaseBean("古典", R.drawable.icon_activity_film));
-        list.add(new BaseBean("夜生活", R.drawable.icon_activity_night_life));
-        list.add(new BaseBean("其他", R.drawable.icon_activity_not));
-        return list;
-    }
-
     //个人中心背景列表
     public static List<BaseBean> getBgList(){
         List<BaseBean> list =new ArrayList<>();
@@ -346,18 +329,6 @@ public class RefreshUtils {
         list.add(new BaseBean("十四", R.drawable.icon_bg13));
         list.add(new BaseBean("十五", R.drawable.icon_bg14));
         list.add(new BaseBean("十六", R.drawable.icon_bg15));
-        return list;
-    }
-
-    //活动类型列表
-    public static List<BaseBean> getMeetList(){
-        List<BaseBean> list =new ArrayList<>();
-        list.add(new BaseBean("美食", R.drawable.aaa));
-        list.add(new BaseBean("运动", R.drawable.bbb));
-        list.add(new BaseBean("下午茶", R.drawable.bbb2));
-        list.add(new BaseBean("k歌", R.drawable.bbb3));
-        list.add(new BaseBean("桌游", R.drawable.bbb4));
-        list.add(new BaseBean("电影", R.drawable.bbb5));
         return list;
     }
 

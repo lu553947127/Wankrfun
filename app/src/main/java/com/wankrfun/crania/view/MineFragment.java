@@ -99,8 +99,6 @@ public class MineFragment extends BaseFragment {
     AppCompatTextView tvFav;
     @BindView(R.id.view_pager)
     AutoHeightViewPager viewPager;
-    @BindView(R.id.iv_add)
-    AppCompatImageView ivAdd;
     private MineViewModel mineViewModel;
     private MeetViewModel meetViewModel;
     private UserInfoBean userInfoBean;
@@ -126,7 +124,7 @@ public class MineFragment extends BaseFragment {
                 new MineFavFragment()
         };
         ScrollUtils.getViewPagerAddOnPageChangeListener(mActivity, getChildFragmentManager(), viewPager, fragments, tvAbout, tvInitiate, tvApply, tvFav);
-        ScrollUtils.getTooBarOnScrollChangeListener(mActivity, scrollView, toolbar, ivAdd);
+        ScrollUtils.getTooBarOnScrollChangeListener(mActivity, scrollView, toolbar, null);
 
         refresh.setEnableLoadMore(false);
         refresh.setEnableRefresh(true);
@@ -197,7 +195,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.iv_set, R.id.iv_set2, R.id.iv_edit, R.id.iv_edit2, R.id.iv_bg, R.id.iv_bg2, R.id.iv_avatar, R.id.iv_avatar2, R.id.iv_label
-            , R.id.tv_about, R.id.tv_initiate, R.id.tv_apply, R.id.tv_fav, R.id.iv_add})
+            , R.id.tv_about, R.id.tv_initiate, R.id.tv_apply, R.id.tv_fav})
     void onClick(View view) {
         Bundle bundle = new Bundle();
         switch (view.getId()){
@@ -243,9 +241,6 @@ public class MineFragment extends BaseFragment {
             case R.id.tv_fav://我的想去
                 DrawableUtils.setMineEventsTab(mActivity, 3, tvAbout, tvInitiate, tvApply, tvFav);
                 viewPager.setCurrentItem(3);
-                break;
-            case R.id.iv_add://活动添加
-                ActivityUtils.startActivity(EventsAddActivity.class);
                 break;
         }
     }

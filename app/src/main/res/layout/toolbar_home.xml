@@ -54,7 +54,8 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_home_date"/>
+            android:src="@drawable/icon_home_date"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

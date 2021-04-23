@@ -26,8 +26,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:scaleType="centerCrop"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/icon_activity_motion15"/>
+                android:layout_gravity="center_vertical" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_title"
@@ -37,8 +36,7 @@
                 android:layout_marginLeft="10dp"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:text="一起来运动吧"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -52,8 +50,7 @@
                 android:id="@+id/iv_avatar"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/bbb3"/>
+                android:layout_gravity="center_vertical"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
@@ -62,16 +59,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/color_BDBDBD"
-                android:textSize="12sp"
-                android:text="嘿嘿"/>
+                android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_sex"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/icon_sex_female"/>
+                android:layout_marginLeft="10dp" />
 
         </LinearLayout>
 
@@ -84,7 +79,6 @@
         android:layout_weight="1"
         android:scaleType="centerCrop"
         app:right_bottom_radius="5dp"
-        app:right_top_radius="5dp"
-        android:src="@drawable/bbb5"/>
+        app:right_top_radius="5dp" />
 
 </LinearLayout>

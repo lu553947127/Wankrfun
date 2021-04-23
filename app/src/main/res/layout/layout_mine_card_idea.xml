@@ -3,8 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    android:id="@+id/ll_questions">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -14,12 +16,25 @@
         android:textSize="18sp"
         android:text="我的想法"/>
 
+    <com.youth.banner.Banner
+        android:id="@+id/banner_questions"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:is_infinite_loop="false"/>
+
+    <com.youth.banner.indicator.CircleIndicator
+        android:id="@+id/indicator_questions"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_gravity="center_horizontal" />
+
     <RelativeLayout
-        android:id="@+id/rl_card_idea"
+        android:id="@+id/rl_card_questions"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@drawable/shape_gray_10"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"

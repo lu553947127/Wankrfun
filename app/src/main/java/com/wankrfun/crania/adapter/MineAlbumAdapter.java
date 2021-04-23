@@ -33,8 +33,8 @@ public class MineAlbumAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
         CornerImageView cornerImageView = helper.getView(R.id.iv_image);
         ImageLoader.load(mContext, new ImageConfig.Builder()
                 .url(item)
-                .placeholder(R.drawable.ic_empty_zhihu)
-                .errorPic(R.drawable.ic_empty_zhihu)
+                .placeholder(R.drawable.icon_images_empty2)
+                .errorPic(R.drawable.icon_images_empty2)
                 .imageView(cornerImageView)
                 .build());
     }

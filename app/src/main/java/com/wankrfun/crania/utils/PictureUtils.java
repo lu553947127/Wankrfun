@@ -66,8 +66,8 @@ public class PictureUtils {
     public static void setImage(Context context, String image, AppCompatImageView appCompatImageView){
         ImageLoader.load(context, new ImageConfig.Builder()
                 .url(image)
-                .placeholder(R.drawable.ic_empty_zhihu)
-                .errorPic(R.drawable.ic_empty_zhihu)
+                .placeholder(R.drawable.icon_images_empty2)
+                .errorPic(R.drawable.icon_images_empty2)
                 .imageView(appCompatImageView)
                 .build());
     }

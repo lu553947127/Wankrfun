@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 import com.wankrfun.crania.R;
 
 import io.rong.imkit.model.ProviderTag;
@@ -27,9 +29,10 @@ import io.rong.imlib.model.MessageContent;
  */
 @ProviderTag(messageContent = CustomMessage.class)
 public class CustomMessageProvider extends IContainerItemProvider.MessageProvider {
+
     @Override
     public void bindView(View view, int i, MessageContent messageContent, UIMessage uiMessage) {
-
+        ((AppCompatTextView)(view.findViewById(R.id.tv_btn))).setText(R.string.meet_accept);
     }
 
     @Override
