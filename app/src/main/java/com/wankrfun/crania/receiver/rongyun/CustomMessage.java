@@ -2,7 +2,7 @@ package com.wankrfun.crania.receiver.rongyun;
 
 import android.annotation.SuppressLint;
 import android.os.Parcel;
-import android.text.TextUtils;
+import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
 
@@ -10,22 +10,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import io.rong.common.ParcelUtils;
 import io.rong.imlib.MessageTag;
-import io.rong.imlib.model.MentionedInfo;
 import io.rong.imlib.model.MessageContent;
-import io.rong.imlib.model.UserInfo;
 
 /**
  * @ProjectName: Wankrfun
  * @Package: com.wankrfun.crania.receiver.rongyun
  * @ClassName: CustomMessage
- * @Description: 融云自定义消息接收类
+ * @Description: 融云自定义消息接收类(主动邀请发送模版)
  * @Author: 鹿鸿祥
  * @CreateDate: 4/19/21 10:34 AM
  * @UpdateUser: 更新者
@@ -34,40 +28,70 @@ import io.rong.imlib.model.UserInfo;
  * @Version: 1.0
  */
 @SuppressLint("ParcelCreator")
-@MessageTag(value = "RC:CustomMsg", flag = MessageTag.ISCOUNTED | MessageTag.ISPERSISTED)
+@MessageTag(value = "WInvitationMsg", flag = MessageTag.ISCOUNTED | MessageTag.ISPERSISTED)
 public class CustomMessage extends MessageContent {
+
     private static final String TAG ="CustomMessage" ;
-    private String content, extra;
 
-    public CustomMessage() {
+    //显示的非下划线文字
+    private String msg;
+    //显示的下划线按钮文字
+    private String btnTxt;
+    //心愿主人id，应当不会显示给心愿主人
+    private String receiverId;
+    //提示收到者id，应当显示本条
+    private String senderId;
+    //互动id， 接受邀约接口用到
+    private String invitationId;
+    //心愿id
+    private String wishId;
+    
+    public CustomMessage(){}
 
+    /**
+     * 创建 CustomMessage(byte[] data) 带有 byte[] 的构造方法用于解析消息内容.
+     */
+    public CustomMessage(byte[] data) {
+        if (data == null) {
+            LogUtils.e(TAG, "data is null ");
+            return;
+        }
+        String jsonStr = null;
+        try {
+            jsonStr = new String(data, "UTF-8");
+            JSONObject jsonObj = new JSONObject(jsonStr);
+            setMsg(jsonObj.getString("msg"));
+            setBtnTxt(jsonObj.getString("btnTxt"));
+            setReceiverId(jsonObj.getString("receiverId"));
+            setSenderId(jsonObj.getString("senderId"));
+            setInvitationId(jsonObj.getString("invitationId"));
+            setWishId(jsonObj.getString("wishId"));
+        } catch (UnsupportedEncodingException | JSONException e) {
+            Log.e(TAG, "UnsupportedEncodingException ", e);
+        }
     }
 
-    public CustomMessage(String content, String extra) {
-        this.content = content;
-        this.extra = extra;
+    public static CustomMessage obtain(String msg, String btnTxt, String receiverId, String senderId, String invitationId, String wishId) {
+        CustomMessage customMessage = new CustomMessage();
+        customMessage.msg = msg;
+        customMessage.btnTxt = btnTxt;
+        customMessage.receiverId = receiverId;
+        customMessage.senderId = senderId;
+        customMessage.invitationId = invitationId;
+        customMessage.wishId = wishId;
+        return customMessage;
     }
 
     @Override
     public byte[] encode() {
         JSONObject jsonObj = new JSONObject();
         try {
-            if (!TextUtils.isEmpty(getContent())) {
-                jsonObj.put("content", getEmotion(getContent()));
-            }
-
-            if (!TextUtils.isEmpty(getExtra()))
-                jsonObj.put("extra", getExtra());
-
-            if (getJSONUserInfo() != null)
-                jsonObj.putOpt("user", getJSONUserInfo());
-
-            if (getJsonMentionInfo() != null) {
-                jsonObj.putOpt("mentionedInfo", getJsonMentionInfo());
-            }
-            // TODO 考虑改成一个字段
-            jsonObj.put("isBurnAfterRead", isDestruct());
-            jsonObj.put("burnDuration", getDestructTime());
+            jsonObj.put("msg", msg);
+            jsonObj.put("btnTxt", btnTxt);
+            jsonObj.put("receiverId", receiverId);
+            jsonObj.put("senderId", senderId);
+            jsonObj.put("invitationId", invitationId);
+            jsonObj.put("wishId", wishId);
         } catch (JSONException e) {
             LogUtils.e(TAG, "JSONException " + e.getMessage());
         }
@@ -88,48 +112,12 @@ public class CustomMessage extends MessageContent {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        ParcelUtils.writeToParcel(parcel, getExtra());
-        ParcelUtils.writeToParcel(parcel, content);
-        ParcelUtils.writeToParcel(parcel, getUserInfo());
-        ParcelUtils.writeToParcel(parcel, getMentionedInfo());
-        ParcelUtils.writeToParcel(parcel, isDestruct() ? 1 : 0);
-        ParcelUtils.writeToParcel(parcel, getDestructTime());
-    }
-
-    /**
-     * 获取消息扩展信息
-     *
-     * @return 扩展信息
-     */
-    public String getExtra() {
-        return extra;
-    }
-
-    /**
-     * 设置消息扩展信息
-     *
-     * @param extra 扩展信息
-     */
-    public void setExtra(String extra) {
-        this.extra = extra;
-    }
-
-    /**
-     * 获取文字消息的内容。
-     *
-     * @return 文字消息的内容。
-     */
-    public String getContent() {
-        return content;
-    }
-
-    /**
-     * 设置文字消息的内容。
-     *
-     * @param content 文字消息的内容。
-     */
-    public void setContent(String content) {
-        this.content = content;
+        ParcelUtils.writeToParcel(parcel, msg);
+        ParcelUtils.writeToParcel(parcel, btnTxt);
+        ParcelUtils.writeToParcel(parcel, receiverId);
+        ParcelUtils.writeToParcel(parcel, senderId);
+        ParcelUtils.writeToParcel(parcel, invitationId);
+        ParcelUtils.writeToParcel(parcel, wishId);
     }
 
     /**
@@ -154,54 +142,59 @@ public class CustomMessage extends MessageContent {
      * @param in 初始化传入的 Parcel。
      */
     public CustomMessage(Parcel in) {
-        setExtra(ParcelUtils.readFromParcel(in));
-        setContent(ParcelUtils.readFromParcel(in));
-        setUserInfo(ParcelUtils.readFromParcel(in, UserInfo.class));
-        setMentionedInfo(ParcelUtils.readFromParcel(in, MentionedInfo.class));
-        setDestruct(ParcelUtils.readIntFromParcel(in) == 1);
-        setDestructTime(ParcelUtils.readLongFromParcel(in));
+        setMsg(ParcelUtils.readFromParcel(in));
+        setBtnTxt(ParcelUtils.readFromParcel(in));
+        setReceiverId(ParcelUtils.readFromParcel(in));
+        setSenderId(ParcelUtils.readFromParcel(in));
+        setInvitationId(ParcelUtils.readFromParcel(in));
+        setWishId(ParcelUtils.readFromParcel(in));
     }
 
-    /**
-     * 构造函数。
-     *
-     * @param content 文字消息的内容。
-     */
-    public CustomMessage(String content) {
-        this.setContent(content);
+    public String getMsg() {
+        return msg;
     }
 
-    @Override
-    public List<String> getSearchableWord() {
-        List<String> words = new ArrayList<>();
-        words.add(content);
-        return words;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public static CustomMessage obtain(String text) {
-        CustomMessage model = new CustomMessage();
-        model.setContent(text);
-        return model;
+    public String getBtnTxt() {
+        return btnTxt;
     }
 
-    private String getEmotion(String content) {
+    public void setBtnTxt(String btnTxt) {
+        this.btnTxt = btnTxt;
+    }
 
-        Pattern pattern = Pattern.compile("\\[/u([0-9A-Fa-f]+)\\]");
-        Matcher matcher = pattern.matcher(content);
+    public String getReceiverId() {
+        return receiverId;
+    }
 
-        StringBuffer sb = new StringBuffer();
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
+    }
 
-        while (matcher.find()) {
-            String matchStr = matcher.group(1);
-            int inthex = 0;
-            if (matchStr != null) {
-                inthex = Integer.parseInt(matchStr, 16);
-            }
-            matcher.appendReplacement(sb, String.valueOf(Character.toChars(inthex)));
-        }
+    public String getSenderId() {
+        return senderId;
+    }
 
-        matcher.appendTail(sb);
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
 
-        return sb.toString();
+    public String getInvitationId() {
+        return invitationId;
+    }
+
+    public void setInvitationId(String invitationId) {
+        this.invitationId = invitationId;
+    }
+
+    public String getWishId() {
+        return wishId;
+    }
+
+    public void setWishId(String wishId) {
+        this.wishId = wishId;
     }
 }

@@ -40,6 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="right"
-        android:src="@drawable/icon_challenge_refresh"/>
+        android:src="@drawable/icon_question_refresh"/>
 
 </LinearLayout>

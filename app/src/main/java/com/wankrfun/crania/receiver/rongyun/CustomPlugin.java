@@ -7,16 +7,12 @@ import android.graphics.drawable.Drawable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.blankj.utilcode.util.LogUtils;
+import com.lxj.xpopup.XPopup;
 import com.wankrfun.crania.R;
+import com.wankrfun.crania.dialog.CustomBottomMessageDialog;
 
 import io.rong.imkit.RongExtension;
-import io.rong.imkit.RongIM;
 import io.rong.imkit.plugin.IPluginModule;
-import io.rong.imlib.IRongCallback;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.Conversation;
-import io.rong.imlib.model.Message;
 
 /**
  * @ProjectName: Wankrfun
@@ -34,7 +30,7 @@ public class CustomPlugin implements IPluginModule {
 
     @Override
     public Drawable obtainDrawable(Context context) {
-        return ContextCompat.getDrawable(context, R.drawable.icon_meet_like);
+        return ContextCompat.getDrawable(context, R.drawable.icon_message_invitation);
     }
 
     @Override
@@ -44,39 +40,7 @@ public class CustomPlugin implements IPluginModule {
 
     @Override
     public void onClick(Fragment fragment, RongExtension rongExtension) {
-        CustomMessage messageContent = CustomMessage.obtain("自定义消息");
-        Message message = Message.obtain(rongExtension.getTargetId(), Conversation.ConversationType.PRIVATE, messageContent);
-        RongIM.getInstance().sendMessage(message, "pushContent", "pushData", new IRongCallback.ISendMessageCallback() {
-            /**
-             * 消息发送前回调, 回调时消息已存储数据库
-             * @param message 已存库的消息体
-             */
-            @Override
-            public void onAttached(Message message) {
-                LogUtils.e("消息发送前回调","message-------"+message.getContent());
-            }
-            /**
-             * 消息发送成功。
-             * @param message 发送成功后的消息体
-             */
-            @Override
-            public void onSuccess(Message message) {
-                LogUtils.e("消息发送成功","message-------"+message.getContent());
-            }
-
-            /**
-             * 消息发送失败
-             * @param message   发送失败的消息体
-             * @param errorCode 具体的错误
-             */
-            @Override
-            public void onError(Message message, RongIMClient.ErrorCode errorCode) {
-                LogUtils.e("消息发送失败","message-------"+message.getContent());
-                LogUtils.e("消息发送失败","errorCode-------"+errorCode);
-                LogUtils.e("消息发送失败","errorCode-------"+errorCode.getMessage());
-                LogUtils.e("消息发送失败","errorCode-------"+errorCode.getValue());
-            }
-        });
+        new XPopup.Builder(fragment.getActivity()).asCustom(new CustomBottomMessageDialog(fragment.getContext(), rongExtension.getTargetId())).show();
     }
 
     @Override

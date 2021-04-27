@@ -35,6 +35,8 @@ import com.wankrfun.crania.http.retrofit.BaseRequest;
 import com.wankrfun.crania.receiver.rongyun.CustomExtensionModule;
 import com.wankrfun.crania.receiver.rongyun.CustomMessage;
 import com.wankrfun.crania.receiver.rongyun.CustomMessageProvider;
+import com.wankrfun.crania.receiver.rongyun.CustomTextMessage;
+import com.wankrfun.crania.receiver.rongyun.CustomTextMessageProvider;
 import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.RongIMUtils;
 
@@ -151,7 +153,7 @@ public class MyApplication extends Application {
      */
     private static void initUtils(Application context) {
         Utils.init(context);
-        LogUtils.getConfig().setGlobalTag(context.getString(R.string.app_name)).setLogSwitch(true);
+        LogUtils.getConfig().setGlobalTag(context.getString(R.string.app_name)).setLogSwitch(false);
         ToastUtils.setGravity(Gravity.CENTER, 0, ConvertUtils.dp2px(100));
         ToastUtils.setMsgTextSize(13);
         ToastUtils.setMsgColor(context.getResources().getColor(R.color.white));
@@ -211,7 +213,7 @@ public class MyApplication extends Application {
             switch (connectionStatus) {
                 //融云账号在其他设备上进行登录
                 case KICKED_OFFLINE_BY_OTHER_CLIENT:
-//                    LoginUtils.getExitLogin();
+                    LoginUtils.getExitLogin();
                     break;
             }
         });
@@ -227,12 +229,16 @@ public class MyApplication extends Application {
         RongIM.getInstance().setVoiceMessageType(RongIM.VoiceMessageType.HighQuality);
         //获取发出去的消息监听
         RongIMUtils.getSendMessageListener();
+        //获取接收到的消息监听
+        RongIMUtils.getReceiveMessageListener();
         //加号区域内置扩展项
         registerExtensionPlugin();
         //注册自定义消息接收
         RongIM.registerMessageType(CustomMessage.class);
+        RongIM.registerMessageType(CustomTextMessage.class);
         //初始化自定义消息布局
         RongIM.getInstance().registerMessageTemplate(new CustomMessageProvider());
+        RongIM.getInstance().registerMessageTemplate(new CustomTextMessageProvider());
     }
 
     /**
