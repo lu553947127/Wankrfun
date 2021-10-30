@@ -19,8 +19,8 @@ android {
         applicationId "com.wankrfun.crania"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
-        versionName "2.1.0"
+        versionCode 4
+        versionName "2.2.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
@@ -161,6 +161,8 @@ dependencies {
     implementation 'com.github.LinweiJ:ViewPagerIndicator:0.3.0'
     //播放webp图片
     implementation 'com.github.penfeizhou.android.animation:awebp:2.10.0'
+
+    implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
 
     //华为推送模块
     implementation 'com.huawei.hms:push:5.0.0.300'
