@@ -27,9 +27,10 @@ allprojects {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         //融云即时通讯maven仓库
         maven { url "https://dl.bintray.com/rongcloud/maven" }
-//        maven { url  "http://maven.rongcloud.cn/repository/maven-releases/" }
+        maven { url  "http://maven.rongcloud.cn/repository/maven-releases/" }
         //华为推送maven仓库
         maven { url 'https://developer.huawei.com/repo/' }
+        google()
     }
 }
 
