@@ -103,7 +103,12 @@ public class ChangeAddressActivity extends BaseActivity implements PoiSearch.OnP
         mQuery.setPageSize(50);// 设置每页最多返回多少条poiitem
         mQuery.setPageNum(0);// 设置查第一页
         mQuery.setCityLimit(true);
-        PoiSearch mPoiSearch = new PoiSearch(activity, mQuery);
+        PoiSearch mPoiSearch = null;
+        try {
+            mPoiSearch = new PoiSearch(activity, mQuery);
+        } catch (AMapException e) {
+            e.printStackTrace();
+        }
         mPoiSearch.setOnPoiSearchListener(this);
         mPoiSearch.searchPOIAsyn();// 异步搜索
     }

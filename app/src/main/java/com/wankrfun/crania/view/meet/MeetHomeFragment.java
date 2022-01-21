@@ -417,7 +417,11 @@ public class MeetHomeFragment extends BaseLazyFragment {
     @Override
     protected void initDataFromService() {
         if (PermissionUtils.isCheckPermission(mActivity)){
-            LocationUtils.getInstance().startLocalService();
+            try {
+                LocationUtils.getInstance().startLocalService();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

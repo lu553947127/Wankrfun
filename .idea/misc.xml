@@ -8,7 +8,16 @@
         <entry key="app/src/main/res/layout/activity_web_view.xml" value="0.11930091185410334" />
         <entry key="app/src/main/res/layout/adapter_events_select_apply.xml" value="0.1831306990881459" />
         <entry key="app/src/main/res/layout/dialog_agreement.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.1831306990881459" />
         <entry key="app/src/main/res/layout/progress_horizontal.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/rc_ext_extension_bar.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/rc_ext_input_edit_text.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/rc_ext_voice_input.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/rc_fr_conversationlist.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/rc_item_base_conversation.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/rc_item_conversation.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/rc_item_message.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/rc_item_text_message.xml" value="0.1358695652173913" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.11930091185410334" />
       </map>
     </option>

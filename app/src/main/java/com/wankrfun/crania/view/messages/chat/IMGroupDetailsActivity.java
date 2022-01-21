@@ -106,19 +106,19 @@ public class IMGroupDetailsActivity extends BaseActivity {
 
         //退出群聊成功返回结果
         imConnectViewModel.imOutGroupLiveData.observe(this, eventsCreateBean -> {
-            RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, getIntent().getStringExtra("group_id"), new RongIMClient.ResultCallback<Boolean>() {
-                @Override
-                public void onSuccess(Boolean aBoolean) {
-                    ToastUtils.showShort(eventsCreateBean.getData().getMsg());
-                    ActivityUtils.finishActivity(IMPrivateChatActivity.class);
-                    finish();
-                }
-
-                @Override
-                public void onError(RongIMClient.ErrorCode e) {
-
-                }
-            });
+//            RongIM.getInstance().removeConversation(Conversation.ConversationType.GROUP, getIntent().getStringExtra("group_id"), new RongIMClient.ResultCallback<Boolean>() {
+//                @Override
+//                public void onSuccess(Boolean aBoolean) {
+//                    ToastUtils.showShort(eventsCreateBean.getData().getMsg());
+//                    ActivityUtils.finishActivity(IMPrivateChatActivity.class);
+//                    finish();
+//                }
+//
+//                @Override
+//                public void onError(RongIMClient.ErrorCode e) {
+//
+//                }
+//            });
         });
 
         imConnectViewModel.getImGroupMembers(getIntent().getStringExtra("group_id"));

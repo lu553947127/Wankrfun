@@ -6,8 +6,10 @@ import android.view.ViewGroup;
 
 import com.wankrfun.crania.R;
 
-import io.rong.imkit.model.UIConversation;
-import io.rong.imkit.widget.adapter.ConversationListAdapter;
+import io.rong.imkit.conversationlist.ConversationListAdapter;
+
+//import io.rong.imkit.model.UIConversation;
+//import io.rong.imkit.widget.adapter.ConversationListAdapter;
 
 /**
  * @ProjectName: Wankrfun
@@ -21,26 +23,26 @@ import io.rong.imkit.widget.adapter.ConversationListAdapter;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class ConversationListAdapterEx extends ConversationListAdapter {
-
-    public ConversationListAdapterEx(Context context) {
-        super(context);
-    }
-
-    @Override
-    protected View newView(Context context, int position, ViewGroup group) {
-        return super.newView(context, position, group);
-    }
-
-    @Override
-    protected void bindView(View v, int position, UIConversation data) {
-        super.bindView(v, position, data);
-        if (data != null) {
-            if (data.isTop()){
-                (v.findViewById(R.id.rc_item_conversation)).setBackgroundResource(R.color.color_333333);
-            }else {
-                (v.findViewById(R.id.rc_item_conversation)).setBackgroundResource(R.color.black);
-            }
-        }
-    }
-}
+//public class ConversationListAdapterEx extends ConversationListAdapter {
+//
+//    public ConversationListAdapterEx(Context context) {
+//        super(context);
+//    }
+//
+//    @Override
+//    protected View newView(Context context, int position, ViewGroup group) {
+//        return super.newView(context, position, group);
+//    }
+//
+//    @Override
+//    protected void bindView(View v, int position, UIConversation data) {
+//        super.bindView(v, position, data);
+//        if (data != null) {
+//            if (data.isTop()){
+//                (v.findViewById(R.id.rc_item_conversation)).setBackgroundResource(R.color.color_333333);
+//            }else {
+//                (v.findViewById(R.id.rc_item_conversation)).setBackgroundResource(R.color.black);
+//            }
+//        }
+//    }
+//}

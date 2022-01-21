@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amap.api.maps.MapsInitializer;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.base.SpConfig;
@@ -61,6 +62,9 @@ public class AgreementDialog {
         SharedUtils sharedUtils = new SharedUtils(activity);
 
         tv_agree.setOnClickListener(v -> {
+            //设置高德地图隐私协议
+            MapsInitializer.updatePrivacyShow(activity, true, true);
+            MapsInitializer.updatePrivacyAgree(activity, true);
             sharedUtils.addShared(SpConfig.FIRST_APP,"1","first");
             onCustomClickListener.onClickListener();
             dialog.dismiss();

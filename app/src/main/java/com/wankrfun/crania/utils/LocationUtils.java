@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
@@ -55,7 +56,7 @@ public class LocationUtils {
     /**
      * 获取一个本地随机数定位地址
      */
-    public void getLocalLocation(){
+    public void getLocalLocation() throws AMapException {
         localLocationList.add(new LocationEvent(121.433727, 31.197776, "上海"));
         localLocationList.add(new LocationEvent(121.446182, 31.19639, "上海"));
         localLocationList.add(new LocationEvent(121.458897, 31.219871, "上海"));
@@ -77,7 +78,7 @@ public class LocationUtils {
     /**
      * 开启定位服务
      */
-    public void startLocalService() {
+    public void startLocalService() throws Exception {
         //初始化定位
         mLocationClient = new AMapLocationClient(MyApplication.getInstance());
         //设置定位回调监听
@@ -89,7 +90,11 @@ public class LocationUtils {
                     SPUtils.getInstance().put(SpConfig.LONGITUDE, String.valueOf(location.getLongitude()), true);
                     SPUtils.getInstance().put(SpConfig.LATITUDE, String.valueOf(location.getLatitude()), true);
                     LogUtils.e( "longitude："+location.getLongitude()+"latitude："+location.getLatitude());
-                    getAddressChange(location.getLatitude(), location.getLongitude());
+                    try {
+                        getAddressChange(location.getLatitude(), location.getLongitude());
+                    } catch (AMapException e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 ToastUtils.showShort("定位失败，loc is null");
@@ -104,7 +109,7 @@ public class LocationUtils {
      * @param latitude 纬度
      * @param longitude 经度
      */
-    private void getAddressChange(final double latitude, double longitude) {
+    private void getAddressChange(final double latitude, double longitude) throws AMapException {
         GeocodeSearch geocoderSearch = new GeocodeSearch(MyApplication.getInstance());
         geocoderSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
 

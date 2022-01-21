@@ -134,7 +134,12 @@ public class CustomBottomAddress extends BottomPopupView implements PoiSearch.On
         PoiSearch.Query query = new PoiSearch.Query(keyWord, "", "");
         query.setPageSize(30);
         query.setPageNum(0);
-        PoiSearch poisearch = new PoiSearch(context, query);
+        PoiSearch poisearch = null;
+        try {
+            poisearch = new PoiSearch(context, query);
+        } catch (AMapException e) {
+            e.printStackTrace();
+        }
         poisearch.setOnPoiSearchListener(this);
         poisearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LATITUDE))
                 ,Double.parseDouble(SPUtils.getInstance().getString(SpConfig.LONGITUDE))), 500, true));
@@ -149,7 +154,12 @@ public class CustomBottomAddress extends BottomPopupView implements PoiSearch.On
         mQuery.setPageSize(50);// 设置每页最多返回多少条poiitem
         mQuery.setPageNum(0);// 设置查第一页
         mQuery.setCityLimit(true);
-        PoiSearch mPoiSearch = new PoiSearch(context, mQuery);
+        PoiSearch mPoiSearch = null;
+        try {
+            mPoiSearch = new PoiSearch(context, mQuery);
+        } catch (AMapException e) {
+            e.printStackTrace();
+        }
         mPoiSearch.setOnPoiSearchListener(this);
         mPoiSearch.searchPOIAsyn();// 异步搜索
     }

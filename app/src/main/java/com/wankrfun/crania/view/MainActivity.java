@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import io.rong.imkit.RongIM;
-import io.rong.imkit.manager.IUnReadMessageObserver;
-import io.rong.imlib.model.Conversation;
+//import io.rong.imkit.RongIM;
+//import io.rong.imkit.manager.IUnReadMessageObserver;
+//import io.rong.imlib.model.Conversation;
 
 /**
  * @ProjectName: Wankrfun
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
     List<Fragment> mFragments;
     //用于记录上个选择的Fragment
     private int lastFragment;
-    private IUnReadMessageObserver observer;
+//    private IUnReadMessageObserver observer;
     private LoginViewModel loginViewModel;
 
     @Override
@@ -204,28 +204,28 @@ public class MainActivity extends BaseActivity {
             }
         }
 
-        observer = i -> {
-            // i 是未读数量
-            //设置底部角标显示状态
-            if (i < 1) {
-                relativeLayout.setVisibility(View.GONE);
-            } else if (i < 100) {
-                relativeLayout.setVisibility(View.VISIBLE);
-                number.setTextSize(11);
-                number.setText(String.valueOf(i));
-            } else {
-                relativeLayout.setVisibility(View.VISIBLE);
-                number.setTextSize(9);
-                number.setText("99+");
-            }
-        };
-        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP, Conversation.ConversationType.SYSTEM);
+//        observer = i -> {
+//            // i 是未读数量
+//            //设置底部角标显示状态
+//            if (i < 1) {
+//                relativeLayout.setVisibility(View.GONE);
+//            } else if (i < 100) {
+//                relativeLayout.setVisibility(View.VISIBLE);
+//                number.setTextSize(11);
+//                number.setText(String.valueOf(i));
+//            } else {
+//                relativeLayout.setVisibility(View.VISIBLE);
+//                number.setTextSize(9);
+//                number.setText("99+");
+//            }
+//        };
+//        RongIM.getInstance().addUnReadMessageCountChangedObserver(observer, Conversation.ConversationType.PRIVATE, Conversation.ConversationType.GROUP, Conversation.ConversationType.SYSTEM);
         loginViewModel.getVersionUpload();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
+//        RongIM.getInstance().removeUnReadMessageCountChangedObserver(observer);
     }
 }

@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 
+import com.amap.api.services.core.AMapException;
 import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BaseActivity;
 import com.wankrfun.crania.image.MatisseGlideEngine;
@@ -60,7 +61,11 @@ public class PermissionUtils {
                 })
                 .onDenied(permissions ->{
                     EventBus.getDefault().post("true");
-                    LocationUtils.getInstance().getLocalLocation();
+                    try {
+                        LocationUtils.getInstance().getLocalLocation();
+                    } catch (AMapException e) {
+                        e.printStackTrace();
+                    }
 //                    activity.showPermissionDialog(activity.getResources().getString(R.string.permission_location));
                 })
                 .start();

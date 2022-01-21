@@ -162,7 +162,7 @@ dependencies {
     implementation 'com.github.LinweiJ:ViewPagerIndicator:0.3.0'
     //播放webp图片
     implementation 'com.github.penfeizhou.android.animation:awebp:2.10.0'
-
+    //支持角标多功能tab
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
 
     //华为推送模块
