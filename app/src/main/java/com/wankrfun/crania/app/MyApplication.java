@@ -32,11 +32,11 @@ import com.wankrfun.crania.R;
 import com.wankrfun.crania.base.BuildConfig;
 import com.wankrfun.crania.http.api.ApiService;
 import com.wankrfun.crania.http.retrofit.BaseRequest;
-//import com.wankrfun.crania.receiver.rongyun.CustomExtensionModule;
-//import com.wankrfun.crania.receiver.rongyun.CustomMessage;
-//import com.wankrfun.crania.receiver.rongyun.CustomMessageProvider;
-//import com.wankrfun.crania.receiver.rongyun.CustomTextMessage;
-//import com.wankrfun.crania.receiver.rongyun.CustomTextMessageProvider;
+import com.wankrfun.crania.receiver.rongyun.CustomExtensionModule;
+import com.wankrfun.crania.receiver.rongyun.CustomMessage;
+import com.wankrfun.crania.receiver.rongyun.CustomMessageProvider;
+import com.wankrfun.crania.receiver.rongyun.CustomTextMessage;
+import com.wankrfun.crania.receiver.rongyun.CustomTextMessageProvider;
 import com.wankrfun.crania.utils.LoginUtils;
 import com.wankrfun.crania.utils.RongIMUtils;
 
@@ -45,9 +45,9 @@ import java.util.List;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import cn.jpush.android.api.JPushInterface;
-//import io.rong.imkit.DefaultExtensionModule;
-//import io.rong.imkit.IExtensionModule;
-//import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
@@ -108,7 +108,7 @@ public class MyApplication extends Application {
 
         initCrash(getApplicationContext());
 
-//        initRongYun(getApplicationContext());
+        initRongYun(getApplicationContext());
 
         initJPush(getApplicationContext());
 
@@ -191,75 +191,75 @@ public class MyApplication extends Application {
         }
     }
 
-//    /**
-//     * 初始化融云
-//     * @param context
-//     */
-//    private static void initRongYun(Context context) {
-//        //融云初始化
-//        RongIM.init(context, BuildConfig.RONG_YUN_APP_KEY);
-//        //融云推送初始化
-//        PushConfig config = new PushConfig
-//                .Builder()
-//                .enableHWPush(true)
-//                .enableMiPush("2882303761519202034", "5801920268034")
-//                .enableVivoPush(true)
-//                .enableOppoPush("ef2e82315f9949e09c8b7026b508ca28", "a5c29a118f344d809c7323a26551b8de")
-//                .build();
-//        RongPushClient.setPushConfig(config);
-//
-//        //设置融云全局链接状态监听
-//        RongIMClient.setConnectionStatusListener(connectionStatus -> {
-//            switch (connectionStatus) {
-//                //融云账号在其他设备上进行登录
-//                case KICKED_OFFLINE_BY_OTHER_CLIENT:
-//                    LoginUtils.getExitLogin();
-//                    break;
-//            }
-//        });
-//
-//        //设置消息回执的会话类型
-//        Conversation.ConversationType[] types = new Conversation.ConversationType[] {
-//                Conversation.ConversationType.PRIVATE,
-//                Conversation.ConversationType.GROUP,
-//                Conversation.ConversationType.DISCUSSION
-//        };
-//        RongIM.getInstance().setReadReceiptConversationTypeList(types);
-//        //开启高清语音
-//        RongIM.getInstance().setVoiceMessageType(RongIM.VoiceMessageType.HighQuality);
-//        //获取发出去的消息监听
-//        RongIMUtils.getSendMessageListener();
-//        //获取接收到的消息监听
-//        RongIMUtils.getReceiveMessageListener();
-//        //加号区域内置扩展项
-//        registerExtensionPlugin();
-//        //注册自定义消息接收
-//        RongIM.registerMessageType(CustomMessage.class);
-//        RongIM.registerMessageType(CustomTextMessage.class);
-//        //初始化自定义消息布局
-//        RongIM.getInstance().registerMessageTemplate(new CustomMessageProvider());
-//        RongIM.getInstance().registerMessageTemplate(new CustomTextMessageProvider());
-//    }
+    /**
+     * 初始化融云
+     * @param context
+     */
+    private static void initRongYun(Context context) {
+        //融云初始化
+        RongIM.init(context, BuildConfig.RONG_YUN_APP_KEY);
+        //融云推送初始化
+        PushConfig config = new PushConfig
+                .Builder()
+                .enableHWPush(true)
+                .enableMiPush("2882303761519202034", "5801920268034")
+                .enableVivoPush(true)
+                .enableOppoPush("ef2e82315f9949e09c8b7026b508ca28", "a5c29a118f344d809c7323a26551b8de")
+                .build();
+        RongPushClient.setPushConfig(config);
 
-//    /**
-//     * 融云单聊页面加号区域内置扩展项
-//     */
-//    private static void registerExtensionPlugin() {
-//        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
-//        IExtensionModule defaultModule = null;
-//        if (moduleList != null) {
-//            for (IExtensionModule module : moduleList) {
-//                if (module instanceof DefaultExtensionModule) {
-//                    defaultModule = module;
-//                    break;
-//                }
-//            }
-//            if (defaultModule != null) {
-//                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
-//                RongExtensionManager.getInstance().registerExtensionModule(new CustomExtensionModule());
-//            }
-//        }
-//    }
+        //设置融云全局链接状态监听
+        RongIMClient.setConnectionStatusListener(connectionStatus -> {
+            switch (connectionStatus) {
+                //融云账号在其他设备上进行登录
+                case KICKED_OFFLINE_BY_OTHER_CLIENT:
+                    LoginUtils.getExitLogin();
+                    break;
+            }
+        });
+
+        //设置消息回执的会话类型
+        Conversation.ConversationType[] types = new Conversation.ConversationType[] {
+                Conversation.ConversationType.PRIVATE,
+                Conversation.ConversationType.GROUP,
+                Conversation.ConversationType.DISCUSSION
+        };
+        RongIM.getInstance().setReadReceiptConversationTypeList(types);
+        //开启高清语音
+        RongIM.getInstance().setVoiceMessageType(RongIM.VoiceMessageType.HighQuality);
+        //获取发出去的消息监听
+        RongIMUtils.getSendMessageListener();
+        //获取接收到的消息监听
+        RongIMUtils.getReceiveMessageListener();
+        //加号区域内置扩展项
+        registerExtensionPlugin();
+        //注册自定义消息接收
+        RongIM.registerMessageType(CustomMessage.class);
+        RongIM.registerMessageType(CustomTextMessage.class);
+        //初始化自定义消息布局
+        RongIM.getInstance().registerMessageTemplate(new CustomMessageProvider());
+        RongIM.getInstance().registerMessageTemplate(new CustomTextMessageProvider());
+    }
+
+    /**
+     * 融云单聊页面加号区域内置扩展项
+     */
+    private static void registerExtensionPlugin() {
+        List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+        IExtensionModule defaultModule = null;
+        if (moduleList != null) {
+            for (IExtensionModule module : moduleList) {
+                if (module instanceof DefaultExtensionModule) {
+                    defaultModule = module;
+                    break;
+                }
+            }
+            if (defaultModule != null) {
+                RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+                RongExtensionManager.getInstance().registerExtensionModule(new CustomExtensionModule());
+            }
+        }
+    }
 
     /**
      * 极光推送初始化配置

@@ -136,12 +136,12 @@ dependencies {
     //搜索功能
     implementation 'com.amap.api:search:latest.integration'
     //融云即时通讯
-//    api 'cn.rongcloud.sdk:im_lib:4.0.0.1'
-//    api 'cn.rongcloud.sdk:im_kit:4.0.0.1'
-//    //融云即时通讯基础能力库
-    api 'cn.rongcloud.sdk:im_lib:5.1.3'
-//    //融云即时通讯 UI 基础组件
-    api 'cn.rongcloud.sdk:im_kit:5.1.3'
+    api 'cn.rongcloud.sdk:im_kit:4.0.3.14'
+    api 'cn.rongcloud.sdk:im_lib:4.0.3.14'
+    //融云即时通讯基础能力库
+//    api 'cn.rongcloud.sdk:im_lib:5.1.3'
+    //融云即时通讯 UI 基础组件
+//    api 'cn.rongcloud.sdk:im_kit:5.1.3'
     //错误布局列表
     implementation 'com.google.android:flexbox:2.0.1'
     //气泡弹窗
@@ -150,7 +150,8 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     //轮播图
     implementation 'com.youth.banner:banner:2.0.11'
-    //基于谷歌最新AAC架构，MVVM设计模式的一套快速开发库，整合Okhttp+RxJava+Retrofit+Glide等主流模块，满足日常开发需求。使用该框架可以快速开发一个高质量、易维护的Android应用。
+    //基于谷歌最新AAC架构，MVVM设计模式的一套快速开发库，整合Okhttp+RxJava+Retrofit+Glide等主流模块，满足日常开发需求。
+    // 使用该框架可以快速开发一个高质量、易维护的Android应用。
     implementation 'com.github.goldze:MVVMHabit:4.0.0'
     //极光推送
     implementation 'cn.jiguang.sdk:jpush:3.8.6'

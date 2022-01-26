@@ -40,8 +40,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;
-//import io.rong.imkit.fragment.ConversationFragment;
-import io.rong.imkit.conversation.ConversationFragment;
+import io.rong.imkit.fragment.ConversationFragment;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
 import io.rong.imlib.model.UserInfo;
@@ -58,7 +57,7 @@ import io.rong.imlib.model.UserInfo;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class IMPrivateChatActivity extends BaseActivity {
+public class IMPrivateChatActivity extends BaseActivity implements RongIM.ConversationClickListener{
     @BindView(R.id.tv_bar_title)
     AppCompatTextView tvBarTitle;
     @BindView(R.id.iv_bar_right)
@@ -131,7 +130,7 @@ public class IMPrivateChatActivity extends BaseActivity {
         }
 
         //设置会话页面操作监听
-//        RongIM.setConversationClickListener(this);
+        RongIM.setConversationClickListener(this);
 
         //会话列表头像名称显示
         imConnectViewModel.imUserInfoLiveData.observe(this, imUserInfoBean -> {
@@ -203,51 +202,51 @@ public class IMPrivateChatActivity extends BaseActivity {
     //加载会话页面
     private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId) {
         LogUtils.e("mTargetId" + mTargetId);
-//        ConversationFragment fragment = new ConversationFragment();
-//        Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
-//                .appendPath("conversation").appendPath(mConversationType.getName().toLowerCase())
-//                .appendQueryParameter("targetId", mTargetId).build();
-//        fragment.setUri(uri);
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.activity_im_contact_fragment, fragment);
-//        transaction.commitAllowingStateLoss();
+        ConversationFragment fragment = new ConversationFragment();
+        Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
+                .appendPath("conversation").appendPath(mConversationType.getName().toLowerCase())
+                .appendQueryParameter("targetId", mTargetId).build();
+        fragment.setUri(uri);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.activity_im_contact_fragment, fragment);
+        transaction.commitAllowingStateLoss();
     }
 
-//    @Override
-//    public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo, String s) {
-//        if (conversationType == Conversation.ConversationType.CUSTOMER_SERVICE || conversationType == Conversation.ConversationType.PUBLIC_SERVICE
-//                || conversationType == Conversation.ConversationType.APP_PUBLIC_SERVICE || conversationType == Conversation.ConversationType.SYSTEM) {
-//            return false;
-//        }
-//        if (userInfo.getUserId() != null) {
-//            if (!userInfo.getUserId().equals(SPUtils.getInstance().getString(SpConfig.USER_ID))) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString("id", userInfo.getUserId());
-//                ActivityUtils.startActivity(bundle, UserInfoActivity.class) ;
-//            }
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo, String s) {
+        if (conversationType == Conversation.ConversationType.CUSTOMER_SERVICE || conversationType == Conversation.ConversationType.PUBLIC_SERVICE
+                || conversationType == Conversation.ConversationType.APP_PUBLIC_SERVICE || conversationType == Conversation.ConversationType.SYSTEM) {
+            return false;
+        }
+        if (userInfo.getUserId() != null) {
+            if (!userInfo.getUserId().equals(SPUtils.getInstance().getString(SpConfig.USER_ID))) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id", userInfo.getUserId());
+                ActivityUtils.startActivity(bundle, UserInfoActivity.class) ;
+            }
+        }
+        return true;
+    }
 
-//    @Override
-//    public boolean onUserPortraitLongClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo, String s) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onMessageClick(Context context, View view, Message message) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onMessageLinkClick(Context context, String s, Message message) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onMessageLongClick(Context context, View view, Message message) {
-//        return false;
-//    }
+    @Override
+    public boolean onUserPortraitLongClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo, String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onMessageClick(Context context, View view, Message message) {
+        return false;
+    }
+
+    @Override
+    public boolean onMessageLinkClick(Context context, String s, Message message) {
+        return false;
+    }
+
+    @Override
+    public boolean onMessageLongClick(Context context, View view, Message message) {
+        return false;
+    }
 
     @OnClick({R.id.iv_bar_back, R.id.iv_bar_right, R.id.ll_group})
     void onClick(View view) {
